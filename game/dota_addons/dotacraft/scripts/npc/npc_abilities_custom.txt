@@ -13744,7 +13744,7 @@
 				{
 					"RunScript"
 					{
-						"ScriptFile"	"units/nightelf/shared.lua"
+						"ScriptFile"	"mechanics/abilities.lua"
 						"Function"		"ToggleOnAutocast"
 					}
 				}
@@ -14305,12 +14305,6 @@
 				"var_type"		"FIELD_INTEGER"
 				"move_speed"	"-20"
 			}
-	
-			"05"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"autocast_radius"	"500"
-			}
 		}
 	
 		"precache"
@@ -14382,7 +14376,7 @@
 				{
 					"RunScript"
 					{
-						"ScriptFile"	"units/human/sorceress.lua"
+						"ScriptFile"	"mechanics/abilities.lua"
 						"Function"		"ToggleOnAutocast"
 					}
 				}
@@ -14571,7 +14565,7 @@
 				{
 					"RunScript"
 					{
-						"ScriptFile"	"units/human/priest.lua"
+						"ScriptFile"	"mechanics/abilities.lua"
 						"Function"		"ToggleOnAutocast"
 					}
 				}
@@ -14697,12 +14691,6 @@
 				"var_type"		"FIELD_INTEGER"
 				"damage_bonus"	"10"
 			}
-	
-			"04"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"autocast_radius"	"500"
-			}
 		}
 	
 		"OnSpellStart"
@@ -14747,14 +14735,6 @@
 			{
 				"Passive"		"1"
 				"IsHidden"		"1"
-				"OnCreated"
-				{
-					"RunScript"
-					{
-						"ScriptFile"	"units/human/priest.lua"
-						"Function"		"ToggleOnAutocast"
-					}
-				}
 	
 				"ThinkInterval" "1.0"
 				"OnIntervalThink"
@@ -20732,99 +20712,129 @@
 	// Orders the peasants to move towards the nearest Town Hall and replace itself with a Militia unit for a duration
 	"human_call_to_arms"
 	{
-		"BaseClass"             		"ability_datadriven"
-		"AbilityTextureName"			"human_call_to_arms"
-		"MaxLevel" 						"1"
+	    "BaseClass"                     "ability_datadriven"
+	    "AbilityTextureName"            "human_call_to_arms"
+	    "MaxLevel"                      "1"
 	
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE"
+	    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE"
 	
-		"AbilityMultiOrder"				"1"
+	    "AbilityMultiOrder"             "1"
+	    "AbilityCastRange"              "3000"
 	
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"duration"			"45"
-			}
-		}
+	    "AbilitySpecial"
+	    {
+	        "01"
+	        {
+	            "var_type"          "FIELD_INTEGER"
+	            "duration"          "45"
+	        }
+	    }
 	
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"units/human/peasant.lua"
-				"Function"		"CallToArms"
-			}
-		}
+	    "OnSpellStart"
+	    {
+	        "RunScript"
+	        {
+	            "ScriptFile"    "units/human/peasant.lua"
+	            "Function"      "CallToArms"
+	        }
+	    }
 	}
 	
+	// Single Target version
+	"human_call_to_arms_peasant"
+	{
+	    "BaseClass"                     "ability_datadriven"
+	    "AbilityTextureName"            "human_call_to_arms"
+	    "MaxLevel"                      "1"
+	
+	    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_CHANNEL | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE"
+	    "AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+	    "AbilityUnitTargetType"         "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+	
+	    "AbilitySpecial"
+	    {
+	        "01"
+	        {
+	            "var_type"          "FIELD_INTEGER"
+	            "duration"          "45"
+	        }
+	    }
+	
+	    "OnSpellStart"
+	    {
+	        "RunScript"
+	        {
+	            "ScriptFile"    "units/human/peasant.lua"
+	            "Function"      "CallToArmsPeasant"
+	        }
+	    }
+	}
 	
 	// Sends the Militia to the city center for swapping back to Peasant, prematurely
 	"human_back_to_work"
 	{
-		"BaseClass"             		"ability_datadriven"
-		"AbilityTextureName"			"human_back_to_work"
-		"MaxLevel" 						"1"
+	    "BaseClass"                     "ability_datadriven"
+	    "AbilityTextureName"            "human_back_to_work"
+	    "MaxLevel"                      "1"
 	
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+	    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 	
-		"AbilityMultiOrder"				"1"
+	    "AbilityMultiOrder"             "1"
 	
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"			"FIELD_INTEGER"
-				"duration"			"45"
-			}
-		}
+	    "AbilitySpecial"
+	    {
+	        "01"
+	        {
+	            "var_type"          "FIELD_INTEGER"
+	            "duration"          "45"
+	        }
+	    }
 	
-		"OnSpellStart"
-		{
-			"RunScript"
-			{
-				"ScriptFile"	"units/human/peasant.lua"
-				"Function"		"BackToWork"
-			}
-		}
+	    "OnSpellStart"
+	    {
+	        "RunScript"
+	        {
+	            "ScriptFile"    "units/human/peasant.lua"
+	            "Function"      "BackToWork"
+	        }
+	    }
 	
-		"Modifiers"
-		{
-			"modifier_militia"
-			{
-				"Duration"			"%duration"
-				"Passive"			"1"
-				"TextureName"		"human_call_to_arms"
-				"OnCreated"
-				{
-					"RunScript"
-					{
-						"ScriptFile"    "units/upgrades.lua"
-						"Function"      "ApplyMultiRankUpgrade"
-						"ResearchName"	"human_research_forged_swords"
-						"WearableType"	"weapon"
-					}
+	    "Modifiers"
+	    {
+	        "modifier_militia"
+	        {
+	            "Duration"          "%duration"
+	            "Passive"           "1"
+	            "TextureName"       "human_call_to_arms"
+	            "OnCreated"
+	            {
+	                "RunScript"
+	                {
+	                    "ScriptFile"    "units/upgrades.lua"
+	                    "Function"      "ApplyMultiRankUpgrade"
+	                    "ResearchName"  "human_research_forged_swords"
+	                    "WearableType"  "weapon"
+	                }
 	
-					"RunScript"
-					{
-						"ScriptFile"    "units/upgrades.lua"
-						"Function"      "ApplyMultiRankUpgrade"
-						"ResearchName"	"human_research_plating"
-						"WearableType"	"armor"
-					}
-				}
+	                "RunScript"
+	                {
+	                    "ScriptFile"    "units/upgrades.lua"
+	                    "Function"      "ApplyMultiRankUpgrade"
+	                    "ResearchName"  "human_research_plating"
+	                    "WearableType"  "armor"
+	                }
+	            }
 	
-				"OnDestroy"
-				{
-					"RunScript"
-					{
-						"ScriptFile"	"units/human/peasant.lua"
-						"Function"		"CallToArmsEnd"
-					}
-				}
-			}
-		}
+	            "OnDestroy"
+	            {
+	                "RunScript"
+	                {
+	                    "ScriptFile"    "units/human/peasant.lua"
+	                    "Function"      "CallToArmsEnd"
+	                }
+	            }
+	        }
+	    }
 	}
 	
 	"human_gather"
@@ -20836,7 +20846,8 @@
 	    "AbilityBehavior"               "DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 	    "AbilityUnitTargetTeam"         "DOTA_UNIT_TARGET_TEAM_BOTH"
 	    "AbilityUnitTargetType"         "DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_TREE | DOTA_UNIT_TARGET_BUILDING | DOTA_UNIT_TARGET_HERO"
-	    "AbilityUnitTargetFlags"        "DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
+	    "AbilityUnitTargetFlags"        "DOTA_UNIT_TARGET_FLAG_INVULNERABLE | DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+	    "CastFilterRejectCaster"        "1"
 	
 	    // Gatherer Key Values
 	    "LumberGainInterval"            "1"
@@ -26145,6 +26156,7 @@
 	{
 	    "BaseClass"             "ability_datadriven"
 	    "AbilityBehavior"       "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+	    "AbilityUnitTargetType" "DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_BUILDING"
 	    "AbilityUnitDamageType" "DAMAGE_TYPE_PHYSICAL"
 	    "AbilityTextureName"    "attack_ground"
 	    "MaxLevel"              "1"
@@ -26536,10 +26548,10 @@
 	
 		"Modifiers"
 		{
-			"modifier_gold_mine_passive"
+			"modifier_grid_goldmine"
 			{
 				"Passive"			"1"
-				"IsHidden"			"0"
+				"IsHidden"			"1"
 	
 				"States"
 				{
@@ -26615,7 +26627,7 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_BOTH"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_TREE"
-		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
+		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_INVULNERABLE | DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
 	
 		// Gatherer Key Values
 	    "LumberGainInterval"            "1"
@@ -32984,7 +32996,7 @@
 				{
 					"RunScript"
 					{
-						"ScriptFile"	"units/nightelf/shared.lua"
+						"ScriptFile"	"mechanics/abilities.lua"
 						"Function"		"ToggleOnAutocast"
 					}
 				}
@@ -33865,7 +33877,7 @@
 		"AbilityTextureName"		"nightelf_faerie_fire"
 		"MaxLevel"					"1"
 			
-		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AUTOCAST"
 		"AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
 		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_1"
@@ -33910,6 +33922,29 @@
 	
 		"Modifiers"
 		{
+			"modifier_faerie_fire_autocast"
+			{
+				"Passive"	"1"
+				"IsHidden"	"1"
+				"OnCreated"
+				{
+				    "RunScript"
+				    {
+				        "ScriptFile"    "mechanics/abilities.lua"
+				        "Function"      "ToggleOnAutocast"
+				    }
+				}
+	
+				"ThinkInterval"  "1.0"
+				"OnIntervalThink"
+				{
+				    "RunScript"
+				    {
+				        "ScriptFile"    "units/nightelf/druid_of_the_talon.lua"
+				        "Function"      "FaerieFireAutocast"
+				    }
+				}
+			}
 			"modifier_faerie_fire"
 			{
 				"IsDebuff"			"1"
@@ -34326,7 +34361,7 @@
 				{
 					"RunScript"
 					{
-						"ScriptFile"		"units/nightelf/shared.lua"
+						"ScriptFile"		"mechanics/abilities.lua"
 						"Function"			"ToggleOnAutocast"
 					}
 				}
@@ -34337,7 +34372,6 @@
 					{
 						"ScriptFile"		"units/nightelf/faerie_dragon.lua"
 						"Function"			"PhaseShiftAutocast"
-						"Damage"			"%attack_damage"
 					}
 				}
 			}
@@ -34856,19 +34890,10 @@
 	
 		"Modifiers"
 		{
-			"modifier_replenish_autocast"
+			"modifier_replenish_autocast" //Not automatically enabled
 			{
 				"Passive"			"1"
 				"IsHidden"			"1"
-				
-				//"OnCreated"
-				//{
-				//	"RunScript"
-				//	{
-				//		"ScriptFile"	"units/nightelf/shared.lua"
-				//		"Function"		"ToggleOnAutocast"
-				//	}
-				//}
 	
 				"ThinkInterval" "1.0"
 				"OnIntervalThink"
@@ -39844,7 +39869,8 @@
 		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 		"AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_BOTH"
 		"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_TREE | DOTA_UNIT_TARGET_BUILDING | DOTA_UNIT_TARGET_HERO"
-		"AbilityUnitTargetFlags"	"DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
+		"AbilityUnitTargetFlags"	"DOTA_UNIT_TARGET_FLAG_INVULNERABLE | DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+		"CastFilterRejectCaster"    "1"
 	
 		"RequiresEmptyTree"			"1"
 		"LumberGainInterval"		"8"
@@ -44579,7 +44605,7 @@
 	            {
 	                "RunScript"
 	                {
-	                    "ScriptFile"    "units/orc/shaman.lua"
+	                    "ScriptFile"    "mechanics/abilities.lua"
 	                    "Function"      "ToggleOnAutocast"
 	                }
 	            }
@@ -50703,7 +50729,8 @@
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_BOTH"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_TREE | DOTA_UNIT_TARGET_BUILDING | DOTA_UNIT_TARGET_HERO"
-		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
+		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_INVULNERABLE | DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+		"CastFilterRejectCaster"    	"1"
 	
 		// Gatherer Key Values
 		"LumberGainInterval"			"1"
@@ -55535,16 +55562,20 @@
 				{
 					"RunScript"
 					{
-						"ScriptFile" "units/undead/crypt_fiend.lua"
+						"ScriptFile" "mechanics/abilities.lua"
 						"Function"	"ToggleOnAutocast"
 					}
+				}
 	
-					"RunScript"
+				"ThinkInterval"  "1.0"
+				"OnIntervalThink"
+				{
+				    "RunScript"
 					{
 						"ScriptFile" "units/undead/crypt_fiend.lua"
-						"Function"	"Web_AutoCast"
-					}				
-				}	
+						"Function"	 "Web_AutoCast"
+					}
+				}
 			}
 		}
 	}
@@ -56113,9 +56144,10 @@
 				"Passive" "1"
 				"IsHidden" "1"
 				
-				"OnCreated"
+				"ThinkInterval"  "1.0"
+				"OnIntervalThink"
 				{
-					"RunScript"
+				    "RunScript"
 					{
 						"ScriptFile" 	"units/undead/necromancer.lua"
 						"Function"		"RaiseDead_AutoCast"
@@ -56399,12 +56431,12 @@
 		"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_AUTOCAST"
 		"AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
-		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_2"
+		"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_1"
 	
 		"TargetsAllowed"            "organic"
 			
 		"AbilityCastRange"			"700"
-		"AbilityCastPoint"			"0"
+		"AbilityCastPoint"			"0.1"
 		"AbilityCooldown"			"1"
 		"AbilityManaCost"			"40"
 			
@@ -56425,11 +56457,6 @@
 				"var_type"		"FIELD_INTEGER"
 				"miss_chance"		"33"
 			}
-			"04"
-			{
-				"var_type"		"FIELD_INTEGER"
-				"cast_range"		"700"
-			}
 		}
 		
 		"precache"
@@ -56440,29 +56467,35 @@
 		
 		"OnSpellStart"
 		{			
-			"RunScript"
+			"ApplyModifier"
 			{
-				"Target"				"TARGET"
-				"Caster"				"CASTER"
-				"ScriptFile"			"units/undead/banshee.lua"
-				"Function"				"undead_curse"
-			}			
-		}
-		
-		"OnOwnerSpawned"
-		{
-			"RunScript"
+			    "ModifierName"  "modifier_undead_curse"
+			    "Target"
+			    {
+			        "Center"    "TARGET"
+			        "Teams"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
+			        "Types"     "DOTA_UNIT_TARGET_HERO"
+			    }
+			    "Duration"      "%hero_duration"
+			}
+			
+			"ApplyModifier"
 			{
-				"caster"				"CASTER"
-				"ScriptFile"			"units/undead/banshee.lua"
-				"Function"				"BansheeCurseAutoCast"
-			}	
+			    "ModifierName"  "modifier_undead_curse"
+			    "Target"
+			    {
+			        "Center"    "TARGET"
+			        "Teams"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
+			        "Types"     "DOTA_UNIT_TARGET_BASIC"
+			    }
+			    "Duration"      "%unit_duration"
+			}		
 		}
 	
 		"Modifiers"
 		{
 			"modifier_undead_curse"
-			{			
+			{
 				"EffectName" 		"particles/econ/items/templar_assassin/templar_assassin_focal/templar_meld_focal_overhead.vpcf"
 				"EffectAttachType" 	"follow_overhead"
 				"IsPurgable"      	"1"
@@ -56484,15 +56517,20 @@
 				{
 					"RunScript"
 					{
-						"ScriptFile"	"units/undead/banshee.lua"
+						"ScriptFile"	"mechanics/abilities.lua"
 						"Function"		"ToggleOnAutocast"
 					}
-					"RunScript"
+				}
+	
+				"ThinkInterval"  "1.0"
+				"OnIntervalThink"
+				{
+				    "RunScript"
 					{
 						"ScriptFile"	"units/undead/banshee.lua"
-						"Function"		"BansheeCurseAutoCast"
-					}	
-				}			
+						"Function"		"CurseAutocast"
+					}
+				}		
 			}		
 		}
 	}
@@ -57112,16 +57150,20 @@
 				{
 					"RunScript"
 					{
-						"ScriptFile"	"units/undead/obsidian_statue.lua"
-						"Function"		"undead_essence_of_blight_autocast"
-					}
-					
-					"RunScript"
+						"ScriptFile"	"mechanics/abilities.lua"
+						"Function"		"ToggleOnAutocast"
+					}		
+				}
+	
+				"ThinkInterval"  "0.8"
+				"OnIntervalThink"
+				{
+				    "RunScript"
 					{
 						"ScriptFile"	"units/undead/obsidian_statue.lua"
-						"Function"		"ToggleOnAutocast"
-					}				
-				}			
+						"Function"		"EssenceAutocast"
+					}
+				}
 			}		
 		}
 	}
@@ -61856,7 +61898,7 @@
 	            {
 	                "RunScript"
 	                {
-	                    "ScriptFile"    "units/undead/blight.lua"
+	                    "ScriptFile"    "mechanics/blight.lua"
 	                    "Function"      "BlightRegen"
 	                }
 	            }
@@ -62467,8 +62509,9 @@
 	
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_BOTH"
-		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_TREE | DOTA_UNIT_TARGET_BUILDING | DOTA_UNIT_TARGET_HERO"
-		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_BUILDING | DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_INVULNERABLE | DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
+		"CastFilterRejectCaster"    	"1"
 	
 		"GoldMineBuilding" 				"undead_haunted_gold_mine"
 		"GoldGainInterval"				"5"
@@ -62519,8 +62562,9 @@
 	
 		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_BOTH"
-		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_TREE | DOTA_UNIT_TARGET_BUILDING | DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_TREE"
 		"AbilityUnitTargetFlags"		"DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
+		"CastFilterRejectCaster"    	"1"
 	
 		"LumberGainInterval"			"1"
 		"LumberPerInterval"				"2"

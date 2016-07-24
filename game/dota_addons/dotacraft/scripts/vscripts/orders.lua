@@ -330,7 +330,7 @@ function dotacraft:FilterExecuteOrder( filterTable )
     --              Rally Flag Order              --
     ------------------------------------------------
     if order_type == DOTA_UNIT_ORDER_MOVE_TO_POSITION and numBuildings > 0 then
-        if unit and IsCustomBuilding(unit) then
+        if unit and IsCustomBuilding(unit) and not IsUprooted(unit) then
 
             local event = { pID = issuer, mainSelected = unit:GetEntityIndex(), rally_type = "position", pos_x = x, pos_y = y, pos_z = z }
             dotacraft:OnBuildingRallyOrder( event )
@@ -512,7 +512,7 @@ function dotacraft:OnBuildingRallyOrder( event )
 
                         -- Extra X
                         local teamNumber = building:GetTeamNumber()
-                        local color = TEAM_COLORS[teamNumber]
+                        local color = dotacraft:ColorForTeam(teamNumber)
                         local Xparticle = ParticleManager:CreateParticleForTeam("particles/custom/x_marker.vpcf", PATTACH_CUSTOMORIGIN, building, teamNumber)
                         ParticleManager:SetParticleControl(Xparticle, 0, position)
                         ParticleManager:SetParticleControl(Xparticle, 15, Vector(color[1], color[2], color[3])) --Color   
@@ -601,7 +601,7 @@ end
 function CreateRallyFlagForBuilding( building )
     local flag_type = building.flag_type
     local teamNumber = building:GetTeamNumber()
-    local color = TEAM_COLORS[teamNumber]
+    local color = dotacraft:ColorForTeam(teamNumber)
     local particleName = "particles/custom/rally_flag.vpcf"
     local origin = building:GetAbsOrigin()
     local particle

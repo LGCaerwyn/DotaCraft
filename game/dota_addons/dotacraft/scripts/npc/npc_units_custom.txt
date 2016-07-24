@@ -25,11 +25,12 @@
 		
 		// Abilities
 		//----------------------------------------------------------------
-		"AbilityLayout"				"4"
+		"AbilityLayout"				"5"
 		"Ability1"					"human_train_peasant"
 		"Ability2"					"human_call_to_arms"
-		"Ability3"					"human_research_backpack"
-		"Ability4"					"human_train_keep"
+		"Ability3"					"human_call_to_arms_peasant"
+		"Ability4"					"human_research_backpack"
+		"Ability5"					"human_train_keep"
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -113,11 +114,12 @@
 		
 		// Abilities
 		//----------------------------------------------------------------
-		"AbilityLayout"				"4"
-		"Ability1"					"human_train_peasant"	 
+		"AbilityLayout"				"5"
+		"Ability1"					"human_train_peasant"
 		"Ability2"					"human_call_to_arms"
-		"Ability3"					"human_research_backpack"	
-		"Ability4"					"human_train_castle_disabled"
+		"Ability3"					"human_call_to_arms_peasant"
+		"Ability4"					"human_research_backpack"	
+		"Ability5"					"human_train_castle_disabled"
 		"Ability6"					"human_keep_passive"
 		
 		// Armor
@@ -203,10 +205,11 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
-		"Ability1"					"human_train_peasant"	 //Reference: Abdl
+		"Ability1"					"human_train_peasant"
 		"Ability2"					"human_call_to_arms"
-		"Ability3"					"human_castle_passive"	 //Reference: Amic
-		"Ability4"					"human_research_backpack"	 //Reference: Argl
+		"Ability3"					"human_call_to_arms_peasant"
+		"Ability4"					"human_castle_passive"	 //Reference: Amic
+		"Ability5"					"human_research_backpack"	 //Reference: Argl
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -2084,7 +2087,7 @@
 		// Bounds
 		//----------------------------------------------------------------
 		"BoundsHullName"			"DOTA_HULL_SIZE_REGULAR"
-		"RingRadius"				"70"
+		"RingRadius"				"50"
 		"CollisionSize"				"16"
 		"FormationRank"				"3"
 		
@@ -4039,7 +4042,7 @@
 		// Bounds
 		//----------------------------------------------------------------
 		"BoundsHullName"			"DOTA_HULL_SIZE_HUGE"
-		"RingRadius"				"70"
+		"RingRadius"				"220"
 		"CollisionSize"				"50"
 		
 		// Building Size
@@ -7976,7 +7979,7 @@
 		// Vision
 		//----------------------------------------------------------------
 		"VisionDaytimeRange"		"900"
-		"VisionNighttimeRange"		"600"
+		"VisionNighttimeRange"		"900"
 		
 		// Attack Damage types
 		//----------------------------------------------------------------
@@ -8078,7 +8081,7 @@
 		// Vision
 		//----------------------------------------------------------------
 		"VisionDaytimeRange"		"1200"
-		"VisionNighttimeRange"		"800"
+		"VisionNighttimeRange"		"1000"
 		
 		// Attack Damage types
 		//----------------------------------------------------------------
@@ -8180,7 +8183,7 @@
 		// Vision
 		//----------------------------------------------------------------
 		"VisionDaytimeRange"		"1200"
-		"VisionNighttimeRange"		"800"
+		"VisionNighttimeRange"		"1000"
 		
 		// Attack Damage types
 		//----------------------------------------------------------------
@@ -8272,8 +8275,8 @@
 		
 		// Vision
 		//----------------------------------------------------------------
-		"VisionDaytimeRange"		"900"
-		"VisionNighttimeRange"		"600"
+		"VisionDaytimeRange"		"1000"
+		"VisionNighttimeRange"		"1000"
 		
 		// Attack Damage types
 		//----------------------------------------------------------------
@@ -8367,8 +8370,8 @@
 		
 		// Vision
 		//----------------------------------------------------------------
-		"VisionDaytimeRange"		"900"
-		"VisionNighttimeRange"		"600"
+		"VisionDaytimeRange"		"1000"
+		"VisionNighttimeRange"		"1000"
 		
 		// Attack Damage types
 		//----------------------------------------------------------------
@@ -8464,8 +8467,8 @@
 		
 		// Vision
 		//----------------------------------------------------------------
-		"VisionDaytimeRange"		"900"
-		"VisionNighttimeRange"		"600"
+		"VisionDaytimeRange"		"1000"
+		"VisionNighttimeRange"		"1000"
 		
 		// Attack Damage types
 		//----------------------------------------------------------------
@@ -8562,7 +8565,7 @@
 		// Vision
 		//----------------------------------------------------------------
 		"VisionDaytimeRange"		"900"
-		"VisionNighttimeRange"		"600"
+		"VisionNighttimeRange"		"900"
 		
 		// Attack Damage types
 		//----------------------------------------------------------------
@@ -8657,7 +8660,7 @@
 		// Vision
 		//----------------------------------------------------------------
 		"VisionDaytimeRange"		"900"
-		"VisionNighttimeRange"		"600"
+		"VisionNighttimeRange"		"900"
 		
 		// Attack Damage types
 		//----------------------------------------------------------------
@@ -8746,7 +8749,7 @@
 		// Vision
 		//----------------------------------------------------------------
 		"VisionDaytimeRange"		"900"
-		"VisionNighttimeRange"		"600"
+		"VisionNighttimeRange"		"900"
 		
 		// Attack Damage types
 		//----------------------------------------------------------------
@@ -8842,7 +8845,7 @@
 		// Vision
 		//----------------------------------------------------------------
 		"VisionDaytimeRange"		"900"
-		"VisionNighttimeRange"		"600"
+		"VisionNighttimeRange"		"900"
 		
 		// Attack Damage types
 		//----------------------------------------------------------------
@@ -8936,7 +8939,7 @@
 		// Vision
 		//----------------------------------------------------------------
 		"VisionDaytimeRange"		"1000"
-		"VisionNighttimeRange"		"750"
+		"VisionNighttimeRange"		"1000"
 		
 		// Attack Damage types
 		//----------------------------------------------------------------
@@ -9026,7 +9029,7 @@
 		// Vision
 		//----------------------------------------------------------------
 		"VisionDaytimeRange"		"1600"
-		"VisionNighttimeRange"		"600"
+		"VisionNighttimeRange"		"1000"
 		
 		// Attack Damage types
 		//----------------------------------------------------------------
@@ -9121,7 +9124,7 @@
 		// Vision
 		//----------------------------------------------------------------
 		"VisionDaytimeRange"		"1600"
-		"VisionNighttimeRange"		"800"
+		"VisionNighttimeRange"		"1000"
 		
 		// Attack Damage types
 		//----------------------------------------------------------------
@@ -9217,7 +9220,7 @@
 		// Vision
 		//----------------------------------------------------------------
 		"VisionDaytimeRange"		"1600"
-		"VisionNighttimeRange"		"800"
+		"VisionNighttimeRange"		"1000"
 		
 		// Attack Damage types
 		//----------------------------------------------------------------
@@ -9302,7 +9305,7 @@
 		// Vision
 		//----------------------------------------------------------------
 		"VisionDaytimeRange"		"900"
-		"VisionNighttimeRange"		"600"
+		"VisionNighttimeRange"		"900"
 		
 		// Attack Damage types
 		//----------------------------------------------------------------
@@ -9313,7 +9316,7 @@
 		//----------------------------------------------------------------
 	}
 	
-	"undead_blight_skull"
+	"undead_blight_dummy"
 	{
 		"BaseClass"					"npc_dota_creature"
 		"Building"					"1"
@@ -9350,14 +9353,13 @@
 		//----------------------------------------------------------------
 		"AbilityLayout"				"6"
 		"Ability1"					"undead_gather_gold" // Only Gold and Repair
-		"Ability2"					"undead_restore"	 //Reference: Arst
-		"Ability3"					"undead_build_crypt"	 //Reference: Alam
-		"Ability4"					"undead_build_temple_of_the_damned_disabled"
-		"Ability5"					"undead_build_slaughterhouse_disabled"
-		"Ability6"					"undead_build_sacrificial_pit_disabled"
-		"Ability7"					"undead_build_boneyard_disabled"
-		"Ability8"					"undead_unsummon_building"	 //Reference: Auns	
-		"Ability9"					"build_undead_items"
+		"Ability2"					"undead_build_crypt"	 //Reference: Alam
+		"Ability3"					"undead_build_temple_of_the_damned_disabled"
+		"Ability4"					"undead_build_slaughterhouse_disabled"
+		"Ability5"					"undead_build_sacrificial_pit_disabled"
+		"Ability6"					"undead_build_boneyard_disabled"
+		"Ability7"					"undead_unsummon_building"	 //Reference: Auns	
+		"Ability10"					"build_undead_items"
 		"Ability11"					"undead_blight_regen"
 			
 		// Gatherer KeyValues
@@ -9365,7 +9367,7 @@
 		"GatherResources"			"gold"
 		"GoldMineControllable"      "1"
 	
-		"RepairAbility"				"undead_gather"
+		"RepairAbility"				"undead_gather_gold"
 	
 		// Armor
 		//----------------------------------------------------------------
@@ -10070,7 +10072,7 @@
 		//----------------------------------------------------------------
 		"BaseClass"					"npc_dota_creature"
 		"Model"						"models/heroes/obsidian_destroyer/obsidian_destroyer.vmdl"
-		"ModelScale"				"1"
+		"ModelScale"				"0.8"
 		"Level"						"2"
 		"BoundsHullName"			"DOTA_HULL_SIZE_HERO"
 		"HealthBarOffset"			"180"
@@ -10181,7 +10183,7 @@
 		//----------------------------------------------------------------
 		"BaseClass"					"npc_dota_creature"
 		"Model"						"models/heroes/obsidian_destroyer/obsidian_destroyer.vmdl"
-		"ModelScale"				"1"
+		"ModelScale"				"0.8"
 		"Level"						"5"
 		"HealthBarOffset"			"350"
 		"SoundSet"                  "Hero_ObsidianDestroyer"
@@ -14586,7 +14588,7 @@
 		// Bounds
 		//----------------------------------------------------------------
 		"BoundsHullName"			"DOTA_HULL_SIZE_HUGE"
-		"RingRadius"				"70"
+		"RingRadius"				"220"
 		"CollisionSize"				"50"
 	
 		// Building Size
@@ -14641,7 +14643,7 @@
 	    //----------------------------------------------------------------
 	    "BaseClass"                 "npc_dota_creature"
 	    "Model"                     "models/heroes/techies/techies.vmdl"
-	    "ModelScale"                "1"
+	    "ModelScale"                "0.5"
 	    "Level"                     "4"
 	    "HealthBarOffset"           "140"
 	
@@ -14671,7 +14673,7 @@
 	    
 	    // Bounds
 	    //----------------------------------------------------------------
-	    "BoundsHullName"            "DOTA_HULL_SIZE_HUGE"
+	    "BoundsHullName"            "DOTA_HULL_SIZE_HERO"
 	    "RingRadius"                "32"
 	    "CollisionSize"             "32"
 	    "FormationRank"             "0"
@@ -14718,7 +14720,7 @@
 	            "3" { "ItemDef" "492" } // Techies Spleen Costume
 	            "4" { "ItemDef" "394" } // Techies Bomb Arsenal
 	            "5" { "ItemDef" "487" } // Techies Spoon Costume
-	            "6" { "ItemDef" "489" } // Techies Slingshot
+	            //"6" { "ItemDef" "489" } // Techies Slingshot
 	        }
 	    }
 	}
@@ -17804,6 +17806,11 @@
 	    //----------------------------------------------------------------
 	    "VisionDaytimeRange"        "1400"
 	    "VisionNighttimeRange"      "800"
+	
+	    // Building Size
+	    //----------------------------------------------------------------
+	    "ConstructionSize"          "8"
+	    "BlockPathingSize"          "6"
 	    
 	    // Team
 	    //----------------------------------------------------------------
@@ -17869,6 +17876,11 @@
 	    //----------------------------------------------------------------
 	    "VisionDaytimeRange"        "1400"
 	    "VisionNighttimeRange"      "800"
+	
+	    // Building Size
+	    //----------------------------------------------------------------
+	    "ConstructionSize"          "8"
+	    "BlockPathingSize"          "6"
 	    
 	    // Team
 	    //----------------------------------------------------------------
@@ -17934,6 +17946,11 @@
 	    //----------------------------------------------------------------
 	    "VisionDaytimeRange"        "1400"
 	    "VisionNighttimeRange"      "800"
+	
+	    // Building Size
+	    //----------------------------------------------------------------
+	    "ConstructionSize"          "8"
+	    "BlockPathingSize"          "6"
 	    
 	    // Team
 	    //----------------------------------------------------------------
@@ -17999,6 +18016,11 @@
 	    //----------------------------------------------------------------
 	    "VisionDaytimeRange"        "1400"
 	    "VisionNighttimeRange"      "800"
+	
+	    // Building Size
+	    //----------------------------------------------------------------
+	    "ConstructionSize"          "8"
+	    "BlockPathingSize"          "6"
 	    
 	    // Team
 	    //----------------------------------------------------------------

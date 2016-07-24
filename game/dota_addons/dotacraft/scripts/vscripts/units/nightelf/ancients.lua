@@ -77,6 +77,7 @@ end
 
 function RootEnd( unit )
     unit:SetArmorType("fortified")
+    unit:SetHullRadius(unit.collision_size)
 
     -- Show all train and research abilities
     for i=0,15 do
@@ -110,7 +111,7 @@ end
 function AutoEntangle( event )
     local caster = event.caster
     -- If it's uprooted or already has an entangled mine, skip
-    if not IsCustomBuilding(caster) or IsValidAlive(caster.entangled_gold_mine) then
+    if not IsCustomBuilding(caster) or IsUprooted(caster) or IsValidAlive(caster.entangled_gold_mine) then
         return
     end
 
@@ -133,6 +134,7 @@ end
 -- Initial cast of the root ability
 function UpRootStart( event )
     local caster = event.caster
+    caster.collision_size = caster.collision_size or caster:GetHullRadius()
 
     -- Don't allow uprooting until the ancient has finished construction
     if caster:IsUnderConstruction() then
@@ -143,7 +145,6 @@ function UpRootStart( event )
     -- Remove building properties
     Queue:Remove(caster)
     BuildingHelper:RemoveBuilding( caster, false )
-    caster:RemoveModifierByName("modifier_building")
 
     -- If the ancient had an entangled mine, remove the effect, which will trigger ShowGoldMine
     if IsValidEntity(caster.entangled_gold_mine) then
@@ -157,6 +158,8 @@ function UpRoot( event )
     local ability = event.ability
     local unitName = caster:GetUnitName()
 
+    caster:SetHullRadius(32)
+    caster:RemoveModifierByName("modifier_building")
     ability:ApplyDataDrivenModifier(caster,caster,"modifier_uprooted",{})
 
     -- Tower: Reduce its damage by 20, (1.5 BAT) and make it melee (128 range)
@@ -241,8 +244,11 @@ function EntangleGoldMine( event )
             -- Create and entangled gold mine building on top of the gold mine
             local building = CreateUnitByName("nightelf_entangled_gold_mine", mine_pos, false, hero, hero, hero:GetTeamNumber())
             building:SetOwner(hero)
+            building:SetAbsOrigin(mine_pos)
+            building:SetNeverMoveToClearSpace(true)
             building:SetControllableByPlayer(playerID, true)
             building.state = "building"
+            building:AddNewModifier(building,nil,"modifier_building",{})
             building:SetForwardVector(target:GetForwardVector()) -- Keep orientation
 
             -- Hide the gold mine
@@ -261,12 +267,17 @@ function EntangleGoldMine( event )
             building.bUpdatingHealth = true
 
             -- Particle effect
-            ApplyConstructionEffect(building)
+            NightElfConstructionParticle({target=building})
             function building:IsUnderConstruction() return true end
             building.updateHealthTimer = Timers:CreateTimer(function()
+                if not IsValidAlive(caster) then
+                    building:ForceKill(true)
+                    return
+                end
+
                 if IsValidAlive(building) then
-                      local timesUp = GameRules:GetGameTime() >= time_completed
-                      if not timesUp then
+                    local timesUp = GameRules:GetGameTime() >= time_completed
+                    if not timesUp then
                         if building.bUpdatingHealth then
                               if building:GetHealth() < hit_points then
                                 building:SetHealth(building:GetHealth() + 1)
@@ -274,19 +285,19 @@ function EntangleGoldMine( event )
                                 building.bUpdatingHealth = false
                              end
                         end
-                      else
+                    else
                         -- Show the gold counter and initialize the mine builders list
                         building.counter_particle = ParticleManager:CreateParticle("particles/custom/gold_mine_counter.vpcf", PATTACH_CUSTOMORIGIN, building)
                         ParticleManager:SetParticleControl(building.counter_particle, 0, Vector(mine_pos.x,mine_pos.y,mine_pos.z+200))
-                        building.builders = {} -- The builders list on the entangled gold mine
-                        RemoveConstructionEffect(building)
+                        ParticleManager:DestroyParticle(target.construction_particle, true)
+                        target.construction_particle = nil
 
                         building.constructionCompleted = true
                         building.state = "complete"
                         function building:IsUnderConstruction() return false end
+                        print("Finished Entangled Gold Mine process")
                         return
                     end
-                
                 else
                     -- Building destroyed
                     print("Entangled gold mine was destroyed during the construction process!")
@@ -297,6 +308,7 @@ function EntangleGoldMine( event )
              end)
              ---------------------------------
 
+            target:SetCapacity(5)
             building.mine = target -- A reference to the mine that the entangled mine is associated with
             building.city_center = caster -- A reference to the city center that entangles this mine
             caster.entangled_gold_mine = building -- A reference to the entangled building of the city center
@@ -321,23 +333,13 @@ function ShowGoldMine( event )
     local city_center = building.city_center
 
     print("Removing Entangled Gold Mine")
-
     mine:RemoveNoDraw()
     mine:RemoveModifierByName("modifier_unselectable")
 
     -- Eject all wisps 
-    local builders = mine.builders
-    for i=1,5 do    
-        local wisp
-        if builders and #builders > 0 then
-            wisp = mine.builders[#builders]
-            mine.builders[#builders] = nil
-        else
-            break
-        end
-
+    local wisps = mine:GetGatherers()
+    for _,wisp in pairs(wisps) do
         FindClearSpaceForUnit(wisp, mine.entrance, true)
-
         wisp:CancelGather()
     end
 
@@ -347,8 +349,6 @@ function ShowGoldMine( event )
     
     RemoveConstructionEffect(building)
 
-    building:RemoveSelf()    
-
     -- Show an ability to re-entangle a gold mine on the city center if it is still rooted
     if IsValidAlive(city_center) then
         city_center:SwapAbilities("nightelf_entangle_gold_mine", "nightelf_entangle_gold_mine_passive", true, false)
@@ -356,7 +356,7 @@ function ShowGoldMine( event )
         -- Remove the references
         city_center.entangled_gold_mine = nil
     end
-
+    building:AddNoDraw()
     mine.building_on_top = nil
 end
 
@@ -369,39 +369,26 @@ function LoadWisp( event )
         print("Must target a wisp")
         return
     else
-        local gather = target:FindAbilityByName("nightelf_gather")
+        local gather = target:GetGatherAbility()
         if gather and gather:IsFullyCastable() then
             ExecuteOrderFromTable({ UnitIndex = target:GetEntityIndex(), OrderType = DOTA_UNIT_ORDER_CAST_TARGET, TargetIndex = caster:GetEntityIndex(), AbilityIndex = gather:GetEntityIndex(), Queue = false}) 
         end
     end
 end
 
--- Ejects the first wisp on the mine.builders
+-- Ejects the first wisp on the mine
 function UnloadWisp( event )
     local caster = event.caster
     local mine = caster.mine
-    local builders = mine.builders
 
-    local wisp
-    if builders and #builders > 0 then
-        wisp = mine.builders[#builders]
-        mine.builders[#builders] = nil
-    else
-        return
+    local wisps = mine:GetGatherers()
+    for _,wisp in pairs(wisps) do
+        FindClearSpaceForUnit(wisp, mine.entrance, true)
+        wisp:CancelGather()
+        break
     end
 
-    FindClearSpaceForUnit(wisp, mine.entrance, true)
-
-    -- Cancel gather effects
-    wisp:CancelGather()
-    
-    -- Set gold mine counter
-    local entangled_gold_mine = mine.building_on_top
-    local count = #builders
-    print(count,"builders left inside ", entangled_gold_mine:GetUnitName())
-    for i=count+1,5 do
-        ParticleManager:SetParticleControl(entangled_gold_mine.counter_particle, i, Vector(0,0,0))
-    end
+    mine:SetCounter(TableCount(mine:GetGatherers()))
 end
 
 

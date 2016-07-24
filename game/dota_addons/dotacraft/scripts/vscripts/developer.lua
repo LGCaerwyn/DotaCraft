@@ -16,7 +16,7 @@ CHEAT_CODES = {
 DEBUG_CODES = {
     ["debug_trees"] = function(...) Gatherer:DebugTrees() end,               -- Prints the trees marked as pathable
     ["debug_forests"] = function(...) Gatherer:DebugForests() end,           -- Prints the forest of each tree
-    ["debug_blight"] = function(...) dotacraft:DebugBlight(...) end,         -- Prints the positions marked for undead buildings
+    ["debug_blight"] = function(...) Blight:Debug() end,                     -- Prints the positions marked for undead buildings
     ["debug_food"] = function(...) dotacraft:DebugFood(...) end,             -- Prints the food count for all players, checking for inconsistencies
     ["debug_clear"] = function(...) DebugDrawClear() end,                    -- Clears all debug world elements
     ["debug_c"] = function(...) dotacraft:DebugCalls(...) end,               -- Spams the console with every lua call
@@ -148,25 +148,34 @@ function dotacraft:LightsOut()
     GameRules:SetTimeOfDay( 0.8 )
 end
 
-function dotacraft:GiveItem(playerID, item_name, num)
+function dotacraft:GiveItem(playerID, itemName, num)
     local selected = PlayerResource:GetMainSelectedEntity(playerID)
     if selected then
         selected = EntIndexToHScript(selected)
         num = num or 1
+        itemName = itemName or "item_scroll_of_town_portal"
+
+        if not GetItemKV(itemName) then
+            for k,_ in pairs(KeyValues.ItemKV) do
+                if k:match(itemName) then
+                    itemName = k
+                end
+            end
+        end
+
+        if not GetItemKV(itemName) then
+            Say(nil,"No match for '"..itemName.."'", false)
+            return
+        end
 
         for i=1,num do
-            local new_item = CreateItem(item_name, nil, nil)
-            if new_item then
-                if selected:IsRealHero() then
-                    selected:AddItem(new_item)
-                else
-                    local pos = selected:GetAbsOrigin()+RandomVector(200)
-                    CreateItemOnPositionSync(pos,new_item)
-                    new_item:LaunchLoot(false, 200, 0.75,pos)
-                end
+            local new_item = CreateItem(itemName, nil, nil)
+            if selected:IsRealHero() then
+                selected:AddItem(new_item)
             else
-                print("ERROR, can't find "..item_name)
-                return
+                local pos = selected:GetAbsOrigin()+RandomVector(200)
+                CreateItemOnPositionSync(pos,new_item)
+                new_item:LaunchLoot(false, 200, 0.75,pos)
             end
         end
     end
@@ -181,26 +190,10 @@ function dotacraft:MapOverview(playerID, distance)
     SendToServerConsole("fog_enable 0")
     SendToServerConsole("dota_hud_healthbars 0")
 
-    dotacraft.center_unit = dotacraft.center_unit or CreateUnitByName("nightelf_wisp",Vector(0,0,0),true,nil,nil,0)
     dotacraft.center_unit:AddNoDraw()
     Timers:CreateTimer(0.1, function()
-        CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(playerID), "map_overview", {center = dotacraft.center_unit:GetEntityIndex(), distance = distance})
+        CustomGameEventManager:Send_ServerToPlayer(PlayerResource:GetPlayer(playerID), "map_overview", {distance = distance})
     end)
-end
-
-function dotacraft:DebugBlight()
-    for y,v in pairs(BuildingHelper.Grid) do
-        for x,_ in pairs(v) do
-            if BuildingHelper:CellHasGridType(x,y,'BLIGHT') then
-                DrawGridSquare(x,y,Vector(128,0,128))
-            end
-            local pos = Vector(GridNav:GridPosToWorldCenterX(x), GridNav:GridPosToWorldCenterY(y), 0)
-            pos = GetGroundPosition(pos,nil)
-            if HasBlightParticle(pos) then
-                DebugDrawCircle(pos,Vector(128,0,128),100,32,true,10)
-            end
-        end
-    end
 end
 
 function dotacraft:DebugFood()
@@ -279,9 +272,17 @@ function dotacraft:CreateUnits(pID, unitName, numUnits, bEnemy)
 
      -- Handle possible unit issues
     numUnits = tonumber(numUnits) or 1
-    if not GameRules.UnitKV[unitName] then
-        Say(nil,"["..unitName.."] <font color='#ff0000'> is not a valid unit name!</font>", false)
-        return
+    if not KeyValues.UnitKV[unitName] then
+        for k,_ in pairs(KeyValues.UnitKV) do
+            if k:match(unitName) then
+                unitName = k
+                break
+            end
+        end
+        if not KeyValues.UnitKV[unitName] then
+            Say(nil,"No match for '"..unitName.."'", false)
+            return
+        end
     end
 
     local gridPoints = GetGridAroundPoint(numUnits, pos)
@@ -309,10 +310,14 @@ function dotacraft:TestHero(playerID, heroName, bEnemy)
     local selected = PlayerResource:GetMainSelectedEntity(playerID)
     if not selected then return end
     selected = EntIndexToHScript(selected)
+    heroName = heroName or "human_archmage"
 
     local pos = selected:GetAbsOrigin()
     local unitName = GetRealHeroName(heroName)
     local team = bEnemy and DOTA_TEAM_BADGUYS or PlayerResource:GetTeam(playerID)
+    if not unitName then
+        Say(nil,"No match for '"..heroName.."'", false)
+    end
 
     PrecacheUnitByNameAsync(unitName, function()
         local hero = CreateUnitByName(unitName, pos, true, nil, nil, team)
@@ -383,24 +388,36 @@ function dotacraft:TestUnit(playerID, name, bEnemy)
     local selected = PlayerResource:GetMainSelectedEntity(playerID)
     if not selected then return end
     selected = EntIndexToHScript(selected)
+    name = name or "human_footman"
 
     local pos = selected:GetAbsOrigin()
-    local unitName
-    for k,_ in pairs(KeyValues.UnitKV) do
-        if k:match(name) then
-            unitName = k
+
+    if not GetUnitKV(name) then
+        for k,_ in pairs(KeyValues.UnitKV) do
+            if k:match(name) then
+                name = k
+                break
+            end
         end
     end
-    if unitName:match('npc_dota_hero') then
-        dotacraft:TestHero(playerID, GetInternalHeroName(unitName), bEnemy)
+    if not GetUnitKV(name) then
+        Say(nil,"No match for '"..name.."'", false)
+        return
+    end
+    if GetUnitKV(name, "ConstructionSize") then
+        dotacraft:TestBuilding(playerID, name, bEnemy)
+        return
+    end
+    if name:match('npc_dota_hero') then
+        dotacraft:TestHero(playerID, GetInternalHeroName(name), bEnemy)
         return
     end
 
     local team = PlayerResource:GetTeam(playerID)
     local hero = PlayerResource:GetSelectedHeroEntity(playerID)
-    if unitName then
-        PrecacheUnitByNameAsync(unitName, function()
-            local unit = CreateUnitByName(unitName, pos, true, hero, hero, team)
+    if name then
+        PrecacheUnitByNameAsync(name, function()
+            local unit = CreateUnitByName(name, pos, true, hero, hero, team)
             unit:SetOwner(hero)
             unit:SetControllableByPlayer(playerID, true)
             unit:SetMana(unit:GetMaxMana())
@@ -473,17 +490,24 @@ function dotacraft:TestBuilding(playerID, name, bEnemy)
     local selected = PlayerResource:GetMainSelectedEntity(playerID)
     if not selected then return end
     selected = EntIndexToHScript(selected)
+    name = name or "human_barracks"
 
     local pos = selected:GetAbsOrigin() + RandomVector(300)
-    local unitName
-    for k,_ in pairs(KeyValues.UnitKV) do
-        if k:match(name) then
-            unitName = k
+    if not GetUnitKV(name) then
+        for k,_ in pairs(KeyValues.UnitKV) do
+            if k:match(name) then
+                name = k
+            end
         end
     end
+    if not GetUnitKV(name) then
+        Say(nil,"No match for '"..name.."'", false)
+        return
+    end
+
     local team = PlayerResource:GetTeam(playerID)
-    if unitName then
-        PrecacheUnitByNameAsync(unitName, function()
+    if name then
+        PrecacheUnitByNameAsync(name, function()
             local unit = BuildingHelper:PlaceBuilding(0, name, pos)
 
             if bEnemy then 

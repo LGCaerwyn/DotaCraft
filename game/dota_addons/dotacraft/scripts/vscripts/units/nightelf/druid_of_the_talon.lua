@@ -14,6 +14,28 @@ function ApplyFaerieFire(event)
 	print("Apply faerie fire for "..duration)
 end
 
+function FaerieFireAutocast(event)
+    local ability = event.ability
+    local caster = event.caster
+    local autocast_radius = ability:GetCastRange()
+    local modifier_name = "modifier_faerie_fire"
+    
+    if ability:GetAutoCastState() and ability:IsFullyCastable() and not caster:IsMoving() then
+        local target
+        local enemies = FindEnemiesInRadius(caster, autocast_radius)
+        for k,unit in pairs(enemies) do
+            if not IsCustomBuilding(unit) and not unit:HasModifier(modifier_name) then
+                target = unit
+                break
+            end
+        end
+
+        if target then
+            caster:CastAbilityOnTarget(target, ability, caster:GetPlayerOwnerID())
+        end
+    end
+end
+
 -- Make vision every second (this is to prevent the vision staying if the modifier is purged)
 function FaerieFireVision( event )
 	local caster = event.caster
@@ -22,12 +44,10 @@ function FaerieFireVision( event )
 	AddFOWViewer( target.faerie_fire_team, target:GetAbsOrigin(), 500, 0.75, true)
 end
 
-
 function CrowFormOn( event )
     local caster = event.caster
     local playerID = caster:GetPlayerOwnerID()
     caster:StartGesture(ACT_DOTA_CAST_ABILITY_4)
-    --caster:EmitSound("Hero_LoneDruid.TrueForm.Cast")
 
     -- Disable cyclone
     local cyclone = caster:FindAbilityByName("nightelf_cyclone")
@@ -46,14 +66,13 @@ function CrowFormOff( event )
     local caster = event.caster
     local playerID = caster:GetPlayerOwnerID()
     caster:StartGesture(ACT_DOTA_IDLE_RARE)
-    --caster:EmitSound("Hero_LoneDruid.TrueForm.Recast")
     
     -- Enable cyclone if the research is valid
     if Players:HasResearch(playerID, "nightelf_research_druid_of_the_talon_training1") then
         local cyclone = caster:FindAbilityByName("nightelf_cyclone")
         cyclone:SetHidden(false)
     else
-        CheckAbilityRequirements( caster, player )
+        CheckAbilityRequirements( caster, playerID )
     end
 
     -- Enable faerie fire
@@ -70,6 +89,9 @@ function CrowFormStart( event )
 
     -- Sets the new model
     caster:AddNewModifier(caster, nil, "modifier_druid_crow_model", {})
+    if not caster:HasModifier("modifier_flying_control") then
+        caster:AddNewModifier(caster,nil,"modifier_flying_control",{})
+    end
 
     -- Add weapon/armor upgrade benefits
     local player = caster:GetPlayerOwner()

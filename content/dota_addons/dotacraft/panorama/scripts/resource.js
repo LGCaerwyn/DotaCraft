@@ -2,7 +2,7 @@
 
 var LOW_UPKEEP = 50
 var HIGH_UPKEEP = 80
-var currentUpkeep = 0 //1 for No, 2 for Low, 3 for High
+var currentUpkeep = 1 //1 for No, 2 for Low, 3 for High
 
 GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_INVENTORY_PROTECT, false );
 GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_INVENTORY_COURIER, false );
@@ -83,7 +83,7 @@ function OnPlayerFoodChanged ( args ) {
 		$('#UpkeepText').AddClass('Green');
 		$('#UpkeepText').RemoveClass('Yellow');
 		$('#UpkeepText').RemoveClass('Red');
-		$('#UpkeepText').text = "No Upkeep";
+		$('#UpkeepText').text = $.Localize( "#no_upkeep" );
 		
 		$('#UpkeepTextAnnounce').AddClass('Green');
 		$('#UpkeepTextAnnounce').RemoveClass('Yellow');
@@ -100,7 +100,8 @@ function OnMapOverview (args) {
 	GameEvents.Subscribe( "player_lumber_changed", OnPlayerLumberChanged );
 	GameEvents.Subscribe( "player_food_changed", OnPlayerFoodChanged );
 	GameEvents.Subscribe( "map_overview", OnMapOverview );
-	
+	$('#UpkeepText').AddClass('Green');
+	$('#UpkeepText').text = $.Localize( "#no_upkeep" );
 	UpdateGold();
 })();
 

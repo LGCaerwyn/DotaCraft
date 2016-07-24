@@ -12,18 +12,6 @@ UNDER_ATTACK_WARNING_INTERVAL = 60
 STARTING_GOLD = 500
 STARTING_LUMBER = 150
 
-TEAM_COLORS = {}
-TEAM_COLORS[DOTA_TEAM_GOODGUYS] = { 52, 85, 255 }   --  Blue
-TEAM_COLORS[DOTA_TEAM_BADGUYS]  = { 255, 52, 85 }   --  Red
-TEAM_COLORS[DOTA_TEAM_CUSTOM_1] = { 61, 210, 150 }  --  Teal
-TEAM_COLORS[DOTA_TEAM_CUSTOM_2] = { 140, 42, 244 }  --  Purple
-TEAM_COLORS[DOTA_TEAM_CUSTOM_3] = { 243, 201, 9 }   --  Yellow
-TEAM_COLORS[DOTA_TEAM_CUSTOM_4] = { 255, 108, 0 }   --  Orange
-TEAM_COLORS[DOTA_TEAM_CUSTOM_5] = { 101, 212, 19 }  --  Green
-TEAM_COLORS[DOTA_TEAM_CUSTOM_6] = { 197, 77, 168 }  --  Pink
-TEAM_COLORS[DOTA_TEAM_CUSTOM_7] = { 129, 83, 54 }   --  Brown
-TEAM_COLORS[DOTA_TEAM_CUSTOM_8] = { 199, 228, 13 }  --  Olive
-
 --------------
 
 -- This function initializes the game mode and is called before anyone loads into the game
@@ -67,11 +55,6 @@ function dotacraft:InitGameMode()
     GameMode:SetFogOfWarDisabled( DISABLE_FOG_OF_WAR_ENTIRELY )
     GameMode:SetStashPurchasingDisabled( true )
     GameMode:SetMaximumAttackSpeed( 500 )
-
-    -- Team Colors
-    for team,color in pairs(TEAM_COLORS) do
-      SetTeamCustomHealthbarColor(team, color[1], color[2], color[3])
-    end
 
     print('[DOTACRAFT] Game Rules set')
 
@@ -152,23 +135,14 @@ function dotacraft:InitGameMode()
     -- Initialized tables for tracking state
     self.vUserIds = {}
     self.vPlayerUserIds = {}
-    self.vSteamIds = {}
     self.vBots = {}
     self.vBroadcasters = {}
 
-    self.vPlayers = {}
-    self.vRadiant = {}
-    self.vDire = {}
-
-    self.nRadiantKills = 0
-    self.nDireKills = 0
+    self.teamColors = {}
 
     GameRules.DefeatedTeamCount = 0
 
     dotacraft:LoadKV()
-
-    -- Keeps the blighted gridnav positions
-    GameRules.Blight = {}
 
     -- Attack net table
     Attacks:Init()
@@ -327,7 +301,7 @@ function dotacraft:InitializePlayer( hero )
     end
 
     -- Spawn as many builders as this race requires
-    dotacraft:InitializeBuilders( hero, race_setup_table, building )
+    dotacraft:InitializeBuilders( hero, race_setup_table )
 
     -- Hide main hero under the main base
     -- Snap the camera to the created building and add it to selection
@@ -505,7 +479,7 @@ function dotacraft:InitializeUndead( hero, race_setup_table, building )
 
     haunted_gold_mine.counter_particle = ParticleManager:CreateParticle("particles/custom/gold_mine_counter.vpcf", PATTACH_CUSTOMORIGIN, entangled_gold_mine)
     ParticleManager:SetParticleControl(haunted_gold_mine.counter_particle, 0, Vector(race_setup_table.closest_mine_pos.x,race_setup_table.closest_mine_pos.y,race_setup_table.closest_mine_pos.z+200))
-    haunted_gold_mine.builders = {}
+    race_setup_table.closest_mine:SetCapacity(5)
 
      -- Hide the targeted gold mine    
     ApplyModifier(race_setup_table.closest_mine, "modifier_unselectable")
@@ -518,8 +492,8 @@ function dotacraft:InitializeUndead( hero, race_setup_table, building )
 
     -- Create blight
     Timers:CreateTimer(function() 
-        CreateBlight(haunted_gold_mine, "small")
-        CreateBlight(building, "large")
+        Blight:Create(haunted_gold_mine, "small")
+        Blight:Create(building, "large")
     end)
 
     haunted_gold_mine.mine = race_setup_table.closest_mine -- A reference to the mine that the haunted mine is associated with
@@ -544,7 +518,7 @@ function dotacraft:InitializeNightElf( hero, race_setup_table, building )
     entangled_gold_mine:SetControllableByPlayer(playerID, true)
     entangled_gold_mine.counter_particle = ParticleManager:CreateParticle("particles/custom/gold_mine_counter.vpcf", PATTACH_CUSTOMORIGIN, entangled_gold_mine)
     ParticleManager:SetParticleControl(entangled_gold_mine.counter_particle, 0, Vector(race_setup_table.closest_mine_pos.x,race_setup_table.closest_mine_pos.y,race_setup_table.closest_mine_pos.z+200))
-    entangled_gold_mine.builders = {}
+    race_setup_table.closest_mine:SetCapacity(5)
 
     entangled_gold_mine.mine = race_setup_table.closest_mine -- A reference to the mine that the entangled mine is associated with
     entangled_gold_mine.city_center = building -- A reference to the city center that entangles this mine
@@ -569,15 +543,8 @@ function dotacraft:InitializeTownHall( hero, position, building )
     Timers:CreateTimer(function() hero:SetAbsOrigin(Vector(position.x,position.y,position.z - 420 )) return 1 end)
     hero:AddNoDraw()
 
-    -- Snap the camera to the created building and add it to selection
-    for i=1,15 do
-        Timers:CreateTimer(i*0.03, function()
-            PlayerResource:SetCameraTarget(playerID, hero)
-        end)
-    end
-
+    -- Add it to selection
     Timers:CreateTimer(0.5, function()
-        PlayerResource:SetCameraTarget(playerID, nil)
         PlayerResource:NewSelection(playerID, building)
         PlayerResource:SetDefaultSelectionEntity(playerID, building)
     end)
@@ -590,7 +557,17 @@ function dotacraft:OnGameInProgress()
     local shops = Entities:FindAllByName("*shop*")
     for k,v in pairs(shops) do
         if v.AddAbility then
-          TeachAbility(v,"ability_shop")
+            local origin = v:GetAbsOrigin()
+            local name = v:GetUnitName()
+            local construction_size = BuildingHelper:GetConstructionSize(name)
+            BuildingHelper:SnapToGrid(construction_size, origin)
+            BuildingHelper:BlockGridSquares(construction_size, BuildingHelper:GetBlockPathingSize(name), origin)
+            v:SetAbsOrigin(GetGroundPosition(origin,v))
+            v:AddNewModifier(v,nil,"modifier_building",{})
+            TeachAbility(v,"ability_shop")
+            for _,teamID in pairs(Teams:GetValidTeams()) do
+                AddFOWViewer(teamID,origin,10,3,false)
+            end
         end
     end
 
@@ -670,23 +647,32 @@ function dotacraft:OnPreGame()
     Teams:DetermineStartingPositions()
     Minimap:PrepareCamps()
     
-    local teamIDs = {2,3,6,7,8,9}
     local maxPlayers = dotacraft:GetMapMaxPlayers()
     for playerID = 0, maxPlayers do
         local playerTable = CustomNetTables:GetTableValue("dotacraft_pregame_table", tostring(playerID))
         if Players:IsValidNetTablePlayer(playerTable) then
             local color = playerTable.Color
-            local team = teamIDs[playerTable.Team]
+            local team = Teams:GetNthTeamID(playerTable.Team)
             local race = GameRules.raceTable[playerTable.Race] or GameRules.raceTable[RandomInt(1, 4)]
-            local PlayerColor = CustomNetTables:GetTableValue("dotacraft_color_table", tostring(color))
+            local playerColor = CustomNetTables:GetTableValue("dotacraft_color_table", tostring(color))
 
-            PlayerResource:SetCustomPlayerColor(playerID, PlayerColor.r, PlayerColor.g, PlayerColor.b)
+            PlayerResource:SetCustomPlayerColor(playerID, playerColor.r, playerColor.g, playerColor.b)
             PlayerResource:SetCustomTeamAssignment(playerID, team)
+
+            local teamColor = dotacraft:ColorForTeam(team)
+            SetTeamCustomHealthbarColor(team,teamColor[1],teamColor[2],teamColor[3])
             
             if PlayerResource:IsValidPlayerID(playerID) then
                 --Race Heroes are already precached
                 local player = PlayerResource:GetPlayer(playerID)
                 local hero = CreateHeroForPlayer(race, player)
+                local position = Teams:GetPositionForPlayer(playerID)
+                if position then
+                    local mine = Gatherer:GetClosestGoldMineToPosition(position)
+                    local mid_point = mine:GetAbsOrigin() + (position-mine:GetAbsOrigin())/2
+                    hero:SetAbsOrigin(mid_point)
+                end
+
                 hero.color_id = color
                 
                 print("[DOTACRAFT] CreateHeroForPlayer: ",playerID,race,team)
@@ -718,28 +704,6 @@ function dotacraft:OnPreGame()
         end
     end
     --]]
-    
-    -- Add gridnav blockers to the gold mines
-    GameRules.GoldMines = Entities:FindAllByModel('models/mine/mine.vmdl')
-    for k,gold_mine in pairs (GameRules.GoldMines) do
-        local location = gold_mine:GetAbsOrigin()
-        local construction_size = BuildingHelper:GetConstructionSize(gold_mine)
-        local pathing_size = BuildingHelper:GetBlockPathingSize(gold_mine)
-        BuildingHelper:SnapToGrid(construction_size, location)
-
-        local gridNavBlockers = BuildingHelper:BlockGridSquares(construction_size, pathing_size, location)
-        BuildingHelper:AddGridType(construction_size, location, "GoldMine")
-        gold_mine:SetAbsOrigin(location)
-        gold_mine.blockers = gridNavBlockers
-
-        -- Find and store the mine entrance
-        local mine_entrance = Entities:FindAllByNameWithin("*mine_entrance", location, 300)
-        for k,v in pairs(mine_entrance) do
-            gold_mine.entrance = v:GetAbsOrigin()
-        end
-
-        -- Find and store the mine light
-    end
 end
 
 -- An NPC has spawned somewhere in game.  This includes heroes
@@ -920,10 +884,10 @@ function dotacraft:OnEntityKilled( event )
     end
 
     -- Check for neutral item drops
-    if killed_teamNumber == DOTA_TEAM_NEUTRALS and killed:IsCreature() then
+    if killed_teamNumber == DOTA_TEAM_NEUTRALS and killed:IsCreature() and not IsCustomBuilding(killed) then
         Drops:Roll(killed)
 
-        if attacker_playerID then
+        if attacker_playerID and PlayerResource:IsValidPlayerID(attacker_playerID) then
             Scores:IncrementItemsObtained( attacker_playerID )
         end
     end
@@ -980,9 +944,14 @@ function dotacraft:OnEntityKilled( event )
             print("Hero Killed but player doesn't have an altar to revive it")
         end
     end
+
+    -- Remove blight area
+    if killed:HasModifier("modifier_grid_blight") then
+        Blight:Remove(killed)
+    end
     
     -- Building Killed
-    if IsCustomBuilding(killed) then
+    if IsCustomBuilding(killed) and killed_teamNumber ~= DOTA_TEAM_NEUTRALS then
 
         -- Cleanup building tables
         Players:RemoveStructure( killed_playerID, killed )
@@ -1074,7 +1043,7 @@ function dotacraft:UpdateRallyFlagDisplays( playerID )
 
     for k,v in pairs(units) do
         local building = EntIndexToHScript(v)
-        if IsValidAlive(building) and IsCustomBuilding(building) and HasRallyPoint(building) then
+        if IsValidAlive(building) and IsCustomBuilding(building) and not IsUprooted(building) and HasRallyPoint(building) then
             CreateRallyFlagForBuilding( building )
         end
     end
@@ -1148,14 +1117,18 @@ end
 
 -- Returns a Vector with the color of the player
 function dotacraft:ColorForPlayer( playerID )
-    local Player_Table = CustomNetTables:GetTableValue(GameRules.UI_PLAYERTABLE, tostring(playerID))
-    local color = CustomNetTables:GetTableValue(GameRules.UI_COLORTABLE, tostring(Player_Table.color_id))
-    return Vector(color.r, color.g, color.b)
+    local playerTable = CustomNetTables:GetTableValue("dotacraft_pregame_table", tostring(playerID))
+    local color = playerTable.Color
+    local playerColor = CustomNetTables:GetTableValue("dotacraft_color_table", tostring(color))
+    return Vector(playerColor.r, playerColor.g, playerColor.b)
 end
 
 function dotacraft:ColorForTeam(teamID)
-    local color = TEAM_COLORS[teamID]
-    return Vector(color[1], color[2], color[3])
+    if not self.teamColors[teamID] then
+        local playerID = PlayerResource:GetNthPlayerIDOnTeam(teamID,1)
+        self.teamColors[teamID] = self:ColorForPlayer( playerID )
+    end
+    return self.teamColors[teamID]
 end
 
 function dotacraft:GetMapName()

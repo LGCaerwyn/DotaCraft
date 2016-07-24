@@ -45,7 +45,7 @@ function Build( event )
 
            -- Blight check
            if string.match(building_name, "undead") and building_name ~= "undead_necropolis" then
-               local bHasBlight = HasBlight(vPos)
+               local bHasBlight = BuildingHelper:PositionHasBlight(vPos)
                BuildingHelper:print("Blight check for "..building_name..":", bHasBlight)
                if not bHasBlight then
                    SendErrorMessage(playerID, "#error_must_build_on_blight")
@@ -53,7 +53,7 @@ function Build( event )
                end
            end
 
-            -- Proximity to gold mine check for Human/Orc: Main Buildings can be as close as 768.015 towards the center of the Gold Mine.
+            -- Proximity to gold mine check for Human/Orc: Main Buildings can be as close as 768 towards the center of the Gold Mine.
             if HasGoldMineDistanceRestriction(building_name) then
                 local nearby_mine = Entities:FindAllByNameWithin("*gold_mine", vPos, 768)
                 if #nearby_mine > 0 then
@@ -147,7 +147,7 @@ function Build( event )
         unit:SetBaseMaxHealth(maxHealth)
 
         if unit:RenderTeamColor() then
-            local color = TEAM_COLORS[teamNumber]
+            local color = dotacraft:ColorForTeam(teamNumber)
             unit:SetRenderColor(color[1], color[2], color[3])
         end
 
@@ -257,23 +257,21 @@ function Build( event )
         -- Add the building handle to the list of structures
         Players:AddStructure(playerID, unit)
 
-        -- Add blight if its an undead building
+        -- If it's a city center, check for city_center_level updates
+        local bCityCenter = IsCityCenter(unit)
+        if bCityCenter then
+            Players:CheckCurrentCityCenters(playerID)
+        end
+
+        -- Add blight if its an undead building, dispel otherwise
+        local blightSize = bCityCenter and "large" or "small"
         if IsUndead(unit) then
-            local size = "small"
-            if unit:GetUnitName() == "undead_necropolis" then
-                size = "large"
-            end
-            CreateBlight(unit, size)
+            Blight:Create(unit, blightSize)
         end
 
         -- Add ability_shop on buildings labeled with _shop
-        if string.match( unit:GetUnitLabel(), "_shop") then
+        if string.match(unit:GetUnitLabel(), "_shop") then
             TeachAbility(unit, "ability_shop")
-        end
-
-        -- If it's a city center, check for city_center_level updates
-        if IsCityCenter(unit) then
-            Players:CheckCurrentCityCenters(playerID)
         end
 
         -- Add to the Food Limit if possible
@@ -298,19 +296,15 @@ function Build( event )
     -- These callbacks will only fire when the state between below half health/above half health changes.
     -- i.e. it won't fire multiple times unnecessarily.
     event:OnBelowHalfHealth(function(unit)
-        BuildingHelper:print("" .. unit:GetUnitName() .. " is below half health.")
+        BuildingHelper:print(unit:GetUnitName() .. " is below half health.")
                 
-        local item = CreateItem("item_apply_modifiers", nil, nil)
-        item:ApplyDataDrivenModifier(unit, unit, "modifier_onfire", {})
-        item = nil
-
+        ApplyModifier(unit, "item_apply_modifiers")
     end)
 
     event:OnAboveHalfHealth(function(unit)
-        BuildingHelper:print("" ..unit:GetUnitName().. " is above half health.")
+        BuildingHelper:print(unit:GetUnitName().. " is above half health.")
 
         unit:RemoveModifierByName("modifier_onfire")
-        
     end)
 end
 
@@ -333,12 +327,14 @@ function CancelBuilding( keys )
     end
 
     -- Refund items (In the item-queue system, units can be queued before the building is finished)
+    local time = 0
     for i=0,5 do
         local item = building:GetItemInSlot(i)
         if item then
             if item:GetAbilityName() == "item_building_cancel" then
                 item:RemoveSelf()
             else
+                time = time + i*1/30
                 Timers:CreateTimer(i*1/30, function() 
                     building:CastAbilityImmediately(item, playerID)
                 end)
@@ -348,11 +344,9 @@ function CancelBuilding( keys )
 
     Players:ModifyGold(playerID, gold_cost)
     Players:ModifyLumber(playerID, lumber_cost)
-    PopupGoldGain(building, gold_cost)
-    PopupLumber(building, lumber_cost)
 
     building.state = "canceled"
-    Timers:CreateTimer(1/5, function() 
+    Timers:CreateTimer(time+1/30, function() 
         building:ForceKill(true)
     end)
 end

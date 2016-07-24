@@ -10,6 +10,7 @@ var overlay_size = 0;
 var range = 0;
 var pressedShift = false;
 var altDown = false;
+var invalid = false;
 var requires;
 var modelParticle;
 var propParticle;
@@ -161,11 +162,11 @@ function StartBuildingHelper( params )
         entityGrid = []
         for (var i = 0; i < entities.length; i++)
         {
-            if (!Entities.IsAlive(entities[i]) || Entities.IsOutOfGame(entities[i]) || !HasModifier(entities[i], "modifier_building")) continue
+            if (!Entities.IsAlive(entities[i]) || Entities.IsOutOfGame(entities[i])) continue
             var entPos = Entities.GetAbsOrigin( entities[i] )
             var squares = GetConstructionSize(entities[i])
             
-            if (squares > 0)
+            if (squares > 0 && HasModifier(entities[i], "modifier_building"))
             {
                 // Block squares centered on the origin
                 BlockGridSquares(entPos, squares, GRID_TYPES["BLOCKED"])
@@ -230,7 +231,7 @@ function StartBuildingHelper( params )
         {
             SnapToGrid(GamePos, size)
 
-            var invalid;
+            invalid = false
             var color = [0,255,0]
             var part = 0
             var halfSide = (size/2)*64
@@ -407,6 +408,12 @@ function EndBuildingHelper()
 
 function SendBuildCommand( params )
 {
+    if (invalid)
+    {
+        CreateErrorMessage({message:"#error_invalid_build_position"})
+        return true
+    }
+
     pressedShift = GameUI.IsShiftDown();
     var mainSelected = Players.GetLocalPlayerPortraitUnit(); 
 
@@ -428,6 +435,17 @@ function SendCancelCommand( params )
 {
     EndBuildingHelper();
     GameEvents.SendCustomGameEventToServer( "building_helper_cancel_command", {} );
+}
+
+function CreateErrorMessage(msg)
+{
+    var reason = msg.reason || 80;
+    if (msg.message){
+        GameEvents.SendEventClientSide("dota_hud_error_message", {"splitscreenplayer":0,"reason":reason ,"message":msg.message} );
+    }
+    else{
+        GameEvents.SendEventClientSide("dota_hud_error_message", {"splitscreenplayer":0,"reason":reason} );
+    }
 }
 
 function RegisterGNV(msg){
