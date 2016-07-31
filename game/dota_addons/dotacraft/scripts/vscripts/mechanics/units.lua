@@ -81,7 +81,7 @@ function Units:Init( unit )
     end
 
     -- Attack system, only applied to units and buildings with an attack
-    local attacks_enabled = GetAttacksEnabled(unit)
+    local attacks_enabled = unit:GetAttacksEnabled()
     if attacks_enabled ~= "none" then
         if bBuilder then
             ApplyModifier(unit, "modifier_attack_system_passive")
@@ -494,7 +494,7 @@ function CDOTA_BaseNPC:HasSplashAttack()
 end
 
 function CDOTA_BaseNPC:IsDummy()
-    return self:GetUnitName():match("dummy_")
+    return self:GetUnitName():match("dummy_") or self:GetUnitLabel():match("dummy")
 end
 
 -- Default 0 (melee)
@@ -539,6 +539,36 @@ function CDOTA_BaseNPC:GetAttackFactorAgainstTarget( unit )
     local armor_type = unit:GetArmorType()
     local damageTable = GameRules.Damage
     return damageTable[attack_type] and damageTable[attack_type][armor_type] or 1
+end
+
+-- Default by omission is "none", other possible returns should be "ground,air" or "air"
+function CDOTA_BaseNPC:GetAttacksEnabled()
+    return self.attacksEnabled or self:GetKeyValue("AttacksEnabled") or "none"
+end
+
+-- Overrides the keyvalue and sets nettable index for that unit
+function CDOTA_BaseNPC:SetAttacksEnabled( attacks )
+    self.attacksEnabled = attacks
+    CustomNetTables:SetTableValue("attacks_enabled", tostring(self:GetEntityIndex()), {enabled = attacks})
+end
+
+-- MODIFIER_PROPERTY_HEALTH_BONUS doesn't work on npc_dota_creature
+function CDOTA_BaseNPC_Creature:IncreaseMaxHealth(bonus)
+    local newHP = self:GetMaxHealth() + bonus
+    local relativeHP = self:GetHealthPercent() * 0.01
+    self:SetMaxHealth(newHP)
+    self:SetBaseMaxHealth(newHP)
+    self:SetHealth(newHP * relativeHP)
+end
+
+-- Increases levels keeping up relative HP
+function CDOTA_BaseNPC_Creature:LevelUp(levels)
+    local relativeHP = self:GetHealthPercent() * 0.01
+    local relativeMana = self:GetMana()/self:GetMaxMana()
+
+    self:CreatureLevelUp(levels)
+    self:SetHealth(self:GetMaxHealth() * relativeHP)
+    self:SetMana(self:GetMaxMana() * relativeMana)
 end
 
 function CDOTA_BaseNPC:FindItemByName(item_name)
@@ -659,5 +689,7 @@ function Unsummon(target, callback)
         return 1
     end)
 end
+
+
 
 Units:start()

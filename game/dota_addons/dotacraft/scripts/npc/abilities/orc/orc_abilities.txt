@@ -258,22 +258,12 @@
 		"03"
 		{
 			"var_type"		"FIELD_INTEGER"
-			"summoned_unit_damage"			"400"
+			"damage_to_summons"			"400"
 		}
 		"04"
 		{
 			"var_type"		"FIELD_INTEGER"
 			"slow_per_stack"	"-20"	
-		}
-		"05"
-		{
-			"var_type"		"FIELD_INTEGER"
-			"stack_multi"	"5"	
-		}
-		"06"
-		{
-			"var_type"		"FIELD_INTEGER"
-			"think_interval"	"1"	
 		}
 	}
 
@@ -285,6 +275,11 @@
 
 	"OnSpellStart"
 	{
+		"FireSound"
+		{
+		    "EffectName"    "DOTA_Item.DiffusalBlade.Target"
+		    "Target"        "TARGET"
+		}
 		"RunScript"
 		{
 			"ScriptFile"	"units/orc/shaman.lua"
@@ -296,7 +291,6 @@
 	{
 		"modifier_purge"
 		{
-			"IsHidden"			"0"
 			"TextureName" 		"orc_purge"
 			"IsDebuff"			"1"
 			"IsPurgable"		"1"
@@ -330,7 +324,7 @@
 			    "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "%slow_per_stack" 
 			}
 
-			"ThinkInterval"  "%think_interval"
+			"ThinkInterval"  "1"
 			"OnIntervalThink"
 			{
 				"RunScript"
@@ -794,8 +788,8 @@
 	"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
 	"AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
 	"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
-	"AbilityUnitDamageType"		"DAMAGE_TYPE_MAGICAL"
-	"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_2"
+	"AbilityCastAnimation"		"ACT_DOTA_ATTACK"
+	"AbilityUnitTargetFlags"	"DOTA_UNIT_TARGET_FLAG_NOT_MAGIC_IMMUNE_ALLIES"
 		
 	"AbilityCastRange"			"750"
 	"AbilityCastPoint"			"0"
@@ -834,6 +828,12 @@
 			"ScriptFile"	"units/orc/spiritwalker.lua"
 			"Function"		"SpiritLinkStart"
 		}
+
+		"FireSound"
+		{
+		    "EffectName"    "Hero_Oracle.FortunesEnd.Target"
+		    "Target"        "TARGET"
+		}
 	}
 
 	"Modifiers"
@@ -843,8 +843,8 @@
 			"IsPurgable"		"1"
 			"IsBuff"			"1"
 			"Duration"			"%duration"
-			//"EffectName"		"particle_name"
-			//"EffectAttachType"	"follow_origin"
+			"EffectName"		"particles/custom/orc/spirit_link.vpcf"
+			"EffectAttachType"	"follow_origin"
 
 			"OnCreated"
 			{
@@ -926,21 +926,11 @@
 	"precache"
 	{
 		"particle"  "particles/econ/items/enchantress/enchantress_lodestar/ench_death_lodestar_burst.vpcf"
+		"particle"  "particles/units/heroes/hero_oracle/oracle_false_promise_dmg_burst.vpcf"
 	}
 
 	"OnSpellStart"
 	{
-		"FireEffect"
-		{
-			"EffectName"        "particles/units/heroes/hero_brewmaster/brewmaster_dispel_magic.vpcf"
-			"EffectAttachType"  "world_origin"
-			"TargetPoint"       "POINT"
-			"ControlPoints"
-			{
-				"01"	"%radius 0 0"
-			}
-		}
-
 		"FireSound"
 		{
 			"EffectName"	"Brewmaster_Storm.DispelMagic"
@@ -968,10 +958,9 @@
 	"MaxLevel"					"1"
 		
 	"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
-	"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_2"
 		
 	"AbilityCastRange"			"350"
-	"AbilityCastPoint"			"0"
+	"AbilityCastPoint"			"0.1"
 	"AbilityCooldown"			"30"
 	"AbilityManaCost"			"250"
 		
@@ -979,15 +968,14 @@
 	{
 		"01"
 		{
-			"var_type"		"FIELD_INTEGER"
-			"life_restored"			"1"
+			"var_type"			"FIELD_INTEGER"
+			"life_restored"		"100"
 		}
 		"02"
 		{
-			"var_type"		"FIELD_FLOAT"
-			"mana_restored"			"0.25"
+			"var_type"			"FIELD_INTEGER"
+			"mana_restored"		"25"
 		}
-		// Both are percentages.
 	}
 
 	"precache"
@@ -1004,7 +992,6 @@
 			"Function"		"AncestralSpiritPrecast"
 		}
 	}
-	
 
 	"OnSpellStart"
 	{
@@ -1012,13 +999,6 @@
 		{
 			"EffectName"		"Hero_Abaddon.AphoticShield.Cast"
 			"Target"			"CASTER"
-		}
-
-		"FireEffect"
-		{
-			"EffectName"        "particles/units/heroes/hero_skeletonking/wraith_king_reincarnate_explode.vpcf"
-			"EffectAttachType"  "follow_origin"
-			"Target"            "CASTER"
 		}
 
 		"RunScript"
@@ -1175,43 +1155,77 @@
 		}
 		"02"
 		{
-			"var_type"			"FIELD_FLOAT"
-			"lower_duration"	"0.6"
-		}
-		// The duration in which the target is lowered.
-		"03"
-		{
 			"var_type"			"FIELD_INTEGER"
-			"lower_height"		"200"
+			"hero_duration"		"2"
 		}
-		// The height to which the target is lowered.
-		// A third value called "Melee Attack Range" apparently doesn't affect anything at all so I've removed it.
 	}
 
 	"precache"
 	{
-		"particle"  "particles/neutral_fx/dark_troll_ensnare.vpcf"
+		"particle"  "particles/units/heroes/hero_siren/siren_net.vpcf"
 		"soundfile" "soundevents/game_sounds_heroes/game_sounds_naga_siren.vsndevts"
 	}
 
 	"OnSpellStart"
 	{
-		"RunScript"
+		"FireSound"
 		{
-			"ScriptFile"	"units/orc/ensnare.lua"
-			"Function"		"OnSpellStart"
+		    "EffectName"    "Hero_NagaSiren.Ensnare.Cast"
+		    "Target"        "CASTER"
 		}
+
+		"TrackingProjectile"
+		{
+		    "Target"            "TARGET"
+		    "EffectName"        "particles/units/heroes/hero_siren/siren_net_projectile.vpcf"
+		    "Dodgeable"         "1"
+		    "ProvidesVision"    "0"
+		    "MoveSpeed"         "1000"
+		    "SourceAttachment"  "DOTA_PROJECTILE_ATTACHMENT_ATTACK_1"
+		}
+	}
+
+	"OnProjectileHitUnit"
+	{
+	    "DeleteOnHit"    "1"
+	    "RunScript"
+        {
+            "ScriptFile"    "mechanics/abilities.lua"
+            "Function"      "Interrupt"
+        }
+
+	    "ApplyModifier"
+	    {
+	        "ModifierName"  "modifier_ensnare"
+	        "Target"
+	        {
+	            "Center"    "TARGET"
+	            "Teams"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
+	            "Types"     "DOTA_UNIT_TARGET_HERO"
+	        }
+	        "Duration"      "%hero_duration"
+	    }
+	    
+	    "ApplyModifier"
+	    {
+	        "ModifierName"  "modifier_ensnare"
+	        "Target"
+	        {
+	            "Center"    "TARGET"
+	            "Teams"     "DOTA_UNIT_TARGET_TEAM_ENEMY"
+	            "Types"     "DOTA_UNIT_TARGET_BASIC"
+	        }
+	        "Duration"      "%duration"
+	    }
 	}
 
 	"Modifiers"
 	{
 		"modifier_ensnare"
 		{
-			"Passive"			"0"
-			"IsHidden"			"0"
 			"IsDebuff"			"1"
 	
-			"EffectName"		"particles/neutral_fx/dark_troll_ensnare.vpcf"
+			"EffectName"		"particles/units/heroes/hero_siren/siren_net.vpcf"
 			"EffectAttachType"	"follow_origin"
 	
 			"States"
@@ -1219,13 +1233,34 @@
 				"MODIFIER_STATE_ROOTED"		"MODIFIER_STATE_VALUE_ENABLED"
 			}
 
+			"OnCreated"
+			{
+			    "RunScript"
+			    {
+			        "ScriptFile"	"units/orc/ensnare.lua"
+					"Function"		"Ensnare"
+			    }
+
+			    "ApplyModifier"
+			    {
+			        "ModifierName"  "modifier_truesight"
+			        "Target"        "TARGET"
+			    }
+			}
+
 			"OnDestroy"
 			{
 				"RunScript"
 				{
 					"ScriptFile"	"units/orc/ensnare.lua"
-					"Function"		"OnModifierDestroy"
+					"Function"		"EnsnareDestroy"
 				}
+
+				"RemoveModifier"
+			    {
+			        "ModifierName"  "modifier_truesight"
+			        "Target"        "TARGET"
+			    }
 			}
 		}
 	}
@@ -1244,24 +1279,18 @@
 		
 	"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
 	"AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
-	"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
-	"AbilityUnitDamageType"		"DAMAGE_TYPE_MAGICAL"
-	"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_2"
+	"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_BASIC"
 		
 	"AbilityCastRange"			"120"
-	"AbilityCastPoint"			"0.1"
+	"AbilityCastPoint"			"0.5"
 	"AbilityCooldown"			"0"
 	"AbilityManaCost"			"0"
 
 	"TargetsAllowed"			"ground,organic"
+	"MaxCreepLevel"             "5"
 		
 	"AbilitySpecial"
 	{
-		"01"
-		{
-			"var_type"		"FIELD_INTEGER"
-			"max_creep_level"			"5"
-		}
 		"02"
 		{
 			"var_type"		"FIELD_FLOAT"
@@ -1277,6 +1306,12 @@
 			"var_type"				"FIELD_INTEGER"
 			"damage_per_second"		"5"
 		}
+	}
+
+	"precache"
+	{
+	    "particle"  "particles/units/heroes/hero_doom_bringer/doom_bringer_devour.vpcf"
+	    "soundfile" "soundevents/game_sounds_heroes/game_sounds_doombringer.vsndevts"
 	}
 
 	"OnAbilityPhaseStart"
@@ -1308,18 +1343,6 @@
 
 	"Modifiers"
 	{
-
-		"modifier_devour_swallow"
-		{
-			"IsHidden"			"1"
-			"Duration"			"%delay"
-
-			"States"
-			{
-				"MODIFIER_STATE_ROOTED"		"MODIFIER_STATE_VALUE_ENABLED"
-			}
-		}
-
 		"modifier_devour_devouring"
 		{
 			"OnDeath"
@@ -1335,7 +1358,7 @@
 		"modifier_devour_debuff"
 		{
 			"IsDebuff"			"1"
-			"ThinkInterval"  "1"
+			"ThinkInterval"  	"1"
 			"OnIntervalThink"
 			{
 				"RunScript"
@@ -1345,20 +1368,13 @@
 				}
 			}
 
-			"OnDeath"
-			{
-				"RunScript"
-				{
-					"ScriptFile"	"units/orc/kodobeast.lua"
-					"Function"		"NotificationFix"
-				}
-			}
-
 			"States"
 			{
+				"MODIFIER_STATE_UNSELECTABLE"	"MODIFIER_STATE_VALUE_ENABLED"
 				"MODIFIER_STATE_STUNNED"		"MODIFIER_STATE_VALUE_ENABLED"
-				"MODIFIER_STATE_OUT_OF_WORLD"	"MODIFIER_STATE_VALUE_ENABLED"
+				"MODIFIER_STATE_OUT_OF_GAME"	"MODIFIER_STATE_VALUE_ENABLED"
 				"MODIFIER_STATE_NO_UNIT_COLLISION"	"MODIFIER_STATE_VALUE_ENABLED"
+				"MODIFIER_STATE_PASSIVES_DISABLED"	"MODIFIER_STATE_VALUE_ENABLED"
 				"MODIFIER_STATE_INVULNERABLE"	"MODIFIER_STATE_VALUE_ENABLED"
 			}
 
@@ -1546,7 +1562,8 @@
 	"AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
 	"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 	"AbilityUnitDamageType"		"DAMAGE_TYPE_MAGICAL"
-	"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_2"
+	
+	"TargetsAllowed"			"air"
 		
 	"AbilityCastRange"			"400"
 	"AbilityCastPoint"			"0"
@@ -1555,28 +1572,26 @@
 		
 	"AbilitySpecial"
 	{
-		// NOTE: Causes a powerful explosion that deals 600 damage to a target air unit and 140 damage to nearby air units. Using this ability destroys the Troll Batrider. The splash radius is 20. ????
 		"01"
 		{
 			"var_type"		"FIELD_INTEGER"
-			"partial_damage_amount"			"200"
+			"full_damage_amount"			"600"
 		}
 		"02"
 		{
 			"var_type"		"FIELD_INTEGER"
-			"partial_damage_radius"			"140"
+			"partial_damage_amount"			"140"
 		}
 		"03"
 		{
 			"var_type"		"FIELD_INTEGER"
-			"full_damage_amount"			"600"
+			"partial_damage_radius"			"200"
 		}
 		"04"
 		{
 			"var_type"		"FIELD_INTEGER"
 			"speed_bonus"			"280"
 		}
-		// The unit will move towards the target unit with an increased speed (base + bonus).
 	}
 
 	"precache"
@@ -1584,7 +1599,6 @@
 		"particle"  "particles/econ/items/huskar/huskar_searing_dominator/huskar_searing_life_break.vpcf"
 		"soundfile" "soundevents/game_sounds_heroes/game_sounds_huskar.vsndevts"
 		"soundfile" "soundevents/game_sounds_heroes/game_sounds_techies.vsndevts"
-		
 	}
 
 	"OnSpellStart"
@@ -1600,8 +1614,7 @@
 	{
 		"modifier_unstable_concoction"
 		{
-			"IsPurgable"		"0"
-			"IsBuff"			"1"
+			"IsHidden"			"1"
 
 			"EffectName"		"particles/econ/items/huskar/huskar_searing_dominator/huskar_searing_life_break.vpcf"
 			"EffectAttachType"	"follow_origin"

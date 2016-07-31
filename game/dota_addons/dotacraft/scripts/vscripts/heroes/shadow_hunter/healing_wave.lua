@@ -3,7 +3,7 @@
     Bounces from the main target to nearby targets in range. Avoids bouncing to full health units
 ]]
 function HealingWave( event )
-    local hero = event.caster
+    local caster = event.caster
     local target = event.target
     local ability = event.ability
     local bounces = ability:GetLevelSpecialValueFor("max_bounces", ability:GetLevel()-1)
@@ -36,7 +36,7 @@ function HealingWave( event )
 
             -- Hit the first unit with health deficit that hasn't been struck yet
             local bounce_target
-            for _,unit in pairs(units) do
+            for _,unit in pairs(allies) do
                 local entIndex = unit:GetEntityIndex()
                 if not targetsStruck[entIndex] and unit:GetHealthDeficit() > 0 then
                     bounce_target = unit
@@ -71,17 +71,18 @@ function CreateHealingWave(caster, start_position, target, healing, ability)
         target_position.z = target_position.z + target:GetBoundingMaxs().z
     end
 
-    local particle = ParticleManager:CreateParticle("particles/custom/dazzle_shadow_wave.vpcf", PATTACH_ABSORIGIN_FOLLOW, hero)
+    local particle = ParticleManager:CreateParticle("particles/custom/dazzle_shadow_wave.vpcf", PATTACH_CUSTOMORIGIN, nil)
     ParticleManager:SetParticleControl(particle, 0, start_position)
     ParticleManager:SetParticleControl(particle, 1, target_position)
 
-    local particle = ParticleManager:CreateParticle("particles/custom/dazzle_shadow_wave_copy.vpcf", PATTACH_ABSORIGIN_FOLLOW, hero)
+    local particle = ParticleManager:CreateParticle("particles/custom/dazzle_shadow_wave_copy.vpcf", PATTACH_CUSTOMORIGIN, nil)
     ParticleManager:SetParticleControl(particle, 0, start_position)
     ParticleManager:SetParticleControl(particle, 1, target_position)
 
     target:Heal(healing, target)
-    local heal = math.floor(math.min(healing, caster:GetHealthDeficit())+0.5)
+    local heal = math.floor(math.min(healing, target:GetHealthDeficit())+0.5)
     if heal > 0 then
         PopupHealing(target,heal)
     end
+    return target_position
 end

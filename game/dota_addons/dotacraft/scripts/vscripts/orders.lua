@@ -21,9 +21,19 @@ function dotacraft:FilterExecuteOrder( filterTable )
     local point = Vector(x,y,z)
     local queue = filterTable["queue"] == 1
 
+    local unit
     local numUnits = 0
     local numBuildings = 0
     if units then
+        -- Skip Prevents order loops
+        unit = EntIndexToHScript(units["0"])
+        if unit then
+            if unit.skip then
+                unit.skip = false
+                return true
+            end
+        end
+
         for n,unit_index in pairs(units) do
             local unit = EntIndexToHScript(unit_index)
             if unit and IsValidEntity(unit) then
@@ -36,15 +46,6 @@ function dotacraft:FilterExecuteOrder( filterTable )
                     numBuildings = numBuildings + 1
                 end
             end
-        end
-    end
-
-    -- Skip Prevents order loops
-    local unit = EntIndexToHScript(units["0"])
-    if unit then
-        if unit.skip then
-            unit.skip = false
-            return true
         end
     end
 
@@ -76,16 +77,23 @@ function dotacraft:FilterExecuteOrder( filterTable )
         if not ability then return true end
         local playerID = unit:GetPlayerOwnerID()
         
-        -- Check health requirements
+        -- Check health/manarequirements
+        local manaDeficit = unit:GetMana() == unit:GetMaxMana()
+        local healthDeficit = unit:GetHealthDeficit() == 0
+        local bNeedsAnyDeficit = ability:GetKeyValue("RequiresAnyDeficit")
         local requiresHealthDeficit = ability:GetKeyValue("RequiresHealthDeficit")
-        if requiresHealthDeficit and unit:GetHealthDeficit() == 0 then
+        local requiresManaDeficit = ability:GetKeyValue("RequiresManaDeficit")
+        if bNeedsAnyDeficit and not healthDeficit and not manaDeficit then
+            if unit:GetMaxMana() > 0 then
+                SendErrorMessage(issuer, "#error_full_mana_health")
+            else
+                SendErrorMessage(issuer, "#error_full_health")
+            end
+            return false
+        elseif requiresHealthDeficit and not healthDeficit then
             SendErrorMessage(issuer, "#error_full_health")
             return false
-        end
-
-        -- Check mana requirements
-        local requiresManaDeficit = ability:GetKeyValue("RequiresManaDeficit")
-        if requiresManaDeficit and unit:GetMana() == unit:GetMaxMana() then
+        elseif requiresManaDeficit and not manaDeficit then
             SendErrorMessage(issuer, "#error_full_mana")
             return false
         end
@@ -306,8 +314,10 @@ function dotacraft:FilterExecuteOrder( filterTable )
                             errorMsg = "#dota_hud_error_target_magic_immune"
                         elseif unit:GetAttackType() ~= "magic" and target:IsEthereal() then
                             errorMsg = "#error_ethereal_target"
-                        elseif GetAttacksEnabled(unit) == "building" and not IsCustomBuilding(target) then
+                        elseif unit:GetAttacksEnabled() == "building" and not IsCustomBuilding(target) then
                             errorMsg = "#error_must_target_buildings"
+                        elseif unit:IsDisarmed() then
+                            errorMsg = "#dota_hud_error_unit_disarmed"
                         else
                             local error_type = GetMovementCapability(target)
                             if error_type == "air" then
@@ -316,7 +326,6 @@ function dotacraft:FilterExecuteOrder( filterTable )
                                 errorMsg = "#error_must_target_air"
                             end
                         end
-
                         SendErrorMessage( unit:GetPlayerOwnerID(), errorMsg )
                     end
                 end

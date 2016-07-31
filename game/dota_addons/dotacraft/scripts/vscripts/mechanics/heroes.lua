@@ -40,8 +40,9 @@ function Heroes:DistributeXP(killed, attacker)
     -- Heroes gain experience for attacking buildings with attacks such as towers.
     if IsCustomBuilding(killed) and not killed:HasAttackCapability() then return end
 
-    local XPGain = killed:IsRealHero() and XP_HERO_BOUNTY_TABLE[killed:GetLevel()] or XP_CREEP_BOUNTY_TABLE[killed:GetLevel()]
-    if not XPGain then return end
+    local level = killed:GetKeyValue("Level") or killed:GetLevel()
+    local XPGain = killed:IsRealHero() and XP_HERO_BOUNTY_TABLE[level] or XP_CREEP_BOUNTY_TABLE[level]
+    if not XPGain or XPGain == 0 then return end
 
     -- You can receive experience for killing units of dropped players, but not get experience if your Heroes are over level 5
     local bDisconnectedOwner = false
@@ -119,52 +120,23 @@ function Heroes:TeamHeroList(teamNumber)
     return heroes
 end
 
+-- Creates a summoned unit by name on a position with a kill duration
+function CDOTA_BaseNPC_Hero:CreateSummon(unitName, position, duration)
+    local playerID = self:GetPlayerOwnerID()
+    local hero = PlayerResource:GetSelectedHeroEntity(playerID)
+    local unit = CreateUnitByName(unitName, position, true, hero, hero, self:GetTeamNumber())
+    unit:SetForwardVector(self:GetForwardVector())
+    unit:SetControllableByPlayer(playerID, true)
+    unit:AddNewModifier(self, ability, "modifier_kill", {duration=duration})
+    unit:AddNewModifier(self, nil, "modifier_phased", {duration=0.03})
+    unit:AddNewModifier(self, nil, "modifier_summoned", {})
+    return unit
+end
+
 -- Returns a string with the race of the hero
 -- Hero race names must be defined in the "Label" keyvalue
 function CDOTA_BaseNPC_Hero:GetRace()
     return self:GetUnitLabel()
-end
-
--- Returns string with the name of the city center associated with the hero_name
-function GetCityCenterNameForHeroRace( hero_name )
-    local citycenter_name = ""
-    if hero_name == "npc_dota_hero_dragon_knight" then
-        citycenter_name = "human_town_hall"
-    elseif hero_name == "npc_dota_hero_furion" then
-        citycenter_name = "nightelf_tree_of_life"
-    elseif hero_name == "npc_dota_hero_life_stealer" then
-        citycenter_name = "undead_necropolis"
-    elseif hero_name == "npc_dota_hero_huskar" then
-        citycenter_name = "orc_great_hall"
-    end
-    return citycenter_name
-end
-
--- Returns string with the name of the builders associated with the hero_name
-function GetBuilderNameForHeroRace( hero_name )
-    local builder_name = ""
-    if hero_name == "npc_dota_hero_dragon_knight" then
-        builder_name = "human_peasant"
-    elseif hero_name == "npc_dota_hero_furion" then
-        builder_name = "nightelf_wisp"
-    elseif hero_name == "npc_dota_hero_life_stealer" then
-        builder_name = "undead_acolyte"
-    elseif hero_name == "npc_dota_hero_huskar" then
-        builder_name = "orc_peon"
-    end
-    return builder_name
-end
-
-function GetHeroNameForRace( race )
-    if race == "human" then
-        return "npc_dota_hero_dragon_knight"
-    elseif race == "orc" then
-        return "npc_dota_hero_huskar"
-    elseif race == "nightelf" then
-        return "npc_dota_hero_furion"
-    elseif race == "undead" then
-        return "npc_dota_hero_life_stealer"
-    end
 end
 
 function GetInternalHeroName( hero_name )

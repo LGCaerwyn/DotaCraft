@@ -1,12 +1,20 @@
 function CDOTABaseAbility:IsAllowedTarget(target)
     local bIgnoreAir = target:HasFlyMovementCapability() and not self:AffectsAir()
     if bIgnoreAir then
-        return false,"error_cant_target_air"
+        if not self:AffectsMechanical() then
+            return false,"error_must_target_organic_ground"
+        else
+            return false,"error_cant_target_air"
+        end
     end
 
     local bIgnoreMechanical = target:IsMechanical() and not self:AffectsMechanical()
     if bIgnoreMechanical then
-        return false,"error_must_target_organic"
+        if not self:AffectsAir() then
+            return false,"error_must_target_organic_ground"
+        else
+            return false,"error_must_target_organic"
+        end
     end
 
     local bIgnoreBuilding = IsCustomBuilding(target) and not self:AffectsBuildings()
@@ -14,7 +22,7 @@ function CDOTABaseAbility:IsAllowedTarget(target)
         return false,"error_cant_target_buildings"
     end
 
-    local bIgnoreGround = target:IsFlyingUnit() and not self:AffectsGround()
+    local bIgnoreGround = not target:IsFlyingUnit() and not self:AffectsGround() and self:AffectsAir()
     if bIgnoreGround then
         return false,"error_must_target_air"
     end
@@ -30,9 +38,13 @@ function CDOTABaseAbility:IsAllowedTarget(target)
         return false,"error_must_target_mana_unit"
     end
 
-    local bNeedsAnyDeficit = self:GetKeyValue("RequiresManaDeficit")
+    local bNeedsAnyDeficit = self:GetKeyValue("RequiresAnyDeficit")
     if bNeedsAnyDeficit and target:GetHealthDeficit() == 0 and target:GetMana() == maxMana then
-        return false,"error_full_mana_health"
+        if maxMana > 0 then
+            return false,"error_full_mana_health"
+        else
+            return false,"error_full_health"
+        end
     end
 
     local bNeedsHealthDeficit = self:GetKeyValue("RequiresHealthDeficit")
@@ -305,4 +317,9 @@ function ToggleOnAutocast(event)
     if not event.ability:GetAutoCastState() then
         event.ability:ToggleAutoCast()
     end
+end
+
+-- Used by root abilities
+function Interrupt(event)
+    event.target:Interrupt()
 end
