@@ -2,59 +2,10 @@ if not Units then
     Units = class({})
 end
 
-function Units:start()
-    self.Races = LoadKeyValues("scripts/kv/races.kv")
-
-    -- Validate BoundsHullName with CollisionSize
-    local builds = {}
-    local units = {}
-    for k,v in pairs(KeyValues.UnitKV) do
-        local hullName = GetUnitKV(k, "BoundsHullName")
-        local collisionSize = GetUnitKV(k, "CollisionSize")
-        if hullName and collisionSize and HULL_SIZES[hullName] then
-            if HULL_SIZES[hullName] ~= collisionSize and HULL_SIZES[hullName]+10 <= collisionSize then
-                local bestHull = 999
-                local bestName
-                for name,value in pairs(HULL_SIZES) do
-                    if value >= collisionSize then
-                        local difference = value-collisionSize
-                        if difference < bestHull-collisionSize then
-                            bestHull = value
-                            bestName = name
-                        end
-                    end
-                end
-                if bestName then
-                    if bestName ~= hullName then
-                        if GetUnitKV(k, "MovementSpeed") == 0 then
-                            table.insert(builds, string.format("%-40s -> %-23s", k, bestName))
-                        else
-                            table.insert(units, string.format("%-40s -> %-23s", k, bestName))
-                        end
-                    end
-                elseif hullName ~= "DOTA_HULL_SIZE_BARRACKS" then
-                    if GetUnitKV(k, "MovementSpeed") == 0 then
-                        table.insert(builds, string.format("%-40s -> %-23s", k, "DOTA_HULL_SIZE_BARRACKS"))
-                    else
-                        table.insert(units, string.format("%-40s -> %-23s", k, "DOTA_HULL_SIZE_BARRACKS"))
-                    end
-                end
-            end
-        end
-    end
-    if #units > 0 or #builds > 0 then
-        print("Problematic BoundsHullName-CollisionSize values found.\nProposed changes:")
-        for k,v in pairs(units) do
-            print(v)
-        end
-        for k,v in pairs(builds) do
-            print(v)
-        end
-    end
-end
-
 -- Initializes one unit with all its required modifiers and functions
 function Units:Init( unit )
+    if unit.bFirstSpawned and not unit:IsRealHero() then return
+    else unit.bFirstSpawned = true end
 
     -- Apply armor and damage modifier (for visuals)
     local attack_type = unit:GetAttackType()
@@ -106,12 +57,32 @@ function Units:Init( unit )
         unit:SetHullRadius(collision_size)
     end
 
+    -- Disable Gold Bounty for non-neutral kills
+    if unit:GetTeamNumber() ~= DOTA_TEAM_NEUTRALS then
+        unit:SetMaximumGoldBounty(0)
+        unit:SetMinimumGoldBounty(0)
+    end
+
     -- Special Tree-Attacking units
     if unit:GetKeyValue("AttacksTrees") then
         unit:SetCanAttackTrees(true)
     end
+
+    -- Store autocast abilities to iterate over them later. Note that we also need to store more abilities after research
+    local autocast_abilities = {}
+    for i=0,15 do
+        local ability = unit:GetAbilityByIndex(i)
+        if ability and ability:HasBehavior(DOTA_ABILITY_BEHAVIOR_AUTOCAST) then
+            table.insert(autocast_abilities, ability)
+        end
+    end
+    if #autocast_abilities > 0 then
+        unit.autocast_abilities = autocast_abilities
+    end
     
     Timers:CreateTimer(0.03, function()
+        if not IsValidAlive(unit) then return end
+        
         -- Flying Height Z control
         if unit:GetKeyValue("MovementCapabilities") == "DOTA_UNIT_CAP_MOVE_FLY" then
             unit:AddNewModifier(unit,nil,"modifier_flying_control",{})
@@ -121,8 +92,64 @@ function Units:Init( unit )
         if unit:GetKeyValue("HasQueue") then
             Queue:Init(unit)
         end
+
+        if unit:IsCreature() and PlayerResource:IsValidPlayerID(unit:GetPlayerOwnerID()) then
+            unit:ApplyRankUpgrades()
+        end
     end)
 end
+
+function Units:start()
+    self.Races = LoadKeyValues("scripts/kv/races.kv")
+
+    -- Validate BoundsHullName with CollisionSize
+    local builds = {}
+    local units = {}
+    for k,v in pairs(KeyValues.UnitKV) do
+        local hullName = GetUnitKV(k, "BoundsHullName")
+        local collisionSize = GetUnitKV(k, "CollisionSize")
+        if hullName and collisionSize and HULL_SIZES[hullName] then
+            if HULL_SIZES[hullName] ~= collisionSize and HULL_SIZES[hullName]+10 <= collisionSize then
+                local bestHull = 999
+                local bestName
+                for name,value in pairs(HULL_SIZES) do
+                    if value >= collisionSize then
+                        local difference = value-collisionSize
+                        if difference < bestHull-collisionSize then
+                            bestHull = value
+                            bestName = name
+                        end
+                    end
+                end
+                if bestName then
+                    if bestName ~= hullName then
+                        if GetUnitKV(k, "MovementSpeed") == 0 then
+                            table.insert(builds, string.format("%-40s -> %-23s", k, bestName))
+                        else
+                            table.insert(units, string.format("%-40s -> %-23s", k, bestName))
+                        end
+                    end
+                elseif hullName ~= "DOTA_HULL_SIZE_BARRACKS" then
+                    if GetUnitKV(k, "MovementSpeed") == 0 then
+                        table.insert(builds, string.format("%-40s -> %-23s", k, "DOTA_HULL_SIZE_BARRACKS"))
+                    else
+                        table.insert(units, string.format("%-40s -> %-23s", k, "DOTA_HULL_SIZE_BARRACKS"))
+                    end
+                end
+            end
+        end
+    end
+    if #units > 0 or #builds > 0 then
+        print("Problematic BoundsHullName-CollisionSize values found.\nProposed changes:")
+        for k,v in pairs(units) do
+            print(v)
+        end
+        for k,v in pairs(builds) do
+            print(v)
+        end
+    end
+end
+
 
 function Units:GetBaseHeroNameForRace(raceName)
     return Units.Races[raceName]["BaseHero"]
@@ -243,6 +270,14 @@ function IsUprooted(unit)
     return unit:HasModifier("modifier_uprooted")
 end
 
+function IsUnsummoning(unit)
+    return unit:HasModifier("modifier_unsummoning")
+end
+
+function IsNightElfAncient(unit)
+    return unit:HasAbility("nightelf_eat_tree")
+end
+
 -- Checks the UnitLabel for "city_center"
 function IsCityCenter( unit )
     return IsCustomBuilding(unit) and string.match(unit:GetUnitLabel(), "city_center")
@@ -311,6 +346,10 @@ end
 
 function CDOTA_BaseNPC:IsMechanical()
     return self:GetUnitLabel():match("mechanical")
+end
+
+function CDOTA_BaseNPC:IsWard()
+    return self:GetUnitLabel():match("ward")
 end
 
 function CDOTA_BaseNPC:IsEthereal()
@@ -493,6 +532,10 @@ function CDOTA_BaseNPC:HasSplashAttack()
     return self:GetKeyValue("SplashAttack")
 end
 
+function CDOTA_BaseNPC:HasDeathAnimation()
+    return self:GetKeyValue("HasDeathAnimation")
+end
+
 function CDOTA_BaseNPC:IsDummy()
     return self:GetUnitName():match("dummy_") or self:GetUnitLabel():match("dummy")
 end
@@ -569,6 +612,23 @@ function CDOTA_BaseNPC_Creature:LevelUp(levels)
     self:CreatureLevelUp(levels)
     self:SetHealth(self:GetMaxHealth() * relativeHP)
     self:SetMana(self:GetMaxMana() * relativeMana)
+end
+
+function CDOTA_BaseNPC_Creature:TransferOwnership(newOwnerID)
+    local oldOwnerID = self:GetPlayerOwnerID()
+
+    -- Remove the unit from the enemy player unit list
+    local foodCost = GetFoodCost(self) or 0
+    if PlayerResource:IsValidPlayer(oldOwnerID) and oldOwnerID ~= newOwnerID then
+        Players:RemoveUnit(oldOwnerID, self)
+        Players:ModifyFoodUsed(newOwnerID, -foodCost)
+    end
+    
+    self:SetOwner(PlayerResource:GetSelectedHeroEntity(newOwnerID))
+    self:SetControllableByPlayer(newOwnerID, true)
+    self:SetTeam(PlayerResource:GetTeam(newOwnerID))
+    Players:AddUnit(newOwnerID, self)
+    Players:ModifyFoodUsed(newOwnerID, foodCost)            
 end
 
 function CDOTA_BaseNPC:FindItemByName(item_name)
@@ -655,13 +715,26 @@ end
 
 function Unsummon(target, callback)
     local playerID = target:GetPlayerOwnerID()
-    if target.unsummoning or not IsCustomBuilding(target) or target:IsUnderConstruction() then
+    if IsUnsummoning(target) or not IsCustomBuilding(target) or target:IsUnderConstruction() then
         SendErrorMessage(playerID, "#error_invalid_unsummon_target")
-        return
+        return true
     end
 
-    -- set flag
-    target.unsummoning = true
+    target:AddNewModifier(target,nil,"modifier_unsummoning",{})
+
+    -- remove abilities, refund items, stop channels
+    for i=0,5 do
+        local item = target:GetItemInSlot(i)
+        if item then
+            target:CastAbilityImmediately(item, playerID)
+        end
+    end
+    for i=0,15 do
+        local ability = target:GetAbilityByIndex(i)
+        if ability and not ability:IsHidden() then
+            ability:SetHidden(true)
+        end
+    end
     
     -- 50% refund
     local goldCost = (0.5 * GetGoldCost(target))
@@ -674,15 +747,13 @@ function Unsummon(target, callback)
     
     Timers:CreateTimer(function()
         if not IsValidEntity(target) then return end
-        
-        ParticleManager:CreateParticle("particles/base_destruction_fx/gbm_lvl3_glow.vpcf", 0, target)
-        
+              
         Players:ModifyGold(playerID, goldGain)
         Players:ModifyLumber(playerID, lumberGain)
         if target:GetHealth() <= 50 then -- refund resource + kill unit
-            target:AddNoDraw()
             target:ForceKill(true)
             callback()
+            return
         else -- refund resource + apply damage
             target:SetHealth(target:GetHealth() - 50)
         end
@@ -690,6 +761,91 @@ function Unsummon(target, callback)
     end)
 end
 
+
+-- Removes the modifiers associated to an ability name on this unit
+function CDOTA_BaseNPC:RemoveModifiersAssociatedWith(ability_name)
+    local modifiers = self:FindAllModifiers()
+
+    for _,modifier in pairs(modifiers) do
+        local ability = modifier:GetAbility()
+        if IsValidEntity(ability) and ability:GetAbilityName() == ability_name then
+            modifier:Destroy()
+        end
+    end
+end
+
+-- Checks all rank upgrades and set them to the correct ability level
+function CDOTA_BaseNPC_Creature:ApplyRankUpgrades()
+    local upgrades = self:GetKeyValue("Upgrades")
+    if not upgrades then return end
+    local playerID = self:GetPlayerOwnerID()
+    for research_name,wearable_type in pairs(upgrades) do
+        local level = Players:GetCurrentResearchRank(playerID, research_name)
+        if level > 0 then
+            local ability_name = Upgrades:GetBaseAbilityName(research_name)
+            if not self:HasAbility(ability_name..level) and self:BenefitsFrom(research_name) then
+                self:AddAbility(ability_name..level):SetLevel(level)
+                if wearable_type then
+                    self:UpgradeWearables(wearable_type, level)
+                end
+            end
+        end
+    end
+end
+
+function CDOTA_BaseNPC_Creature:BenefitsFrom(research_name)
+    local upgrades = self:GetKeyValue("Upgrades")
+    if not upgrades then return false end
+
+    -- Handle modifier requirements
+    if upgrades["RequiresModifier"] then
+        for name,modifier in pairs(upgrades["RequiresModifier"]) do
+            if name == research_name and not self:HasModifier(modifier) then
+                return false
+            end
+        end
+    end
+
+    return upgrades[research_name] ~= nil
+end
+
+-- Read the wearables.kv, check the unit name, swap all models to the correct level
+function CDOTA_BaseNPC_Creature:UpgradeWearables(wearable_type, level)
+    local unit_table = GameRules.Wearables[self:GetUnitName()]
+    if unit_table then
+        local sub_table = unit_table[wearable_type]
+        if not sub_table then return end
+        local wearables = self:GetChildren()
+        for k,v in pairs(sub_table) do
+            local original_wearable = v[tostring(0)]
+            local old_wearable = v[tostring((level)-1)]
+            local new_wearable = v[tostring(level)]
+            
+            for _,wearable in pairs(wearables) do
+                if wearable:GetClassname() == "dota_item_wearable" then
+                    -- Unit just spawned, it has the default weapon
+                    if wearable:GetModelName() == original_wearable then
+                        wearable:SetModel(new_wearable)
+
+                    -- In this case, the unit is already on the field and might have an upgrade
+                    elseif old_wearable and old_wearable == wearable:GetModelName() then
+                        wearable:SetModel(new_wearable)
+                    end
+                end
+            end
+        end
+    end
+end
+
+function CDOTA_BaseNPC:QuickPurge(bRemovePositiveBuffs, bRemoveDebuffs)
+    self:Purge(bRemovePositiveBuffs, bRemoveDebuffs, false, false, false)
+    self:RemoveModifierByName("modifier_brewmaster_storm_cyclone")
+end
+
+function CDOTA_BaseNPC:SetAttackRange(value)
+    if self:HasModifier("modifier_attack_range") then self:RemoveModifierByName("modifier_attack_range") end
+    self:AddNewModifier(self,nil,"modifier_attack_range",{range=value})
+end
 
 
 Units:start()

@@ -48,6 +48,9 @@ function Replenish( event )
 
         ParticleManager:CreateParticle("particles/items3_fx/mango_active.vpcf", PATTACH_ABSORIGIN_FOLLOW, moon_well)
         target:EmitSound("DOTA_Item.Mango.Activate")
+        if target:IsMoving() then
+            target:Stop()
+        end
     end
 end
 
@@ -69,7 +72,7 @@ function ReplenishAutocast( event )
         local units = FindUnitsInRadius(caster:GetTeamNumber(), caster:GetAbsOrigin(), nil, autocast_radius, DOTA_UNIT_TARGET_TEAM_FRIENDLY, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, 0, FIND_ANY_ORDER, false)      
         for k,unit in pairs(units) do
             -- Get the unit on lowest health
-            if not IsCustomBuilding(unit) and not unit:IsMechanical() and unit:GetHealthPercent() < lowestHealthPercent then
+            if not IsCustomBuilding(unit) and not unit:IsMechanical() and not unit:IsWard() and unit:GetHealthPercent() < lowestHealthPercent then
                 lowestHealthPercent = unit:GetHealthPercent()
                 target = unit
             end
@@ -80,7 +83,7 @@ function ReplenishAutocast( event )
             for k,unit in pairs(units) do
                 -- Get the unit on lowest mana
                 local manaPercent = unit:GetMana()/unit:GetMaxMana()
-                if not IsCustomBuilding(unit) and not unit:IsMechanical() and unit:GetMaxMana() > 0 and manaPercent < lowestManaPercent then
+                if not IsCustomBuilding(unit) and not unit:IsMechanical() and not unit:IsWard() and unit:GetMaxMana() > 0 and manaPercent < lowestManaPercent then
                     lowestManaPercent = manaPercent
                     target = unit
                 end

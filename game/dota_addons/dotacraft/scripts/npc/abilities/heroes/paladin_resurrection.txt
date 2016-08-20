@@ -23,7 +23,6 @@
 
     "precache"
     {
-        "particle"  "particles/units/heroes/hero_omniknight/omniknight_guardian_angel_halo_buff.vpcf"
         "particle"  "particles/status_fx/status_effect_guardian_angel.vpcf"
         "particle"  "particles/units/heroes/hero_omniknight/omniknight_guardian_angel_ally.vpcf"
         "soundfile" "soundevents/game_sounds_heroes/game_sounds_omniknight.vsndevts"
@@ -62,18 +61,8 @@
     {
         "modifier_resurrection"
         {
-            "StatusEffectName"     "particles/status_fx/status_effect_guardian_angel.vpcf"
-            "StatusEffectPriority" "10"
-
             "OnCreated"
             {
-                "AttachEffect"
-                {
-                    "EffectName"        "particles/units/heroes/hero_omniknight/omniknight_guardian_angel_halo_buff.vpcf"
-                    "EffectAttachType"  "follow_overhead"
-                    "Target"            "TARGET"
-                }
-
                 "ApplyModifier"
                 {
                     "ModifierName"  "modifier_resurrection_fx"
@@ -88,7 +77,7 @@
             "Duration"      "0.5"
             "OnCreated"
             {
-                "AttachEffect"
+                "FireEffect"
                 {
                     "Target"            "TARGET"
                     "EffectName"        "particles/units/heroes/hero_omniknight/omniknight_guardian_angel_ally.vpcf"

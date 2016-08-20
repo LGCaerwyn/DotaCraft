@@ -1,4 +1,4 @@
-BH_VERSION = "1.2.8"
+BH_VERSION = "1.2.9"
 
 --[[
     For installation, usage and implementation examples check the wiki:
@@ -567,6 +567,9 @@ function BuildingHelper:OrderFilter(order)
 
     -- Stop and Hold
     elseif order_type == DOTA_UNIT_ORDER_STOP or order_type == DOTA_UNIT_ORDER_HOLD_POSITION then
+        if unit and IsBuilder(unit) then --Hold Stops instead
+            order.order_type = DOTA_UNIT_ORDER_STOP
+        end
         for n, unit_index in pairs(units) do 
             local unit = EntIndexToHScript(unit_index)
             if IsBuilder(unit) then
@@ -692,8 +695,7 @@ function BuildingHelper:AddBuilding(keys)
     event.modelOffset = GetUnitKV(unitName, "ModelOffset") or 0
 
     -- npc_dota_creature doesn't render cosmetics on the particle ghost, use hero names instead
-    local overrideGhost = buildingTable:GetVal("OverrideBuildingGhost", "string")
-    unitName = overrideGhost or unitName
+    unitName = GetUnitKV(unitName, "OverrideBuildingGhost") or unitName
 
     -- Get a model dummy to pass it to panorama
     local mgd = BuildingHelper:GetOrCreateDummy(unitName)
@@ -2500,7 +2502,7 @@ function BuildingHelper:ShowBuilder(unit)
 end
 
 -- Find the closest position of construction_size, within maxDistance
-function BuildingHelper:FindClosestEmptyPositionNearby(location, construction_size, maxDistance)
+function BuildingHelper:FindClosestEmptyPositionNearby(location, construction_size, maxDistance, avoidUnits)
     local originX = GridNav:WorldToGridPosX(location.x)
     local originY = GridNav:WorldToGridPosY(location.y)
 
@@ -2537,8 +2539,16 @@ function BuildingHelper:FindClosestEmptyPositionNearby(location, construction_si
                 if BuildingHelper:MeetsHeightCondition(pos) and not BuildingHelper:IsAreaBlocked(construction_size, pos) then
                     local distance = (pos - location):Length2D()
                     if distance < closestDistance then
-                        towerPos = pos
-                        closestDistance = distance
+                        if avoidUnits then
+                            local units = FindUnitsInRadius(DOTA_TEAM_GOODGUYS, pos, nil, 64, DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_BASIC+DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_ANY_ORDER, false)
+                            if #units == 0 then
+                                towerPos = pos
+                                closestDistance = distance
+                            end
+                        else
+                            towerPos = pos
+                            closestDistance = distance
+                        end                        
                     end
                 end
             end

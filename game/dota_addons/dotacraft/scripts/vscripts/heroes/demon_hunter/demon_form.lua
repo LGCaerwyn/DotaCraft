@@ -3,7 +3,7 @@ modifier_demon_form = class({})
 function modifier_demon_form:DeclareFunctions()
     return { MODIFIER_PROPERTY_MODEL_CHANGE, 
              MODIFIER_PROPERTY_ATTACK_RANGE_BONUS,
-             MODIFIER_PROPERTY_EXTRA_HEALTH_BONUS,
+             MODIFIER_PROPERTY_HEALTH_BONUS,
              MODIFIER_PROPERTY_HEALTH_REGEN_CONSTANT, }
 end
 
@@ -18,6 +18,7 @@ function modifier_demon_form:OnCreated()
         SetRangedProjectileName(target, "particles/units/heroes/hero_terrorblade/terrorblade_metamorphosis_base_attack.vpcf")
         target:SetAttackCapability(DOTA_UNIT_CAP_RANGED_ATTACK)
         target:SetAttackType("chaos")
+        target:SetAttacksEnabled("ground,air")
     end
 end
 
@@ -27,6 +28,9 @@ function modifier_demon_form:OnDestroy()
         SetRangedProjectileName(target, target.old_attack_projectile)
         target:SetAttackCapability(DOTA_UNIT_CAP_MELEE_ATTACK)
         target:SetAttackType("hero")
+        if not target.hasOrb then
+            target:SetAttacksEnabled("ground")
+        end
         target.old_attack_projectile = nil
     end
 end
@@ -63,7 +67,7 @@ function modifier_demon_form:GetModifierAttackRangeBonus()
     return self:GetAbility():GetSpecialValueFor("bonus_range")
 end
 
-function modifier_demon_form:GetModifierExtraHealthBonus()
+function modifier_demon_form:GetModifierHealthBonus()
     return self:GetAbility():GetSpecialValueFor("bonus_health")
 end
 

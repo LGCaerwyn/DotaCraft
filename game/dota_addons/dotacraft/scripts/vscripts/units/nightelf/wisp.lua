@@ -1,12 +1,13 @@
 function Detonate( event )
 	local caster = event.caster
+	if caster:HasModifier("modifier_builder_hidden") then caster:Interrupt() return end
 	local point = event.target_points[1]
 	local ability = event.ability
 	local radius = ability:GetSpecialValueFor("radius")
 	local mana_drained = ability:GetSpecialValueFor("mana_drained")
 	local damage_to_summons = ability:GetSpecialValueFor("damage_to_summons")
 
-	local units = FindUnitsInRadius(caster:GetTeamNumber(), point, nil, radius, DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_ANY_ORDER, false)
+	local units = FindUnitsInRadius(caster:GetTeamNumber(), point, nil, radius, DOTA_UNIT_TARGET_TEAM_BOTH, DOTA_UNIT_TARGET_BASIC + DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES+DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FIND_ANY_ORDER, false)
 	for k,unit in pairs(units) do
 		-- Damage summons
 		if unit:IsSummoned() and unit:GetTeamNumber() ~= caster:GetTeamNumber() then
@@ -27,7 +28,7 @@ function Detonate( event )
 			bRemoveDebuffs = true
 		end
 
-		unit:Purge(bRemovePositiveBuffs, bRemoveDebuffs, false, false, false)
+		unit:QuickPurge(bRemovePositiveBuffs, bRemoveDebuffs)
 	end
 	local particle = ParticleManager:CreateParticle("particles/units/heroes/hero_brewmaster/brewmaster_dispel_magic.vpcf", PATTACH_CUSTOMORIGIN, nil)
 	ParticleManager:SetParticleControl(particle, 0, point)

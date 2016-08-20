@@ -89,10 +89,13 @@ function dotacraft:InitGameMode()
 
     -- Panorama listeners
     CustomGameEventManager:RegisterListener( "selection_update", Dynamic_Wrap(dotacraft, 'OnPlayerSelectedEntities'))
-    CustomGameEventManager:RegisterListener( "moonwell_order", Dynamic_Wrap(dotacraft, "MoonWellOrder")) --Right click through panorama
-    CustomGameEventManager:RegisterListener( "burrow_order", Dynamic_Wrap(dotacraft, "BurrowOrder")) --Right click through panorama 
-    CustomGameEventManager:RegisterListener( "shop_active_order", Dynamic_Wrap(dotacraft, "ShopActiveOrder")) --Right click through panorama 
-    CustomGameEventManager:RegisterListener( "building_rally_order", Dynamic_Wrap(dotacraft, "OnBuildingRallyOrder")) --Right click through panorama
+    CustomGameEventManager:RegisterListener( "moonwell_order", Dynamic_Wrap(dotacraft, "MoonWellOrder"))
+    CustomGameEventManager:RegisterListener( "burrow_order", Dynamic_Wrap(dotacraft, "BurrowOrder")) 
+    CustomGameEventManager:RegisterListener( "hippogryph_ride_order", Dynamic_Wrap(dotacraft, "HippogryphRiderOrder")) 
+    CustomGameEventManager:RegisterListener( "sacrifice_order", Dynamic_Wrap(dotacraft, "SacrificeOrder"))
+    CustomGameEventManager:RegisterListener( "entangle_order", Dynamic_Wrap(dotacraft, "EntangleOrder"))
+    CustomGameEventManager:RegisterListener( "shop_active_order", Dynamic_Wrap(dotacraft, "ShopActiveOrder")) 
+    CustomGameEventManager:RegisterListener( "building_rally_order", Dynamic_Wrap(dotacraft, "OnBuildingRallyOrder"))
     
     -- Lua Modifiers
     LinkLuaModifier("modifier_hex_frog", "libraries/modifiers/modifier_hex", LUA_MODIFIER_MOTION_NONE)
@@ -100,8 +103,11 @@ function dotacraft:InitGameMode()
     LinkLuaModifier("modifier_model_scale", "libraries/modifiers/modifier_model_scale", LUA_MODIFIER_MOTION_NONE)
     LinkLuaModifier("modifier_client_convars", "libraries/modifiers/modifier_client_convars", LUA_MODIFIER_MOTION_NONE)
     LinkLuaModifier("modifier_summoned", "libraries/modifiers/modifier_summoned", LUA_MODIFIER_MOTION_NONE)
+    LinkLuaModifier("modifier_invisibility", "libraries/modifiers/modifier_invisibility", LUA_MODIFIER_MOTION_NONE)
     LinkLuaModifier("modifier_flying_control", "libraries/modifiers/modifier_flying_control", LUA_MODIFIER_MOTION_NONE)
     LinkLuaModifier("modifier_animation_freeze", "libraries/modifiers/modifier_animation_freeze", LUA_MODIFIER_MOTION_NONE)
+    LinkLuaModifier("modifier_attack_range", "libraries/modifiers/modifier_attack_range", LUA_MODIFIER_MOTION_NONE)
+    LinkLuaModifier("modifier_unsummoning", "libraries/modifiers/modifier_unsummoning", LUA_MODIFIER_MOTION_NONE)
     LinkLuaModifier("modifier_autoattack", "units/attack_modifiers", LUA_MODIFIER_MOTION_NONE)
     LinkLuaModifier("modifier_autoattack_passive", "units/attack_modifiers", LUA_MODIFIER_MOTION_NONE)
     LinkLuaModifier("modifier_druid_bear_model", "units/nightelf/modifier_druid_model", LUA_MODIFIER_MOTION_NONE)
@@ -157,8 +163,6 @@ end
 function dotacraft:LoadKV()
     GameRules.Requirements = LoadKeyValues("scripts/kv/tech_tree.kv")
     GameRules.Wearables = LoadKeyValues("scripts/kv/wearables.kv")
-    GameRules.UnitUpgrades = LoadKeyValues("scripts/kv/unit_upgrades.kv")
-    GameRules.Abilities = LoadKeyValues("scripts/kv/abilities.kv")
     GameRules.Damage = LoadKeyValues("scripts/kv/damage_table.kv")
 end
 
@@ -320,7 +324,7 @@ function dotacraft:InitializePlayer( hero )
     dotacraft:TrackIdleWorkers( hero )
 
     -- Toggle Autocast as a group
-    dotacraft:AutoCastTimer(hero)
+    dotacraft:AutoCastTimer(playerID)
 
     --------------------------------------------
     -- Test game logic on the model overview map
@@ -382,30 +386,35 @@ function dotacraft:TrackIdleWorkers( hero )
     end)
 end
 
-function dotacraft:AutoCastTimer(hero)
-    local playerID = hero:GetPlayerID()
+function dotacraft:AutoCastTimer(playerID)
     Timers:CreateTimer(0.1, function()
         local selectedEntities = PlayerResource:GetSelectedEntities(playerID)
         if selectedEntities["0"] then
             local unit = EntIndexToHScript(selectedEntities["0"])
-            if IsValidAlive(unit) then
+            if IsValidAlive(unit) and unit.autocast_abilities then
 
                 -- Check autocast abilities and their last state to toggle as a group
-                for i=0,15 do
-                    local ability = unit:GetAbilityByIndex(i)
-                    if ability and ability:HasBehavior(DOTA_ABILITY_BEHAVIOR_AUTOCAST) then
+                for _,ability in pairs(unit.autocast_abilities) do
+                    if IsValidEntity(ability) and ability:HasBehavior(DOTA_ABILITY_BEHAVIOR_AUTOCAST) then
                         local state = ability:GetAutoCastState()
                         if not ability.last_autocast_state then
                             ability.last_autocast_state = state
                             if state then
+                                ability.autocast_toggled = GameRules:GetGameTime()
                                 GroupToggleAutoCast(selectedEntities, unit, ability:GetAbilityName(), state)
                             end
                         elseif ability.last_autocast_state ~= state then
                             ability.last_autocast_state = state
+                            if state then
+                                ability.autocast_toggled = GameRules:GetGameTime()
+                            end
                             GroupToggleAutoCast(selectedEntities, unit, ability:GetAbilityName(), state)
                         end
                     end
                 end
+
+                -- If more than 1 ability is in autocast mode, deactivate the oldest
+                CheckDoubleToggle(unit)
             end
         end
 
@@ -419,15 +428,37 @@ function GroupToggleAutoCast(entityList, mainUnit, abilityName, state)
     for _,entIndex in pairs(entityList) do
         local unit = EntIndexToHScript(entIndex)
         if unit ~= mainUnit and IsValidAlive(unit) and unit:GetUnitName() == unitName then
-            for i=0,15 do
-                local ability = unit:GetAbilityByIndex(i)
-                if ability and ability:GetAbilityName() == abilityName then
+            for _,ability in pairs(unit.autocast_abilities) do
+                if IsValidEntity(ability) and ability:GetAbilityName() == abilityName then
                     if ability:GetAutoCastState() ~= state then
                         ability:ToggleAutoCast()
+                        if state then
+                            ability.autocast_toggled = GameRules:GetGameTime()
+                            CheckDoubleToggle(unit)
+                        end
                     end
                 end
             end
         end
+    end
+end
+
+function CheckDoubleToggle(unit)
+    local toggled_count = 0
+    local oldest_time = GameRules:GetGameTime()
+    local oldest_ability
+    for _,ability in pairs(unit.autocast_abilities) do
+        if IsValidEntity(ability) and ability:GetAutoCastState() then
+            toggled_count = toggled_count + 1
+            ability.autocast_toggled = ability.autocast_toggled or GameRules:GetGameTime()
+            if ability.autocast_toggled <= oldest_time then
+                oldest_ability = ability
+                oldest_time = ability.autocast_toggled
+            end
+        end
+    end
+    if toggled_count == 2 then
+        oldest_ability:ToggleAutoCast()
     end
 end
 
@@ -590,12 +621,27 @@ end
 function LightsOut()
     print("[DOTACRAFT] Night Time")
     GameRules.DayTime = false
+
+    dotacraft:SetNightElfAncientRegen(0.5)
 end
 
 -- Wake up creeps
 function RiseAndShine()
     print("[DOTACRAFT] Day Time")
     GameRules.DayTime = true
+
+    dotacraft:SetNightElfAncientRegen(0)
+end
+
+function dotacraft:SetNightElfAncientRegen(value)
+    ForAllPlayerIDs(function(playerID)
+        local playerBuildings = Players:GetStructures(playerID)
+        for _,building in pairs(playerBuildings) do
+            if IsValidEntity(building) and IsNightElfAncient(building) then
+                building:SetBaseHealthRegen(value)
+            end
+        end
+    end)
 end
 
 -- Cleanup a player when they leave
@@ -859,7 +905,7 @@ function dotacraft:OnEntityKilled( event )
     end
 
     -- Don't leave corpses if the target was killed by an aoe splash
-    if IsValidEntity(attacker) and attacker:HasArtilleryAttack() then
+    if IsValidEntity(attacker) and attacker:HasArtilleryAttack() and LeavesCorpse(killed) then
         killed:SetNoCorpse()
         killed:AddNoDraw()
         local particle = ParticleManager:CreateParticle("particles/custom/effects/corpse_blood_explosion.vpcf",PATTACH_CUSTOMORIGIN,nil)
@@ -938,7 +984,9 @@ function dotacraft:OnEntityKilled( event )
 
         -- Cleanup building tables
         Players:RemoveStructure( killed_playerID, killed )
-        killed:AddNoDraw()
+        if not killed:HasDeathAnimation() then
+            killed:AddNoDraw()
+        end
 
         if attacker_playerID and attacker_playerID ~= -1 and attacker_playerID ~= killed_playerID then
             Scores:IncrementBuildingsRazed( attacker_playerID, killed )
@@ -1101,6 +1149,7 @@ end
 -- Returns a Vector with the color of the player
 function dotacraft:ColorForPlayer( playerID )
     local playerTable = CustomNetTables:GetTableValue("dotacraft_pregame_table", tostring(playerID))
+    if not playerTable or not playerTable.Color then return Vector(255,255,255) end
     local color = playerTable.Color
     local playerColor = CustomNetTables:GetTableValue("dotacraft_color_table", tostring(color))
     return Vector(playerColor.r, playerColor.g, playerColor.b)

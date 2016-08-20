@@ -141,7 +141,7 @@ function Build( event )
         -- Play construction sound
 
         -- Adjust health for human research
-        local masonry_rank = Players:GetCurrentResearchRank(playerID, "human_research_masonry1")
+        local masonry_rank = Players:GetCurrentResearchRank(playerID, "human_research_masonry")
         local maxHealth = unit:GetMaxHealth() * (1 + 0.2 * masonry_rank)
         unit:SetMaxHealth(maxHealth)
         unit:SetBaseMaxHealth(maxHealth)
@@ -191,18 +191,12 @@ function Build( event )
 
         -- Check the abilities of this building, disabling those that don't meet the requirements
         CheckAbilityRequirements( unit, playerID )
+        unit:ApplyRankUpgrades()
 
         -- Add roots to ancient
         local ancient_roots = unit:FindAbilityByName("nightelf_uproot")
         if ancient_roots then
             ancient_roots:ApplyDataDrivenModifier(unit, unit, "modifier_rooted_ancient", {})
-        end
-
-        -- Apply the current level of Masonry to the newly upgraded building
-        local masonry_rank = Players:GetCurrentResearchRank(playerID, "human_research_masonry1")
-        if masonry_rank and masonry_rank > 0 then
-            BuildingHelper:print("Applying masonry rank "..masonry_rank.." to this building construction")
-            UpdateUnitUpgrades( unit, playerID, "human_research_masonry"..masonry_rank )
         end
 
         -- Apply altar linking
@@ -269,6 +263,11 @@ function Build( event )
             Blight:Create(unit, blightSize)
         end
 
+        -- Enable night regeneration
+        if not GameRules:IsDaytime() and IsNightElfAncient(unit) then
+            unit:SetBaseHealthRegen(0.5)
+        end
+
         -- Add ability_shop on buildings labeled with _shop
         if string.match(unit:GetUnitLabel(), "_shop") then
             TeachAbility(unit, "ability_shop")
@@ -296,9 +295,10 @@ function Build( event )
     -- These callbacks will only fire when the state between below half health/above half health changes.
     -- i.e. it won't fire multiple times unnecessarily.
     event:OnBelowHalfHealth(function(unit)
-        BuildingHelper:print(unit:GetUnitName() .. " is below half health.")
-                
-        ApplyModifier(unit, "item_apply_modifiers")
+        if not IsUnsummoning(unit) then
+            BuildingHelper:print(unit:GetUnitName() .. " is below half health.")
+            ApplyModifier(unit, "modifier_onfire")
+        end
     end)
 
     event:OnAboveHalfHealth(function(unit)

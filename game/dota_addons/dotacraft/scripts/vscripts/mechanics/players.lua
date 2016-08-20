@@ -9,6 +9,7 @@ function Players:Init( playerID, hero )
     hero.structures = {} -- This keeps the handle of the constructed units, to iterate for unlocking upgrades
     hero.heroes = {} -- Owned hero units (not this assigned hero, which will be a fake)
     hero.altar_structures = {} -- Keeps altars linked
+    hero.altar_queue = {}  -- Heroes queued
 
     hero.buildings = {} -- This keeps the name and quantity of each building
     hero.upgrades = {} -- This kees the name of all the upgrades researched, so each unit can check and upgrade itself on spawn
@@ -29,6 +30,15 @@ function Players:Init( playerID, hero )
 
     if PlayerResource:IsFakeClient(playerID) then
         Scores:InitPlayer(playerID)
+    end
+end
+
+function ForAllPlayerIDs(callback)
+    local maxPlayers = dotacraft:GetMapMaxPlayers()
+    for playerID = 0, maxPlayers do
+        if PlayerResource:IsValidPlayerID(playerID) then
+            callback(playerID)
+        end
     end
 end
 
@@ -425,18 +435,32 @@ end
 
 ---------------------------------------------------------------
 
--- Returns bool
-function Players:HasResearch( playerID, research_name )
-    local upgrades = Players:GetUpgradeTable(playerID)
-    return upgrades[research_name]
+function Players:SetResearchLevel(playerID, research_name, level)
+    local upgradeTable = Players:GetUpgradeTable(playerID)
+    level = (upgradeTable[research_name] and math.max(upgradeTable[research_name], level)) or level
+    upgradeTable[research_name] = level
+end
+
+function Players:GetCurrentResearchRank(playerID, research_name)
+    local upgradeTable = Players:GetUpgradeTable(playerID)
+    return upgradeTable[research_name] or 0
 end
 
 -- Returns bool
-function Players:HasRequirementForAbility( playerID, ability_name )
+function Players:HasResearch(playerID, research_name)
+    return Players:GetCurrentResearchRank(playerID, research_name) > 0
+end
+
+-- Returns bool
+function Players:HasRequirementForAbility(playerID, ability_name)
     local requirements = GameRules.Requirements
     local buildings = Players:GetBuildingTable(playerID)
     local upgrades = Players:GetUpgradeTable(playerID)
-    local requirement_failed = false
+
+    -- Unlock all abilities cheat
+    if GameRules.Synergy then
+        return true
+    end
 
     if requirements[ability_name] then
 
@@ -445,8 +469,8 @@ function Players:HasRequirementForAbility( playerID, ability_name )
 
             -- If it's an ability tied to a research, check the upgrades table
             if requirements[ability_name].research then
-                if k ~= "research" and (not upgrades[k] or upgrades[k] == 0) then
-                    --print("Failed the research requirements for "..ability_name..", no "..k.." found")
+                if k ~= "research" and Players:GetCurrentResearchRank(playerID, k) < v then
+                    --print("Failed the research requirements for "..ability_name..", no "..k.." "..v.." found")
                     return false
                 end
             else
@@ -503,26 +527,6 @@ function Players:FindAbilityOnUnits( playerID, ability_name )
         end
     end
     return nil
-end
-
-
--- Returns int, 0 if the player doesnt have the research
-function Players:GetCurrentResearchRank( playerID, research_name )
-    local upgrades = Players:GetUpgradeTable(playerID)
-    local max_rank = MaxResearchRank(research_name)
-
-    local current_rank = 0
-    if max_rank > 0 then
-        for i=1,max_rank do
-            local ability_len = string.len(research_name)
-            local this_research = string.sub(research_name, 1 , ability_len - 1)..i
-            if Players:HasResearch(playerID, this_research) then
-                current_rank = i
-            end
-        end
-    end
-
-    return current_rank
 end
 
 -- Goes through the structures of the player, checking for the max level city center
@@ -598,18 +602,18 @@ function Players:GetRace( playerID )
     return hero:GetRace()
 end
 
-function Players:FindHighestLevelCityCenter( unit )
+function Players:FindHighestLevelCityCenter(unit)
     local playerID = unit:GetPlayerOwnerID()
     local position = unit:GetAbsOrigin()
-    local buildings = Players:GetStructures( playerID )
+    local buildings = Players:GetStructures(playerID)
     local level = 0 --Priority to the highest level city center
-    local distance = 20000
-    local closest_building = nil
+    local distance = math.huge
+    local closest_building
 
     for _,building in pairs(buildings) do
-        if IsValidAlive(building) and IsCityCenter(building) and building.state == "complete" and building:GetLevel() > level then
+        if IsValidAlive(building) and IsCityCenter(building) and not building:IsUnderConstruction() and building:GetLevel() > level then
             level = building:GetLevel()
-            local this_distance = (position - building:GetAbsOrigin()):Length()
+            local this_distance = (position - building:GetAbsOrigin()):Length2D()
             if this_distance < distance then
                 distance = this_distance
                 closest_building = building
@@ -619,7 +623,98 @@ function Players:FindHighestLevelCityCenter( unit )
     return closest_building
 end
 
-function Players:SetMainCityCenter( playerID, building )
+function Players:FindClosestCityCenter(playerID, position)
+    local structures = Players:GetStructures(playerID)
+    local distance = math.huge
+    local closest_building
+
+    for _,building in pairs(structures) do
+        if IsValidAlive(building) and IsCityCenter(building) and not building:IsUnderConstruction() then
+            local this_distance = (position - building:GetAbsOrigin()):Length2D()
+            if this_distance < distance then
+                distance = this_distance
+                closest_building = building
+            end
+        end
+    end
+    return closest_building
+end
+
+-- FindClosestCityCenter for all team members and returns the best
+function Players:FindClosestFriendlyCityCenter(playerID, position)
+    local teamMembers = Teams:GetPlayersOnTeam(PlayerResource:GetTeam(playerID))
+    local distance = math.huge
+    local closest
+    for _,pID in pairs(teamMembers) do
+        local unit = self:FindClosestCityCenter(pID, position)
+        local this_distance = (position - unit:GetAbsOrigin()):Length2D()
+        if this_distance < distance then
+            distance = this_distance
+            closest = unit
+        end
+    end
+    return closest
+end
+
+function Players:FindClosestUnit(playerID, position, filterFunction)
+    local units = Players:GetUnits(playerID)
+    local heroes = Players:GetHeroes(playerID)
+    local structures = Players:GetStructures(playerID)
+    local distance = math.huge
+    local closest
+    if not filterFunction then 
+        filterFunction = function(...) return true end
+    end
+
+    for _,unit in pairs(units) do
+        if IsValidAlive(unit) and filterFunction(unit) then
+            local this_distance = (position - unit:GetAbsOrigin()):Length2D()
+            if this_distance < distance then
+                distance = this_distance
+                closest = unit
+            end
+        end
+    end
+
+    for _,hero in pairs(heroes) do
+        if IsValidAlive(hero) then
+            local this_distance = (position - hero:GetAbsOrigin()):Length2D()
+            if this_distance < distance then
+                distance = this_distance
+                closest = hero
+            end
+        end
+    end
+
+    for _,structures in pairs(structures) do
+        if IsValidAlive(structures) then
+            local this_distance = (position - structures:GetAbsOrigin()):Length2D()
+            if this_distance < distance then
+                distance = this_distance
+                closest = structures
+            end
+        end
+    end
+    return closest
+end
+
+-- FindClosestUnit for all team members and returns the best
+function Players:FindClosestFriendlyUnit(playerID, position, filterFunction)
+    local teamMembers = Teams:GetPlayersOnTeam(PlayerResource:GetTeam(playerID))
+    local distance = math.huge
+    local closest
+    for _,pID in pairs(teamMembers) do
+        local unit = self:FindClosestUnit(pID, position, filterFunction)
+        local this_distance = (position - unit:GetAbsOrigin()):Length2D()
+        if this_distance < distance then
+            distance = this_distance
+            closest = unit
+        end
+    end
+    return closest
+end
+
+function Players:SetMainCityCenter(playerID, building)
     local hero = PlayerResource:GetSelectedHeroEntity(playerID)
 
     PlayerResource:SetDefaultSelectionEntity(playerID, building)

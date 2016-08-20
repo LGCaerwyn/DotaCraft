@@ -146,33 +146,16 @@
 			}
 		}
 
-		"modifier_shadow_meld_fade"
-		{
-			"IsHidden"		"1"
-			"OnDestroy"
-			{
-				"ApplyModifier"
-				{
-					"ModifierName"	"modifier_shadow_meld"
-					"Target" 		"CASTER"
-				}
-				"ApplyModifier"
-				{
-					"ModifierName"	"modifier_invisible"
-					"Target" 		"CASTER"
-				}
-			}
-		}
-
 		"modifier_shadow_meld"
 		{
 			"IsHidden"			"1"
-			"IsBuff"			"1"
-			"IsPurgable"		"1"
-
-			"States"
+			"OnCreated"
 			{
-				"MODIFIER_STATE_INVISIBLE"	"MODIFIER_STATE_VALUE_ENABLED"
+			    "RunScript"
+				{
+					"ScriptFile"	"units/nightelf/shared.lua"
+					"Function"		"ShadowMeldApply"
+				}
 			}
 		}
 
@@ -410,7 +393,8 @@
 // Huntress have 1 jump on moon glaive innate, the upgrade gives a second jump
 "nightelf_moon_glaive"
 {
-	"BaseClass"					"luna_moon_glaive"
+	"BaseClass"					"ability_lua"
+	"ScriptFile"				"units/nightelf/huntress.lua"
 	"AbilityTextureName"		"nightelf_moon_glaive"
 	"MaxLevel"					"1"
 		
@@ -418,6 +402,11 @@
 	"SpellImmunityType"			"SPELL_IMMUNITY_ENEMIES_YES"
 
 	"TargetsAllowed"            "ground"
+
+	"precache"
+	{
+	    "soundfile" "soundevents/game_sounds_heroes/game_sounds_luna.vsndevts"
+	}
 	
 	"AbilitySpecial"
 	{
@@ -442,7 +431,8 @@
 // New name, different icon, replaces the basic ability
 "nightelf_upgraded_moon_glaive"
 {
-	"BaseClass"					"luna_moon_glaive"
+	"BaseClass"					"ability_lua"
+	"ScriptFile"				"units/nightelf/huntress.lua"
 	"AbilityTextureName"		"nightelf_research_upgraded_moon_glaive"
 	"MaxLevel"					"1"
 		
@@ -450,6 +440,11 @@
 	"SpellImmunityType"			"SPELL_IMMUNITY_ENEMIES_YES"
 
 	"TargetsAllowed"            "ground"
+
+	"precache"
+	{
+	    "particle"  "particles/econ/items/luna/luna_lucent_rider/luna_ambient_glaive_lucent_rider.vpcf"
+	}
 	
 	"AbilitySpecial"
 	{
@@ -666,6 +661,8 @@
 	"AbilityCastPoint"			"0"
 	"AbilityCooldown"			"0"
 	"AbilityManaCost"			"50"
+
+	"TargetsAllowed"			"ward"
 		
 	"AbilitySpecial"
 	{
@@ -1227,14 +1224,6 @@
 		{
 			"ScriptFile"	"units/nightelf/mountain_giant.lua"
 			"Function"		"Taunt"
-			"Target"
-			{
-				"Center"  	"CASTER"
-				"Radius" 	"%radius"
-				"Teams" 	"DOTA_UNIT_TARGET_TEAM_ENEMY"
-				"Types" 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-				"MaxTargets" "%max_units"
-			}
 		}
 	}
 }
@@ -1476,8 +1465,10 @@
 	
 			"States"
 			{
+				"MODIFIER_STATE_NO_UNIT_COLLISION"	"MODIFIER_STATE_VALUE_ENABLED"
 				"MODIFIER_STATE_COMMAND_RESTRICTED" "MODIFIER_STATE_VALUE_ENABLED"
 				"MODIFIER_STATE_DISARMED"		"MODIFIER_STATE_VALUE_ENABLED"
+				"MODIFIER_STATE_STUNNED"		"MODIFIER_STATE_VALUE_ENABLED"
 				"MODIFIER_STATE_NO_HEALTH_BAR"	"MODIFIER_STATE_VALUE_ENABLED"
 				"MODIFIER_STATE_UNSELECTABLE"	"MODIFIER_STATE_VALUE_ENABLED"
 				"MODIFIER_STATE_NOT_ON_MINIMAP"	"MODIFIER_STATE_VALUE_ENABLED"
@@ -1574,6 +1565,15 @@
 				{
 					"ScriptFile"	"units/nightelf/hippogryph.lua"
 					"Function"		"FakeArcherAttack"
+				}
+			}
+
+			"OnDestroy"
+			{
+				"RunScript"
+				{
+				    "ScriptFile"    "units/nightelf/hippogryph.lua"
+				    "Function"      "KillArcher"
 				}
 			}
 		}
@@ -2097,20 +2097,19 @@
 	"AbilityTextureName"		"nightelf_mana_flare"
 	"MaxLevel"					"1"
 		
-	"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_CHANNELED"
+	"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_CHANNELED"
 	"AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
 	"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
 	"AbilityUnitDamageType"		"DAMAGE_TYPE_MAGICAL"
 	"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_1"
 	"AnimationPlaybackRate"		"0.3"
 		
-	"AbilityCastRange"			"200"
+	"AbilityCastRange"			"750"
 	"AbilityCastPoint"			"0.75"
 	"AbilityCooldown"			"20"
 	"AbilityManaCost"			"50"
 	"AbilityChannelTime"		"30"
-		
-	"AOERadius"					"750"
+	
 	"AbilitySpecial"
 	{
 		"01"
@@ -2163,13 +2162,6 @@
 		{
 			"ScriptFile"	"units/nightelf/faerie_dragon.lua"
 			"Function"		"ManaFlareStart"
-			"Target"		"POINT"
-		}
-		"ApplyModifier"
-		{
-			"ModifierName"	"modifier_mana_flare_caster"
-			"Target" 		"CASTER"
-			"Duration"		"%duration"
 		}
 	}
 
@@ -2180,25 +2172,17 @@
 			"ScriptFile"	"units/nightelf/faerie_dragon.lua"
 			"Function"		"ManaFlareEnd"
 		}
-		"RemoveModifier"
-		{
-			"ModifierName"	"modifier_mana_flare_caster"
-			"Target" 		"CASTER"
-		}
 	}
 
 	"Modifiers"
 	{
-		"modifier_mana_flare_caster"
-		{			
+		"modifier_mana_flare"
+		{
 			"Properties"
 			{
 				"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS" "%bonus_armor"
 			}
-		}
 
-		"modifier_mana_flare"
-		{
 			"IsHidden"			"1"
             "Aura"              "modifier_mana_flare_debuff"
             "Aura_Radius"       "%radius"
@@ -2251,7 +2235,7 @@
 		"02"
 		{
 			"var_type"			"FIELD_INTEGER"
-			"bonus_range"		"400"
+			"attack_range"		"850"
 		}
 		// Attack range increased by 400, from 450 to 850, only against buildings
 	}
@@ -2266,37 +2250,25 @@
 		"modifier_corrosive_breath"
 		{
 			"Passive"			"1"
-			
-			"Properties"
+			"IsHidden"			"1"
+			"OnCreated"
 			{
-				"MODIFIER_PROPERTY_ATTACK_RANGE_BONUS" "%bonus_range"
-			}
-
-			"OnAttackStart"
-			{
-				"RunScript"
-				{
-					"ScriptFile"	"units/nightelf/chimaera.lua"
-					"Function"		"CorrosiveBreathAttack"
-				}
-			}
-
-			"OnAttackLanded"
-			{
-				"RunScript"
-				{
-					"ScriptFile"	"units/nightelf/chimaera.lua"
-					"Function"		"CorrosiveBreathDamage"
-				}
-			}
-		}
-
-		"modifier_corrosive_breath_adjustment"
-		{
-			"IsHidden"		"1"
-			"Properties"
-			{
-				"MODIFIER_PROPERTY_ATTACK_RANGE_BONUS" "-400"
+			    "RunScript"
+			    {
+			        "ScriptFile"    "units/nightelf/chimaera.lua"
+			        "Function"      "UnlockCorrosiveBreath"
+			        "SecondaryAttackTable"
+					{
+						"UsedAgainst"			"building"
+						"AttackCapabilities"	"DOTA_UNIT_CAP_RANGED_ATTACK"
+						"AttackType"			"siege"
+						"AttackDamageMin"		"45.0"
+						"AttackDamageMax"		"55.0"
+						"AttackRate"			"2.5"
+						"AttackRange"			"850"
+						"ProjectileModel"		"particles/units/heroes/hero_venomancer/venomancer_base_attack.vpcf"
+					}
+			    }
 			}
 		}
 	}

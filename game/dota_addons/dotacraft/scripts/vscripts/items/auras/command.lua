@@ -33,7 +33,7 @@ function modifier_command_aura:GetModifierAura()
 end
 
 function modifier_command_aura:GetEffectName()
-    return "particles/items_fx/aura_assault_ring.vpcf"
+    return "particles/custom/aura_command.vpcf"
 end
 
 function modifier_command_aura:GetEffectAttachType()
@@ -45,7 +45,7 @@ function modifier_command_aura:GetAuraSearchTeam()
 end
 
 function modifier_command_aura:GetAuraEntityReject(target)
-    return IsCustomBuilding(target)
+    return IsCustomBuilding(target) or target:IsWard()
 end
 
 function modifier_command_aura:GetAuraSearchType()

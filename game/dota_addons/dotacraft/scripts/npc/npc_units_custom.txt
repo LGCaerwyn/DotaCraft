@@ -22,6 +22,12 @@
 		"HasQueue"					"1"
 	
 		"UnitLabel"					"city_center"
+	
+		// Research
+		"Upgrades"
+		{
+			"human_research_masonry" 	""
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -111,6 +117,12 @@
 		"HasQueue"					"1"
 	
 		"UnitLabel"					"city_center"
+	
+		// Research
+		"Upgrades"
+		{
+			"human_research_masonry" 	""
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -201,6 +213,12 @@
 		"HasQueue"					"1"
 	
 		"UnitLabel"					"city_center"
+	
+		// Research
+		"Upgrades"
+		{
+			"human_research_masonry" 	""
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -288,6 +306,12 @@
 	
 		"RenderTeamColor"			"1"
 		"HasQueue"					"1"
+	
+		// Research
+		"Upgrades"
+		{
+			"human_research_masonry" 	""
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -370,6 +394,12 @@
 		"ModelScale"				"1"
 		"Level"						"1"
 		"HealthBarOffset"			"140"
+	
+		// Research
+		"Upgrades"
+		{
+			"human_research_masonry" 	""
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -458,6 +488,12 @@
 		"ConsideredHero"			"1"
 	
 		"HasQueue"					"1"
+	
+		// Research
+		"Upgrades"
+		{
+			"human_research_masonry" 	""
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -543,6 +579,12 @@
 		"ConsideredHero"			"1"
 	
 		"HasQueue"					"1"
+	
+		// Research
+		"Upgrades"
+		{
+			"human_research_masonry" 	""
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -625,6 +667,12 @@
 		"HasInventory"				"1"
 	
 		"HasQueue"					"1"
+	
+		// Research
+		"Upgrades"
+		{
+			"human_research_masonry" 	""
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -706,6 +754,12 @@
 		"HealthBarOffset"			"180"
 	
 		"AttacksEnabled"			"ground,air"
+	
+		// Research
+		"Upgrades"
+		{
+			"human_research_masonry" 	""
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -793,6 +847,12 @@
 		"HealthBarOffset"			"180"
 	
 		"AttacksEnabled"			"ground"
+	
+		// Research
+		"Upgrades"
+		{
+			"human_research_masonry" 	""
+		}
 	
 		"Artillery"					"1"
 		"SplashAttack"				"1"
@@ -887,6 +947,12 @@
 		"HealthBarOffset"			"180"
 	
 		"AttacksEnabled"			"ground,air"
+	
+		// Research
+		"Upgrades"
+		{
+			"human_research_masonry" 	""
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -977,6 +1043,12 @@
 		"ConsideredHero"			"1"
 	
 		"HasQueue"					"1"
+	
+		// Research
+		"Upgrades"
+		{
+			"human_research_masonry" 	""
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -1062,6 +1134,13 @@
 		"ConsideredHero"			"1"
 	
 		"HasQueue"					"1"
+		"HasDeathAnimation"			"1"
+	
+		// Research
+		"Upgrades"
+		{
+			"human_research_masonry" 	""
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -1151,6 +1230,12 @@
 		
 		"RenderTeamColor"			"1"
 		"HasQueue"					"1"
+	
+		// Research
+		"Upgrades"
+		{
+			"human_research_masonry" 	""
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -1236,6 +1321,12 @@
 		"ConsideredHero"			"1"
 	
 		"HasQueue"					"1"
+	
+		// Research
+		"Upgrades"
+		{
+			"human_research_masonry" 	""
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -1320,6 +1411,12 @@
 		"HasInventory"				"1"
 	
 		"UnitLabel"					"human_shop"
+	
+		// Research
+		"Upgrades"
+		{
+			"human_research_masonry" 	""
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -1407,6 +1504,12 @@
 		"UnitLabel"					"builder"
 	
 		"AttacksEnabled"			"ground"
+	
+		// Research
+		"Upgrades"
+		{
+			"human_research_lumber_harvesting" 	""
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -1518,6 +1621,13 @@
 	
 		"AttacksEnabled"			"ground"
 	
+		// Research
+		"Upgrades"
+		{
+			"human_research_forged_swords" 	"weapon"
+			"human_research_plating" 		"armor"
+		}
+	
 		// Abilities
 		//----------------------------------------------------------------
 		"Ability1"					"human_back_to_work"	 //Reference: Ahar
@@ -1618,6 +1728,12 @@
 	
 		"AttacksEnabled"			"ground"
 		
+		// Research
+		"Upgrades"
+		{
+			"human_research_forged_swords" 	"weapon"
+			"human_research_plating" 		"armor"
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -1727,6 +1843,12 @@
 	
 		"AttacksEnabled"			"ground,air"
 		
+		// Research
+		"Upgrades"
+		{
+			"human_research_ranged_weapons" 	"weapon"
+			"human_research_leather_armor" 		"armor"
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -1829,6 +1951,12 @@
 	
 		"AttacksEnabled"			"ground"
 		
+		// Research
+		"Upgrades"
+		{
+			"human_research_forged_swords" 	"weapon"
+			"human_research_plating" 		"armor"
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -1943,7 +2071,12 @@
 	
 		"AttacksEnabled"			"ground,air"
 		
-		
+		// Research
+		"Upgrades"
+		{
+			"human_research_sorceress_training" 	"training"
+		}
+	
 		// Abilities
 		//----------------------------------------------------------------
 		"Ability1"					"lina_arcana"	 //Reference: Aivs
@@ -2053,6 +2186,11 @@
 	
 		"AttacksEnabled"			"ground,air"
 		
+		// Research
+		"Upgrades"
+		{
+			"human_research_priest_training" 	"training"
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -2163,7 +2301,13 @@
 	
 		"AttacksEnabled"			"ground"
 		
-		
+		// Research
+		"Upgrades"
+		{
+			"human_research_forged_swords" 	"weapon"
+			"human_research_plating" 		"armor"
+		}
+	
 		// Abilities
 		//----------------------------------------------------------------
 		"Ability1"					"human_spell_steal"	 //Reference: Asps
@@ -2270,6 +2414,13 @@
 		"AttacksEnabled"			"air"
 		"LeavesCorpse"				"0"
 		"UnitLabel"					"mechanical"
+	
+		// Research
+		"Upgrades"
+		{
+			"human_research_ranged_weapons" 	"weapon"
+			"human_research_plating" 		"armor"
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -2280,15 +2431,16 @@
 		
 		// Armor
 		//----------------------------------------------------------------
+		"ArmorType"					"heavy"
 		"ArmorPhysical"				"2"
 		"MagicalResistance"			"0"
 		
-		// Attack - AIR
+		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackType"				"siege"
 		"AttackDamageMin"			"14.0"
 		"AttackDamageMax"			"15.0"
-		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
 		"AttackRate"				"2"
 		"AttackAnimationPoint"		"0.03"
 		"AttackAcquisitionRange"	"500"
@@ -2296,17 +2448,18 @@
 		"ProjectileModel"			"particles/econ/items/gyrocopter/hero_gyrocopter_gyrotechnics/gyro_base_attack.vpcf"
 		"ProjectileSpeed"			"2000" //"2000,900"
 	
-		// Secondary Attack - GROUND
-		//----------------------------------------------------------------
-		"SecondaryAttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
-		"SecondaryAttackType"				"siege"
-		"SecondaryAttackDamageMin"			"7.0"
-		"SecondaryAttackDamageMax"			"8.0"
-		"SecondaryAttackRate"				"2"
-		"SecondaryAttackAnimationPoint"		"0.03"
-		"SecondaryAttackAcquisitionRange"	"500"
-		"SecondaryAttackRange"				"128"
-		"SecondaryAttackAgainst"			"ground"
+		"SecondaryAttack"
+		{
+			"UsedAgainst"			"ground"
+			"AttackCapabilities"	"DOTA_UNIT_CAP_RANGED_ATTACK"
+			"AttackType"			"pierce"
+			"AttackDamageMin"		"7.0"
+			"AttackDamageMax"		"8.0"
+			"AttackRate"			"2"
+			"AttackRange"			"100"
+			"ProjectileModel"		"particles/econ/items/gyrocopter/hero_gyrocopter_gyrotechnics/gyro_base_attack.vpcf"
+			"ProjectileSpeed"		"900"
+		}
 	
 		// Bounds
 		//----------------------------------------------------------------
@@ -2339,12 +2492,7 @@
 		//----------------------------------------------------------------
 		"VisionDaytimeRange"		"1800"
 		"VisionNighttimeRange"		"1100"
-		
-		// Attack Damage types
-		//----------------------------------------------------------------
-		"AttackType"				"pierce"
-		"ArmorType"					"heavy"
-		
+			
 		// Creature Data
 		//----------------------------------------------------------------
 		"Creature"
@@ -2383,6 +2531,12 @@
 		"AttacksEnabled"			"ground,air"
 		"LeavesCorpse"				"0"
 		
+		// Research
+		"Upgrades"
+		{
+			"weapon" 	"human_research_forged_swords"
+			"armor" 	"human_research_leather_armor"
+		}
 	
 		// Abilities
 		//----------------------------------------------------------------
@@ -2494,6 +2648,12 @@
 		"SplashSmallRadius"			"250"
 		"SplashSmallDamage"			"0.1"
 		
+		// Research
+		"Upgrades"
+		{
+			"human_research_ranged_weapons" 	"weapon"
+			"human_research_leather_armor" 	"armor"
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -2598,6 +2758,13 @@
 		"AttacksEnabled"			"building"
 		"LeavesCorpse"				"0"
 		"UnitLabel"					"mechanical"
+	
+		// Research
+		"Upgrades"
+		{
+			"human_research_ranged_weapons" 	"weapon"
+			"human_research_plating" 		"armor"
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -2609,31 +2776,30 @@
 		"ArmorPhysical"				"2"
 		"MagicalResistance"			"0"
 		
-		// Attack - GROUND
+		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackType"				"siege"
 		"AttackDamageMin"			"45.0"
 		"AttackDamageMax"			"55.0"
-		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
 		"AttackRate"				"2.1"
 		"AttackAnimationPoint"		"0.5"
 		"AttackAcquisitionRange"	"500"
 		"AttackRange"				"192"
 		"ProjectileModel"			"particles/base_attacks/ranged_siege_good.vpcf"
-		"ProjectileSpeed"			"2500"
+		"ProjectileSpeed"			"1500"
 		
-		// Secondary Attack - AIR
-		//----------------------------------------------------------------
-		"SecondaryAttackCapabilities"			"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"SecondaryAttackType"			"pierce"
-		"SecondaryAttackDamageMin"			"13.0"
-		"SecondaryAttackDamageMax"			"14.0"
-		"SecondaryAttackRate"				"2.1"
-		"SecondaryAttackAnimationPoint"		"0.03"
-		"SecondaryAttackAcquisitionRange"	"800"
-		"SecondaryAttackRange"				"500"
-		"ProjectileModel"			"particles/base_attacks/ranged_siege_good.vpcf"
-		"ProjectileSpeed"			"1000"
+		"SecondaryAttack"
+		{
+			"UsedAgainst"			"air"
+			"AttackCapabilities"	"DOTA_UNIT_CAP_RANGED_ATTACK"
+			"AttackType"			"pierce"
+			"AttackDamageMin"		"13.0"
+			"AttackDamageMax"		"14.0"
+			"AttackRate"			"2.0"
+			"AttackRange"			"500"
+			"ProjectileModel"		"particles/econ/items/gyrocopter/hero_gyrocopter_gyrotechnics/gyro_base_attack.vpcf"
+		}
 	
 		// Bounty
 		//----------------------------------------------------------------
@@ -2702,6 +2868,13 @@
 		"AttacksEnabled"			"ground,air"
 		
 		"LeavesCorpse"				"0"
+	
+		// Research
+		"Upgrades"
+		{
+			"weapon" 	"human_research_forged_swords"
+			"armor" 	"human_research_leather_armor"
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -2874,6 +3047,7 @@
 	
 		"AttacksEnabled"			"ground"
 		"HasQueue"					"1"
+		"HasDeathAnimation"			"1"
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -2937,7 +3111,7 @@
 		// Status
 		//----------------------------------------------------------------
 		"StatusHealth"				"900"
-		"StatusHealthRegen"			"0.5"
+		"StatusHealthRegen"			"0"
 		"StatusMana"				"100"
 		"StatusManaRegen"			"0"
 		
@@ -2971,6 +3145,7 @@
 	
 		"AttacksEnabled"			"ground"
 		"HasQueue"					"1"
+		"HasDeathAnimation"			"1"
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -3034,7 +3209,7 @@
 		// Status
 		//----------------------------------------------------------------
 		"StatusHealth"				"1000"
-		"StatusHealthRegen"			"0.5"
+		"StatusHealthRegen"			"0"
 		"StatusMana"				"100"
 		"StatusManaRegen"			"0"
 		
@@ -3069,6 +3244,7 @@
 	
 		"AttacksEnabled"			"ground"
 		"HasQueue"					"1"
+		"HasDeathAnimation"			"1"
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -3130,7 +3306,7 @@
 		// Status
 		//----------------------------------------------------------------
 		"StatusHealth"				"900"
-		"StatusHealthRegen"			"0.5"
+		"StatusHealthRegen"			"0"
 		"StatusMana"				"100"
 		"StatusManaRegen"			"0"
 		
@@ -3164,6 +3340,7 @@
 	
 		"AttacksEnabled"			"ground,air"
 		"HasQueue"					"1"
+		"HasDeathAnimation"			"1"
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -3223,7 +3400,7 @@
 		// Status
 		//----------------------------------------------------------------
 		"StatusHealth"				"600"
-		"StatusHealthRegen"			"0.5"
+		"StatusHealthRegen"			"0"
 		"StatusMana"				"100"
 		"StatusManaRegen"			"0"
 		
@@ -3256,6 +3433,7 @@
 	
 		"AttacksEnabled"			"ground"
 		"HasQueue"					"1"
+		"HasDeathAnimation"			"1"
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -3315,7 +3493,7 @@
 		// Status
 		//----------------------------------------------------------------
 		"StatusHealth"				"450"
-		"StatusHealthRegen"			"0.5"
+		"StatusHealthRegen"			"0"
 		"StatusMana"				"100"
 		"StatusManaRegen"			"0"
 		
@@ -3352,6 +3530,7 @@
 	
 		"AttacksEnabled"			"ground"
 		"HasQueue"					"1"
+		"HasDeathAnimation"			"1"
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -3414,7 +3593,7 @@
 		// Status
 		//----------------------------------------------------------------
 		"StatusHealth"				"1300"
-		"StatusHealthRegen"			"0.5"
+		"StatusHealthRegen"			"0"
 		"StatusMana"				"100"
 		"StatusManaRegen"			"0"
 		
@@ -3460,6 +3639,7 @@
 	
 		"AttacksEnabled"			"ground"
 		"HasQueue"					"1"
+		"HasDeathAnimation"			"1"
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -3522,7 +3702,7 @@
 		// Status
 		//----------------------------------------------------------------
 		"StatusHealth"				"1700"
-		"StatusHealthRegen"			"0.5"
+		"StatusHealthRegen"			"0"
 		"StatusMana"				"100"
 		"StatusManaRegen"			"0"
 		
@@ -3568,6 +3748,7 @@
 	
 		"AttacksEnabled"			"ground"
 		"HasQueue"					"1"
+		"HasDeathAnimation"			"1"
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -3629,7 +3810,7 @@
 		// Status
 		//----------------------------------------------------------------
 		"StatusHealth"				"2000"
-		"StatusHealthRegen"			"0.5"
+		"StatusHealthRegen"			"0"
 		"StatusMana"				"100"
 		"StatusManaRegen"			"0"
 		
@@ -3758,6 +3939,7 @@
 		"ConsideredHero"			"1"
 	
 		"HasQueue"					"1"
+		"HasDeathAnimation"			"1"
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -4099,7 +4281,7 @@
 		"UnitLabel"					"builder"
 	
 		"LeavesCorpse"				"0"
-		
+	
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"6"
@@ -4207,6 +4389,13 @@
 		"GameSoundsFile"			"soundevents/game_sounds_heroes/game_sounds_windrunner.vsndevts"
 	
 		"AttacksEnabled"			"ground,air"
+	
+		// Research
+		"Upgrades"
+		{
+			"nightelf_research_strength_of_the_moon" 	"weapon"
+			"nightelf_research_moon_armor" 				"armor"
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -4246,7 +4435,7 @@
 		// Bounds
 		//----------------------------------------------------------------
 		"BoundsHullName"			"DOTA_HULL_SIZE_HUGE"
-		"RingRadius"				"70"
+		"RingRadius"				"50"
 		"CollisionSize"				"32"
 		"FormationRank"				"2"
 		
@@ -4315,6 +4504,13 @@
 		
 		"AttacksEnabled"			"ground"
 	
+		// Research
+		"Upgrades"
+		{
+			"nightelf_research_strength_of_the_moon" 	"weapon"
+			"nightelf_research_moon_armor" 				"armor"
+		}
+	
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"6"
@@ -4346,7 +4542,7 @@
 		"AttackAnimationPoint"		"0.46"
 		"AttackAcquisitionRange"	"500"
 		"AttackRange"				"225"
-		"ProjectileModel"			"particles/units/heroes/hero_luna/luna_base_attack.vpcf"
+		"ProjectileModel"			"particles/units/heroes/hero_luna/luna_moon_glaive.vpcf"
 		"ProjectileSpeed"			"900"
 		
 		// Bounty
@@ -4357,7 +4553,7 @@
 		// Bounds
 		//----------------------------------------------------------------
 		"BoundsHullName"			"DOTA_HULL_SIZE_HUGE"
-		"RingRadius"				"70"
+		"RingRadius"				"60"
 		"CollisionSize"				"32"
 		"FormationRank"				"0"
 		
@@ -4433,6 +4629,12 @@
 		"SplashMediumDamage"		"0.4" //65%
 		"SplashSmallRadius"			"150"
 		"SplashSmallDamage"			"0.25"
+	
+		// Research
+		"Upgrades"
+		{
+			"nightelf_research_strength_of_the_moon" 	"weapon"
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -4529,6 +4731,13 @@
 	    "GameSoundsFile"            "soundevents/game_sounds_heroes/game_sounds_enchantress.vsndevts"
 	
 		"AttacksEnabled"			"ground,air"
+	
+		// Research
+		"Upgrades"
+		{
+			"nightelf_research_strength_of_the_wild" 	"weapon"
+			"nightelf_research_reinforced_hides" 		"armor"
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -4638,6 +4847,19 @@
 	    "GameSoundsFile"            "soundevents/game_sounds_heroes/game_sounds_lone_druid.vsndevts"
 	
 		"AttacksEnabled"			"ground"
+	
+		// Research
+		"Upgrades"
+		{
+			"nightelf_research_druid_of_the_claw_training" 	"training"
+			"nightelf_research_strength_of_the_wild" 		""
+			"nightelf_research_reinforced_hides"			""
+			"RequiresModifier"
+			{
+				"nightelf_research_strength_of_the_wild" 	"modifier_bear_form"
+				"nightelf_research_reinforced_hides" 		"modifier_bear_form"
+			}
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -4746,6 +4968,13 @@
 	
 		"AttacksEnabled"			"ground"
 		"LeavesCorpse"				"0"
+	
+		// Research
+		"Upgrades"
+		{
+			"nightelf_research_strength_of_the_wild" 	"weapon"
+			"nightelf_research_reinforced_hides"		"armor"
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -4763,7 +4992,7 @@
 		"ArmorPhysical"				"4"
 		"MagicalResistance"			"0"
 		
-		// Attack - GROUND
+		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
 		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
@@ -4773,18 +5002,6 @@
 		"AttackAnimationPoint"		"0.49"
 		"AttackAcquisitionRange"	"500"
 		"AttackRange"				"128"
-	
-		// Secondary Attack - GROUND(war club)
-		//----------------------------------------------------------------
-		"SecondaryAttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
-		"SecondaryAttackType"				"siege"
-		"SecondaryAttackDamageMin"			"34"
-		"SecondaryAttackDamageMax"			"48"
-		"SecondaryAttackRate"				"2.5"
-		"SecondaryAttackAnimationPoint"		"0.49"
-		"SecondaryAttackAcquisitionRange"	"500"
-		"SecondaryAttackRange"				"250"
-		"SecondaryAttackAgainst"			"ground"
 	
 		// Bounty
 		//----------------------------------------------------------------
@@ -4861,6 +5078,13 @@
 	
 		"AttacksEnabled"			"ground"
 		"LeavesCorpse"				"0"
+	
+		// Research
+		"Upgrades"
+		{
+			"nightelf_research_strength_of_the_wild" 	"weapon"
+			"nightelf_research_reinforced_hides"		"armor"
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -4876,7 +5100,7 @@
 		// Armor
 		//----------------------------------------------------------------
 		"ArmorPhysical"				"4"
-		"MagicalResistance"			"30"
+		"MagicalResistance"			"30.000001"
 		
 		// Attack
 		//----------------------------------------------------------------
@@ -4929,7 +5153,7 @@
 		// Attack Damage types
 		//----------------------------------------------------------------
 		"AttackType"				"normal"
-		"ArmorType"					"medium"
+		"ArmorType"					"hero"
 		
 		// Creature Data
 		//----------------------------------------------------------------
@@ -4964,6 +5188,19 @@
 	    "GameSoundsFile"            "soundevents/game_sounds_heroes/game_sounds_furion.vsndevts"
 	
 		"AttacksEnabled"			"ground,air"
+	
+		// Research
+		"Upgrades"
+		{
+			"nightelf_research_druid_of_the_talon_training" 	"training"
+			"nightelf_research_strength_of_the_wild" 		""
+			"nightelf_research_reinforced_hides"			""
+			"RequiresModifier"
+			{
+				"nightelf_research_strength_of_the_wild" 	"modifier_crow_form"
+				"nightelf_research_reinforced_hides" 		"modifier_crow_form"
+			}
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -5077,6 +5314,13 @@
 	
 		"AttacksEnabled"			"ground,air"
 		"LeavesCorpse"				"0"
+	
+		// Research
+		"Upgrades"
+		{
+			"nightelf_research_strength_of_the_wild" 	"weapon"
+			"nightelf_research_reinforced_hides"		"armor"
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -5163,122 +5407,6 @@
 	}
 	
 	//=================================================================================
-	// Creature: Chimaera
-	// Description: "Flying two headed Dragon. Can learn Corrosive Breath. \n\n|cffffcc00Attacks land units.|r"
-	//=================================================================================
-	"nightelf_chimaera"
-	{
-		// General
-		//----------------------------------------------------------------
-		"BaseClass"					"npc_dota_creature"
-		"Model"						"models/heroes/twin_headed_dragon/twin_headed_dragon.vmdl"
-		"ModelScale"				"1"
-		"Level"						"5"
-		"HealthBarOffset"			"140"
-	    "SoundSet"                  "Hero_Jakiro"
-	    "GameSoundsFile"            "soundevents/game_sounds_heroes/game_sounds_jakiro.vsndevts"
-	
-		"AttacksEnabled"			"ground"
-		"LeavesCorpse"				"0"
-	
-		"SplashAttack"				"1"
-		"SplashFullRadius"			"25"
-		"SplashMediumRadius"		"125"
-		"SplashMediumDamage"		"0.4" //50%
-		"SplashSmallRadius"			"200"
-		"SplashSmallDamage"			"0.1"
-		
-		// Abilities
-		//----------------------------------------------------------------
-		"AbilityLayout"				"4"
-		"Ability1"					"nightelf_corrosive_breath_disabled"	 //Reference: Acor
-		"Ability2"					"nightelf_chimaera_attack"	 //Reference: Alit //Lightning Attack
-		"Ability3"					"nightelf_ultravision_disabled"	 //Reference: Ault - Ultravision
-		"Ability11"					"nightelf_night_regen"
-		
-		// Armor
-		//----------------------------------------------------------------
-		"ArmorPhysical"				"2"
-		"MagicalResistance"			"0"
-		
-		// Attack - GROUND
-		//----------------------------------------------------------------
-		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
-		"AttackDamageMin"			"70.0"
-		"AttackDamageMax"			"80.0"
-		"AttackRate"				"2.5"
-		"AttackAnimationPoint"		"0.7"
-		"AttackAcquisitionRange"	"900"
-		"AttackRange"				"450" //850 vs buildings
-		"ProjectileModel"			"particles/units/heroes/hero_razor/razor_base_attack.vpcf"
-		"ProjectileSpeed"			"1200"
-	
-		// Secondary Attack - GROUND(BUILDINGS), SIEGE
-		//----------------------------------------------------------------
-		"SecondaryAttackCapabilities"			"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"SecondaryAttackType"			"siege"
-		"SecondaryAttackDamageMin"			"45.0"
-		"SecondaryAttackDamageMax"			"55.0"
-		"SecondaryAttackRate"				"2.5"
-		"SecondaryAttackAnimationPoint"		"0.7"
-		"SecondaryAttackAcquisitionRange"	"850"
-		"SecondaryAttackRange"				"850"
-		"ProjectileModel"			"particles/units/heroes/hero_razor/razor_base_attack.vpcf"
-		"ProjectileSpeed"			"1000"
-	
-	
-		// Bounty
-		//----------------------------------------------------------------
-		"BountyGoldMin"				"38.0"
-		"BountyGoldMax"				"54.0"
-		
-		// Bounds
-		//----------------------------------------------------------------
-		"BoundsHullName"			"DOTA_HULL_SIZE_SMALL"
-		"RingRadius"				"40"
-		"CollisionSize"				"8"
-		"FormationRank"				"2"
-		
-		// Building Cost Stats
-		//----------------------------------------------------------------
-		"GoldCost"					"330"
-		"LumberCost"				"70"
-		"FoodCost"					"5"
-		"BuildTime"					"60"
-		
-		// Movement
-		//----------------------------------------------------------------
-		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_FLY"
-		"MovementSpeed"				"250"
-		"MovementTurnRate"			"0.5"
-		
-		// Status
-		//----------------------------------------------------------------
-		"StatusHealth"				"1000"
-		"StatusHealthRegen"			"0.5"
-		"StatusMana"				"0"
-		"StatusManaRegen"			"0"
-		
-		// Vision
-		//----------------------------------------------------------------
-		"VisionDaytimeRange"		"1600"
-		"VisionNighttimeRange"		"800"
-		
-		// Attack Damage types
-		//----------------------------------------------------------------
-		"AttackType"				"magic"
-		"ArmorType"					"light"
-		
-		// Creature Data
-		//----------------------------------------------------------------
-		"Creature"
-		{
-			"DisableClumpingBehavior"	"1"
-		}
-	}
-	
-	//=================================================================================
 	// Creature: Hippogryph
 	// Description: "Flying melee attack beast. Can learn the Hippogryph Taming ability. \n\n|cffffcc00Attacks air units.|r"
 	//=================================================================================
@@ -5294,6 +5422,13 @@
 	
 		"AttacksEnabled"			"air"
 		"LeavesCorpse"				"0"
+	
+		// Research
+		"Upgrades"
+		{
+			"nightelf_research_strength_of_the_wild" 	"weapon"
+			"nightelf_research_reinforced_hides"		"armor"
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -5386,6 +5521,13 @@
 	
 		"AttacksEnabled"			"ground,air"
 		"LeavesCorpse"				"0"
+	
+		// Research
+		"Upgrades"
+		{
+			"nightelf_research_strength_of_the_wild" 	"weapon"
+			"nightelf_research_reinforced_hides"		"armor"
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -5464,6 +5606,111 @@
 		}
 	}
 	
+	//=================================================================================
+	// Creature: Chimaera
+	// Description: "Flying two headed Dragon. Can learn Corrosive Breath. \n\n|cffffcc00Attacks land units.|r"
+	//=================================================================================
+	"nightelf_chimaera"
+	{
+		// General
+		//----------------------------------------------------------------
+		"BaseClass"					"npc_dota_creature"
+		"Model"						"models/heroes/twin_headed_dragon/twin_headed_dragon.vmdl"
+		"ModelScale"				"1"
+		"Level"						"5"
+		"HealthBarOffset"			"140"
+	    "SoundSet"                  "Hero_Jakiro"
+	    "GameSoundsFile"            "soundevents/game_sounds_heroes/game_sounds_jakiro.vsndevts"
+	
+		"AttacksEnabled"			"ground"
+		"LeavesCorpse"				"0"
+	
+		"SplashAttack"				"1"
+		"SplashFullRadius"			"25"
+		"SplashMediumRadius"		"125"
+		"SplashMediumDamage"		"0.4" //50%
+		"SplashSmallRadius"			"200"
+		"SplashSmallDamage"			"0.1"
+	
+		// Research
+		"Upgrades"
+		{
+			"nightelf_research_strength_of_the_wild" 	"weapon"
+			"nightelf_research_reinforced_hides"		"armor"
+		}
+		
+		// Abilities
+		//----------------------------------------------------------------
+		"AbilityLayout"				"4"
+		"Ability1"					"nightelf_corrosive_breath_disabled"	 //Reference: Acor
+		"Ability2"					"nightelf_chimaera_attack"	 //Reference: Alit //Lightning Attack
+		"Ability3"					"nightelf_ultravision_disabled"	 //Reference: Ault - Ultravision
+		"Ability11"					"nightelf_night_regen"
+		
+		// Armor
+		//----------------------------------------------------------------
+		"ArmorType"					"light"
+		"ArmorPhysical"				"2"
+		"MagicalResistance"			"0"
+		
+		// Attack
+		//----------------------------------------------------------------
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackType"				"magic"
+		"AttackDamageMin"			"70.0"
+		"AttackDamageMax"			"80.0"
+		"AttackRate"				"2.5"
+		"AttackAnimationPoint"		"0.7"
+		"AttackAcquisitionRange"	"900"
+		"AttackRange"				"450"
+		"ProjectileModel"			"particles/units/heroes/hero_razor/razor_base_attack.vpcf"
+		"ProjectileSpeed"			"1200"
+	
+		// Bounty
+		//----------------------------------------------------------------
+		"BountyGoldMin"				"38.0"
+		"BountyGoldMax"				"54.0"
+		
+		// Bounds
+		//----------------------------------------------------------------
+		"BoundsHullName"			"DOTA_HULL_SIZE_SMALL"
+		"RingRadius"				"40"
+		"CollisionSize"				"8"
+		"FormationRank"				"2"
+		
+		// Building Cost Stats
+		//----------------------------------------------------------------
+		"GoldCost"					"330"
+		"LumberCost"				"70"
+		"FoodCost"					"5"
+		"BuildTime"					"60"
+		
+		// Movement
+		//----------------------------------------------------------------
+		"MovementCapabilities"		"DOTA_UNIT_CAP_MOVE_FLY"
+		"MovementSpeed"				"250"
+		"MovementTurnRate"			"0.5"
+		
+		// Status
+		//----------------------------------------------------------------
+		"StatusHealth"				"1000"
+		"StatusHealthRegen"			"0.5"
+		"StatusMana"				"0"
+		"StatusManaRegen"			"0"
+		
+		// Vision
+		//----------------------------------------------------------------
+		"VisionDaytimeRange"		"1600"
+		"VisionNighttimeRange"		"800"
+		
+		// Creature Data
+		//----------------------------------------------------------------
+		"Creature"
+		{
+			"DisableClumpingBehavior"	"1"
+		}
+	}
+	
 	"nightelf_sentinel_owl"
 	{										
 		// General
@@ -5524,6 +5771,12 @@
 		"ConsideredHero"			"1"
 	
 		"HasQueue"					"1"
+		"HasDeathAnimation"			"1"
+	
+		"Upgrades"
+		{
+			"orc_research_spiked_barricades" ""
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -5608,6 +5861,11 @@
 		"ConsideredHero"			"1"
 		
 		"HasQueue"					"1"
+	
+		"Upgrades"
+		{
+			"orc_research_spiked_barricades" ""
+		}
 	
 		// Abilities
 		//----------------------------------------------------------------
@@ -5696,6 +5954,11 @@
 		"ConsideredHero"			"1"
 	
 		"HasQueue"					"1"
+	
+		"Upgrades"
+		{
+			"orc_research_spiked_barricades" ""
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -5787,6 +6050,11 @@
 		"HasQueue"					"1"
 	
 		"UnitLabel"					"city_center"
+	
+		"Upgrades"
+		{
+			"orc_research_spiked_barricades" ""
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -5875,6 +6143,11 @@
 		"HasQueue"					"1"
 	
 		"UnitLabel"					"city_center"
+	
+		"Upgrades"
+		{
+			"orc_research_spiked_barricades" ""
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -5963,6 +6236,11 @@
 		"HasQueue"					"1"
 	
 		"UnitLabel"					"city_center"
+	
+		"Upgrades"
+		{
+			"orc_research_spiked_barricades" ""
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -6049,6 +6327,11 @@
 	
 		"AttacksEnabled"			"ground,air"
 		"HasQueue"					"1"
+	
+		"Upgrades"
+		{
+			"orc_research_spiked_barricades" ""
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -6143,6 +6426,11 @@
 	
 		"HasQueue"					"1"
 	
+		"Upgrades"
+		{
+			"orc_research_spiked_barricades" ""
+		}
+	
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"6"
@@ -6228,6 +6516,11 @@
 		"ConsideredHero"			"1"
 	
 		"HasQueue"					"1"
+	
+		"Upgrades"
+		{
+			"orc_research_spiked_barricades" ""
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -6311,6 +6604,12 @@
 		"ConsideredHero"			"1"
 	
 		"UnitLabel"					"orc_shop"
+		"HasDeathAnimation"			"1"
+	
+		"Upgrades"
+		{
+			"orc_research_spiked_barricades" ""
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -6398,6 +6697,11 @@
 		"ConsideredHero"			"1"
 	
 		"HasQueue"					"1"
+	
+		"Upgrades"
+		{
+			"orc_research_spiked_barricades" ""
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -6482,6 +6786,11 @@
 		"HealthBarOffset"			"140"
 	
 		"AttacksEnabled"			"ground,air"
+	
+		"Upgrades"
+		{
+			"orc_research_spiked_barricades" ""
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -6680,6 +6989,13 @@
 	    "GameSoundsFile"            "soundevents/game_sounds_heroes/game_sounds_axe.vsndevts"
 	
 		"AttacksEnabled"			"ground"
+	
+		// Research
+		"Upgrades"
+		{
+			"orc_research_melee_weapons" 	"weapon"
+			"orc_research_unit_armor" 		"armor"
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -6784,6 +7100,13 @@
 	    "GameSoundsFile"            "soundevents/game_sounds_heroes/game_sounds_huskar.vsndevts"
 	
 		"AttacksEnabled"			"ground,air"
+	
+		// Research
+		"Upgrades"
+		{
+			"orc_research_ranged_weapons" 	"weapon"
+			"orc_research_unit_armor" 		"armor"
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -6887,6 +7210,13 @@
 	    "GameSoundsFile"            "soundevents/game_sounds_heroes/game_sounds_huskar.vsndevts"
 	
 		"AttacksEnabled"			"ground,air"
+	
+		// Research
+		"Upgrades"
+		{
+			"orc_research_ranged_weapons" 	"weapon"
+			"orc_research_unit_armor" 		"armor"
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -6998,6 +7328,13 @@
 		"SplashMediumDamage"		"0.4" //65%
 		"SplashSmallRadius"			"150"
 		"SplashSmallDamage"			"0.25"
+	
+		// Research
+		"Upgrades"
+		{
+			"orc_research_ranged_weapons" 	"weapon"
+			"orc_research_unit_armor" 		"armor"
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -7094,6 +7431,12 @@
 	    "GameSoundsFile"            "soundevents/game_sounds_heroes/game_sounds_bloodseeker.vsndevts"
 	
 		"AttacksEnabled"			"ground,air"
+	
+		// Research
+		"Upgrades"
+		{
+			"orc_research_shaman_training" 	"training"
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -7204,6 +7547,12 @@
 	    "GameSoundsFile"            "soundevents/game_sounds_heroes/game_sounds_witchdoctor.vsndevts"
 	
 		"AttacksEnabled"			"ground,air"
+	
+		// Research
+		"Upgrades"
+		{
+			"orc_research_witch_doctor_training" 	"training"
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -7304,15 +7653,20 @@
 		//----------------------------------------------------------------
 		"BaseClass"					"npc_dota_creature"
 		"Model"						"models/heroes/spirit_breaker/spirit_breaker.vmdl"
-		"ModelScale"				"1"
+		"ModelScale"				"0.85"
 		"Level"						"3"
 		"HealthBarOffset"			"140"
 		"HasInventory"				"1"
-		"ConsideredHero"			"1"
 		"SoundSet"                  "Hero_SpiritBreaker"
 	    "GameSoundsFile"            "soundevents/game_sounds_heroes/game_sounds_spirit_breaker.vsndevts"
 	
 		"AttacksEnabled"			"ground,air"
+	
+		// Research
+		"Upgrades"
+		{
+			"orc_research_spirit_walker_training" 	"training"
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -7426,6 +7780,13 @@
 	    "GameSoundsFile"            "soundevents/game_sounds_heroes/game_sounds_chen.vsndevts"
 	
 		"AttacksEnabled"			"ground"
+	
+		// Research
+		"Upgrades"
+		{
+			"orc_research_melee_weapons" 	"weapon"
+			"orc_research_unit_armor"		"armor"
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -7527,6 +7888,13 @@
 	
 		"AttacksEnabled"			"ground,air"
 		"LeavesCorpse"				"0"
+	
+		// Research
+		"Upgrades"
+		{
+			"orc_research_melee_weapons" 	"weapon"
+			"orc_research_unit_armor"		"armor"
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -7621,6 +7989,13 @@
 	
 		"AttacksEnabled"			"ground,air"
 		"LeavesCorpse"				"0"
+	
+		// Research
+		"Upgrades"
+		{
+			"orc_research_ranged_weapons" 	"weapon"
+			"orc_research_unit_armor"		"armor"
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -7714,6 +8089,13 @@
 	
 		"AttacksEnabled"			"ground,air"
 		"LeavesCorpse"				"0"
+	
+		// Research
+		"Upgrades"
+		{
+			"orc_research_ranged_weapons" 	"weapon"
+			"orc_research_unit_armor"		"armor"
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -7815,6 +8197,13 @@
 	    "GameSoundsFile"            "soundevents/game_sounds_heroes/game_sounds_earthshaker.vsndevts"
 	
 		"AttacksEnabled"			"ground"
+	
+		// Research
+		"Upgrades"
+		{
+			"orc_research_melee_weapons" 	"weapon"
+			"orc_research_unit_armor"		"armor"
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -7914,6 +8303,7 @@
 		
 		"UnitLabel"					"city_center"
 		"HasQueue"					"1"
+		"HasDeathAnimation"			"1"
 	
 		// Abilities
 		//----------------------------------------------------------------
@@ -8009,13 +8399,14 @@
 	
 		"AttacksEnabled"			"ground,air"
 		"HasQueue"					"1"
+		"HasDeathAnimation"			"1"
 	
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
 		"Ability1"					"undead_train_acolyte"
 		"Ability2"					"undead_research_backpack"
-		"Ability3"					""	 //Reference: Afr2
+		"Ability3"					"undead_frost_attack"
 		"Ability6"					"undead_train_black_citadel"
 		
 		// Armor
@@ -8033,7 +8424,7 @@
 		"AttackAnimationPoint"		"0.3"
 		"AttackAcquisitionRange"	"800"
 		"AttackRange"				"800"
-		"ProjectileModel"			"particles/neutral_fx/satyr_trickster_projectile.vpcf"	 //Add projectile
+		"ProjectileModel"			"particles/units/heroes/hero_winter_wyvern/winter_wyvern_base_attack.vpcf"
 		"ProjectileSpeed"			"1200"
 		
 		// Bounty
@@ -8112,13 +8503,14 @@
 	
 		"AttacksEnabled"			"ground,air"
 		"HasQueue"					"1"
+		"HasDeathAnimation"			"1"
 		
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
 		"Ability1"					"undead_train_acolyte"	 //Reference: Abgl
 		"Ability2"					"undead_research_backpack"
-		"Ability3"					""	 //Reference: Afr2
+		"Ability3"					"undead_frost_attack"
 	
 		// Armor
 		//----------------------------------------------------------------
@@ -8135,7 +8527,7 @@
 		"AttackAnimationPoint"		"0.3"
 		"AttackAcquisitionRange"	"800"
 		"AttackRange"				"800"
-		"ProjectileModel"			"particles/neutral_fx/satyr_trickster_projectile.vpcf"	 //Add projectile
+		"ProjectileModel"			"particles/units/heroes/hero_winter_wyvern/winter_wyvern_base_attack.vpcf"
 		"ProjectileSpeed"			"1200"
 		
 		// Bounty
@@ -9076,7 +9468,7 @@
 		"AttackAnimationPoint"		"0.5"
 		"AttackAcquisitionRange"	"900"
 		"AttackRange"				"700"
-		"ProjectileModel"			"particles/units/heroes/hero_crystalmaiden/maiden_base_attack.vpcf"	 //Add projectile
+		"ProjectileModel"			"particles/units/heroes/hero_crystalmaiden/maiden_base_attack.vpcf"
 		"ProjectileSpeed"			"1200"
 		
 		// Bounty
@@ -9171,7 +9563,7 @@
 		"AttackAnimationPoint"		"0.5"
 		"AttackAcquisitionRange"	"900"
 		"AttackRange"				"700"
-		"ProjectileModel"			"particles/neutral_fx/satyr_trickster_projectile.vpcf"	 //Add projectile
+		"ProjectileModel"			"particles/units/heroes/hero_winter_wyvern/winter_wyvern_base_attack.vpcf"
 		"ProjectileSpeed"			"900"
 		
 		// Bounty
@@ -9248,7 +9640,7 @@
 		
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					"undead_sacrifice_pit"	 //Reference: Abgs
+		"Ability1"					"undead_train_shade"	 //Reference: Abgs
 		"Ability2"					""	 //Reference: Asac
 		
 		// Armor
@@ -9557,6 +9949,13 @@
 	    "GameSoundsFile"            "soundevents/game_sounds_heroes/game_sounds_life_stealer.vsndevts"
 	
 		"AttacksEnabled"			"ground"
+	
+		// Research
+		"Upgrades"
+		{
+			"undead_research_unholy_strength" 	"weapon"
+			"undead_research_unholy_armor"		"armor"
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -9665,6 +10064,13 @@
 		
 		"AttacksEnabled"			"ground"
 	
+		// Research
+		"Upgrades"
+		{
+			"undead_research_creature_attack" 	"weapon"
+			"undead_research_creature_carapace"	"armor"
+		}
+	
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
@@ -9690,7 +10096,7 @@
 		"AttackAnimationPoint"		"0.64"
 		"AttackAcquisitionRange"	"700"
 		"AttackRange"				"550"
-		"ProjectileModel"			"particles/units/heroes/hero_weaver/weaver_base_attack.vpcf"	 //Add projectile
+		"ProjectileModel"			"particles/units/heroes/hero_weaver/weaver_base_attack.vpcf"
 		"ProjectileSpeed"			"500"
 		
 		// Bounty
@@ -9770,6 +10176,13 @@
 		"AttacksEnabled"			"ground,air"
 		"LeavesCorpse"				"0"
 	
+		// Research
+		"Upgrades"
+		{
+			"undead_research_creature_attack" 	"weapon"
+			"undead_research_creature_carapace"	"armor"
+		}
+	
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
@@ -9778,31 +10191,34 @@
 		
 		// Armor
 		//----------------------------------------------------------------
+		"ArmorType"					"unarmored"
 		"ArmorPhysical"				"3"
 		"MagicalResistance"			"0"
 		
-		// Attack - AIR
+		// Attack
 		//----------------------------------------------------------------
-		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
-		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
-		"AttackDamageMin"			"61.0"
-		"AttackDamageMax"			"70.0"
-		"AttackRate"				"1.4"
+		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
+		"AttackType"				"pierce"
+		"AttackDamageMin"			"18.0"
+		"AttackDamageMax"			"21.0"
+		"AttackRate"				"2.2"
+		"AttackRange"				"300"
 		"AttackAnimationPoint"		"0.33"
 		"AttackAcquisitionRange"	"500"
-		"AttackRange"				"128"
+		"ProjectileModel"			"particles/units/heroes/hero_visage/visage_familiar_base_attack.vpcf"
+		"ProjectileSpeed"			"900"
 	
-		// Secondary Attack - GROUND
-		//----------------------------------------------------------------
-		"SecondaryAttackCapabilities"			"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"SecondaryAttackType"			"pierce"
-		"SecondaryAttackDamageMin"			"18.0"
-		"SecondaryAttackDamageMax"			"21.0"
-		"SecondaryAttackRate"				"2.2"
-		"SecondaryAttackAnimationPoint"		"0.33"
-		"SecondaryAttackAcquisitionRange"	"500"
-		"SecondaryAttackRange"				"300"
-	
+		"SecondaryAttack"
+		{
+			"UsedAgainst"			"air"
+			"AttackCapabilities"	"DOTA_UNIT_CAP_MELEE_ATTACK"
+			"AttackType"			"normal"
+			"AttackDamageMin"		"61.0"
+			"AttackDamageMax"		"70.0"
+			"AttackRate"			"1.4"
+			"AttackRange"			"128"
+		}
+		
 		// Bounty
 		//----------------------------------------------------------------
 		"BountyGoldMin"				"26.0"
@@ -9840,11 +10256,6 @@
 		"VisionDaytimeRange"		"1600"
 		"VisionNighttimeRange"		"800"
 		
-		// Attack Damage types
-		//----------------------------------------------------------------
-		"AttackType"				"normal"
-		"ArmorType"					"unarmored"
-		
 		// Creature Data
 		//----------------------------------------------------------------
 		"Creature"
@@ -9871,6 +10282,13 @@
 	    "GameSoundsFile"            "soundevents/game_sounds_heroes/game_sounds_pudge.vsndevts"
 	
 		"AttacksEnabled"			"ground"
+	
+		// Research
+		"Upgrades"
+		{
+			"undead_research_unholy_strength" 	"weapon"
+			"undead_research_unholy_armor"		"armor"
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -9983,6 +10401,12 @@
 		"SplashMediumDamage"		"0.4" //65%
 		"SplashSmallRadius"			"150"
 		"SplashSmallDamage"			"0.25"
+	
+		// Research
+		"Upgrades"
+		{
+			"undead_research_unholy_strength" 	"weapon"
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -10010,7 +10434,7 @@
 		"AttackAcquisitionRange"	"1150"
 		"AttackRange"				"1150"
 		"MinimumRange"				"250"
-		"ProjectileModel"			"particles/neutral_fx/mud_golem_hurl_boulder.vpcf"	 //Add projectile
+		"ProjectileModel"			"particles/neutral_fx/mud_golem_hurl_boulder.vpcf"
 		"ProjectileSpeed"			"700"
 		
 		// Bounty
@@ -10107,7 +10531,7 @@
 		"AttackAnimationPoint"		"0.53"
 		"AttackAcquisitionRange"	"600"
 		"AttackRange"				"575"
-		"ProjectileModel"			"particles/units/heroes/hero_zuus/zuus_base_attack.vpcf"	 //Add projectile
+		"ProjectileModel"			"particles/units/heroes/hero_zuus/zuus_base_attack.vpcf"
 		"ProjectileSpeed"			"700"
 		
 		// Bounty
@@ -10191,6 +10615,13 @@
 	    "GameSoundsFile"            "soundevents/game_sounds_heroes/game_sounds_obsidian_destroyer.vsndevts"
 	
 		"AttacksEnabled"			"ground,air"
+	
+		// Research
+		"Upgrades"
+		{
+			"undead_research_creature_attack" 	"weapon"
+			"undead_research_creature_carapace"	"armor"
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -10216,7 +10647,7 @@
 		"AttackAnimationPoint"		"0.633"
 		"AttackAcquisitionRange"	"500"
 		"AttackRange"				"450"
-		"ProjectileModel"			"particles/units/heroes/hero_bane/bane_projectile.vpcf"	 //Add projectile
+		"ProjectileModel"			"particles/units/heroes/hero_bane/bane_projectile.vpcf"
 		"ProjectileSpeed"			"700"
 		
 		// Bounty
@@ -10249,6 +10680,7 @@
 		"StatusHealth"				"900"
 		"StatusHealthRegen"			"0"
 		"StatusMana"				"400"
+		"StatusManaRegen"			"-3"
 		"StatusStartingMana"		"0"
 		
 		// Vision
@@ -10296,13 +10728,19 @@
 	    "GameSoundsFile"            "soundevents/game_sounds_heroes/game_sounds_necrolyte.vsndevts"
 	
 		"AttacksEnabled"			"ground,air"
+	
+		// Research
+		"Upgrades"
+		{
+			"undead_research_necromancer_training" 	"training"
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
 		"Ability1"					"undead_raise_dead"	 //Reference: Acri
-		"Ability2"					"undead_cripple_disabled"	 //Reference: Arai
-		"Ability3"					"undead_unholy_frenzy_disabled"	 //Reference: Auhf
+		"Ability2"					"undead_unholy_frenzy_disabled"	 //Reference: Arai
+		"Ability3"					"undead_cripple_disabled"	 //Reference: Auhf
 		"Ability4"					""	 //Reference: Aiun
 		"Ability10"					"undead_backpack_disabled"
 		"Ability11"					"undead_blight_regen"
@@ -10322,7 +10760,7 @@
 		"AttackAnimationPoint"		"0.53"
 		"AttackAcquisitionRange"	"600"
 		"AttackRange"				"600"
-		"ProjectileModel"			"particles/econ/items/necrolyte/necronub_base_attack/necrolyte_base_attack_ka.vpcf"	 //Add projectile
+		"ProjectileModel"			"particles/econ/items/necrolyte/necronub_base_attack/necrolyte_base_attack_ka.vpcf"
 		"ProjectileSpeed"			"700"
 		
 		// Bounty
@@ -10408,6 +10846,12 @@
 		"AttacksEnabled"			"ground,air"
 		"LeavesCorpse"				"0"
 	
+		// Research
+		"Upgrades"
+		{
+			"undead_research_banshee_training" 	"training"
+		}
+	
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
@@ -10433,7 +10877,7 @@
 		"AttackAnimationPoint"		"0.56"
 		"AttackAcquisitionRange"	"700"
 		"AttackRange"				"600"
-		"ProjectileModel"			"particles/units/heroes/hero_enigma/enigma_base_attack_eidolon.vpcf"	 //Add projectile
+		"ProjectileModel"			"particles/units/heroes/hero_enigma/enigma_base_attack_eidolon.vpcf"
 		"ProjectileSpeed"			"900"
 		
 		// Bounty
@@ -10514,6 +10958,13 @@
 	
 		"AttacksEnabled"			"ground"
 		"LeavesCorpse"				"0"
+	
+		// Research
+		"Upgrades"
+		{
+			"undead_research_unholy_strength" 	"weapon"
+			"undead_research_unholy_armor"		"armor"
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -10604,6 +11055,13 @@
 	
 		"AttacksEnabled"			"ground,air"
 		"LeavesCorpse"				"0"
+	
+		// Research
+		"Upgrades"
+		{
+			"undead_research_unholy_strength" 	"weapon"
+			"undead_research_unholy_armor"		"armor"
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -10713,6 +11171,13 @@
 		"SplashMediumDamage"		"0.2" //30%
 		"SplashSmallRadius"			"200"
 		"SplashSmallDamage"			"0.1"
+	
+		// Research
+		"Upgrades"
+		{
+			"undead_research_creature_attack" 	"weapon"
+			"undead_research_creature_carapace"	"armor"
+		}
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -10723,13 +11188,14 @@
 		
 		// Armor
 		//----------------------------------------------------------------
+		"ArmorType"					"light"
 		"ArmorPhysical"				"1"
-		"MagicalResistance"			"0"
+		"MagicalResistance"			"0"	
 		
-		// Attack - GROUND
+		// Attack
 		//----------------------------------------------------------------
 		"AttackCapabilities"		"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackType"				"pierce"
 		"AttackDamageMin"			"93.0"
 		"AttackDamageMax"			"115.0"
 		"AttackRate"				"3"
@@ -10739,16 +11205,16 @@
 		"ProjectileModel"			"particles/units/heroes/hero_winter_wyvern/winter_wyvern_arctic_attack.vpcf"
 		"ProjectileSpeed"			"800"
 	
-		// Secondary Attack - AIR
-		//----------------------------------------------------------------
-		"SecondaryAttackCapabilities"			"DOTA_UNIT_CAP_RANGED_ATTACK"
-		"SecondaryAttackType"			"magic"
-		"SecondaryAttackDamageMin"			"84.0"
-		"SecondaryAttackDamageMax"			"94.0"
-		"SecondaryAttackRate"				"3"
-		"SecondaryAttackAnimationPoint"		"0.5"
-		"SecondaryAttackAcquisitionRange"	"500"
-		"SecondaryAttackRange"				"300"
+		"SecondaryAttack"
+		{
+			"UsedAgainst"			"air"
+			"AttackCapabilities"	"DOTA_UNIT_CAP_RANGED_ATTACK"
+			"AttackType"			"pierce"
+			"AttackDamageMin"		"84.0"
+			"AttackDamageMax"		"94.0"
+			"AttackRate"			"3"
+			"AttackRange"			"300"
+		}
 	
 		// Bounty
 		//----------------------------------------------------------------
@@ -10786,11 +11252,6 @@
 		//----------------------------------------------------------------
 		"VisionDaytimeRange"		"1600"
 		"VisionNighttimeRange"		"800"
-		
-		// Attack Damage types
-		//----------------------------------------------------------------
-		"AttackType"				"magic"
-		"ArmorType"					"light"
 		
 		// Creature Data
 		//----------------------------------------------------------------
@@ -11471,6 +11932,7 @@
 		
 		// Armor
 		//----------------------------------------------------------------
+		"ArmorType"					"heavy"
 		"ArmorPhysical"				"4"
 		"MagicalResistance"			"0"
 		
@@ -11479,12 +11941,24 @@
 		"AttackCapabilities"		"DOTA_UNIT_CAP_MELEE_ATTACK"
 		"AttackDamageMin"			"29.0"
 		"AttackDamageMax"			"33.0"
-		"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
+		"AttackType"				"normal"
 		"AttackRate"				"1.35"
 		"AttackAnimationPoint"		"0.3"
 		"AttackAcquisitionRange"	"500"
 		"AttackRange"				"100"
+		"ProjectileModel"			"particles/neutral_fx/mud_golem_hurl_boulder.vpcf"
 		"ProjectileSpeed"			"1000"
+	
+		"SecondaryAttack"
+		{
+			"UsedAgainst"			"air"
+			"AttackCapabilities"	"DOTA_UNIT_CAP_RANGED_ATTACK"
+			"AttackType"			"pierce"
+			"AttackDamageMin"		"29.0"
+			"AttackDamageMax"		"33.0"
+			"AttackRate"			"2.0"
+			"AttackRange"			"500"
+		}
 		
 		// Bounty
 		//----------------------------------------------------------------
@@ -11513,11 +11987,6 @@
 		//----------------------------------------------------------------
 		"VisionDaytimeRange"		"1400"
 		"VisionNighttimeRange"		"800"
-		
-		// Attack Damage types
-		//----------------------------------------------------------------
-		"AttackType"				"normal"
-		"ArmorType"					"heavy"
 		
 		// Creature Data
 		//----------------------------------------------------------------
@@ -18363,6 +18832,7 @@
 	    "ModelScale"                "1"
 	    "MinimapIcon"               "minimap_ward_invis"
 	    "MinimapIconSize"           "300"
+	    "UnitLabel"                 "ward"
 	
 	    // Bounds
 	    //----------------------------------------------------------------
@@ -18407,6 +18877,7 @@
 	    "ModelScale"                "1"
 	    "MinimapIcon"               "minimap_ward_invis"
 	    "MinimapIconSize"           "300"
+	    "UnitLabel"                 "ward"
 	
 	    // Bounds
 	    //----------------------------------------------------------------
@@ -18445,6 +18916,7 @@
 	    "ModelScale"                "1"
 	    "MinimapIcon"               "minimap_ward_invis"
 	    "MinimapIconSize"           "300"
+	    "UnitLabel"                 "ward"
 	
 	    // Bounds
 	    //----------------------------------------------------------------
@@ -19847,7 +20319,6 @@
 	    "AttackAnimationPoint"      "0"
 	    "AttackAcquisitionRange"    "900"
 	    "AttackRange"           "10"
-	    "ProjectileModel"       ""   //Add projectile models
 	    "ProjectileSpeed"       "500"
 	    
 	    // Bounty
@@ -19857,7 +20328,7 @@
 	    
 	    // Movement
 	    //----------------------------------------------------------------
-	    "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_FLY"
+	    "MovementCapabilities"  "DOTA_UNIT_CAP_MOVE_GROUND"
 	    "MovementSpeed"         "400"
 	    "MovementTurnRate"      "0.2"
 	    
@@ -19870,7 +20341,7 @@
 	    // Vision
 	    //----------------------------------------------------------------
 	    "VisionDaytimeRange"        "0"
-	    "VisionNighttimeRange"      "10"
+	    "VisionNighttimeRange"      "0"
 	    
 	    // Attack Damage types
 	    //----------------------------------------------------------------
@@ -20181,8 +20652,8 @@
 	{                                       
 	    // General
 	    //----------------------------------------------------------------
-	    "Model"                     "models/items/lycan/ultimate/thegreatcalamityti4/thegreatcalamityti4.vmdl" //"models/heroes/lycan/summon_wolves.mdl"    // Model.
-	    "BaseClass"                 "npc_dota_creep_neutral"
+	    "Model"                     "models/items/lycan/ultimate/thegreatcalamityti4/thegreatcalamityti4.vmdl"
+	    "BaseClass"                 "npc_dota_creature"
 	    "SoundSet"                  "Lycan_Wolf"
 	    "Level"                     "1"
 	    "IsSummoned"                "1"
@@ -20254,90 +20725,15 @@
 	    // Attack Damage types
 	    //----------------------------------------------------------------                          // Attack Damage types name.
 	    "AttackType"                "normal"
-	    "ArmorType"                     "heavy"
+	    "ArmorType"                 "heavy"
 	}   
-	
-	"orc_shadow_wolf"
-	{                                       
-	    // General
-	    //----------------------------------------------------------------
-	    "Model"                     "models/items/lycan/ultimate/thegreatcalamityti4/thegreatcalamityti4.vmdl"  // Model.
-	    "BaseClass"                 "npc_dota_creep_neutral"
-	    "SoundSet"                  "Lycan_Wolf"
-	    "Level"                     "3"
-	    "IsSummoned"                "1"
-	    "ModelScale"                "0.90"
-	    "UnitLabel"                 "lycan_wolf"
-	
-	    "AttacksEnabled"            "ground"
-	
-	    // Abilities
-	    //----------------------------------------------------------------
-	    "Ability1"                  "lycan_summon_wolves_critical_strike"           // Ability 1
-	    "Ability2"                  "lycan_summon_wolves_invisibility"          // Ability 2
-	    "Ability3"                  ""          // Ability 3
-	    "Ability4"                  ""          // Ability 4
-	
-	    // Armor
-	    //----------------------------------------------------------------
-	    "ArmorPhysical"             "0"         // Physical protection.
-	    "MagicalResistance"         "0"     // Magical protection.
-	
-	    // Attack
-	    //----------------------------------------------------------------
-	    "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
-	    "AttackDamageType"          "DAMAGE_TYPE_ArmorPhysical"
-	    "AttackDamageMin"           "21"        // Damage range min.
-	    "AttackDamageMax"           "22"        // Damage range max.    
-	    "AttackRate"                "1.15"      // Speed of attack.
-	    "AttackAnimationPoint"      "0.33"      // Normalized time in animation cycle to attack.
-	    "AttackAcquisitionRange"    "500"       // Range within a target can be acquired.
-	    "AttackRange"               "128"       // Range within a target can be attacked.
-	    "ProjectileModel"           ""          // Particle system model for projectile.
-	    "ProjectileSpeed"           "0"         // Speed of projectile.        
-	
-	    // Bounds
-	    //----------------------------------------------------------------
-	    "BoundsHullName"            "DOTA_HULL_SIZE_SMALL"          // Hull type used for navigation/locomotion.
-	    "RingRadius"                "70"
-	    "HealthBarOffset"           "160"
-	    "FormationRank"             "0"
-	
-	    // Bounty
-	    //----------------------------------------------------------------
-	    "BountyXP"                  "20"        // Experience earn.
-	    "BountyGoldMin"             "36"        // Gold earned min.
-	    "BountyGoldMax"             "36"        // Gold earned max.
-	
-	    // Movement
-	    //----------------------------------------------------------------
-	    "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
-	    "MovementSpeed"             "350"       // Speed.
-	
-	    // Status
-	    //----------------------------------------------------------------
-	    "StatusHealth"              "500"       // Base health.
-	    "StatusHealthRegen"         "0.5"       // Health regeneration rate.
-	    "StatusMana"                "0"         // Base mana.
-	    "StatusManaRegen"           "0"         // Mana regeneration rate.       
-	    
-	    // Vision
-	    //----------------------------------------------------------------
-	    "VisionDaytimeRange"        "1200"      // Range of vision during day light.
-	    "VisionNighttimeRange"      "800"       // Range of vision at night time.
-	
-	    // Attack Damage types
-	    //----------------------------------------------------------------                          // Attack Damage types name.
-	    "AttackType"                "normal"
-	    "ArmorType"                     "heavy"
-	}
 	
 	"orc_dire_wolf"
 	{                                       
 	    // General
 	    //----------------------------------------------------------------
-	    "Model"                     "models/items/lycan/ultimate/thegreatcalamityti4/thegreatcalamityti4.vmdl"  // Model.
-	    "BaseClass"                 "npc_dota_creep_neutral"
+	    "Model"                     "models/items/lycan/ultimate/thegreatcalamityti4/thegreatcalamityti4.vmdl"
+	    "BaseClass"                 "npc_dota_creature"
 	    "SoundSet"                  "Lycan_Wolf"
 	    "Level"                     "2"
 	    "IsSummoned"                "1"
@@ -20348,7 +20744,7 @@
 	
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"                  "lycan_summon_wolves_critical_strike"           // Ability 1
+	    "Ability1"                  "far_seer_wolves_critical_strike"
 	    "Ability2"                  ""          // Ability 2
 	    "Ability3"                  ""          // Ability 3
 	    "Ability4"                  ""          // Ability 4
@@ -20405,8 +20801,83 @@
 	    // Attack Damage types
 	    //----------------------------------------------------------------                          // Attack Damage types name.
 	    "AttackType"                "normal"
-	    "ArmorType"                     "heavy"
-	}   
+	    "ArmorType"                 "heavy"
+	}
+	
+	"orc_shadow_wolf"
+	{                                       
+	    // General
+	    //----------------------------------------------------------------
+	    "Model"                     "models/items/lycan/ultimate/thegreatcalamityti4/thegreatcalamityti4.vmdl"
+	    "BaseClass"                 "npc_dota_creature"
+	    "SoundSet"                  "Lycan_Wolf"
+	    "Level"                     "5"
+	    "IsSummoned"                "1"
+	    "ModelScale"                "0.90"
+	    "UnitLabel"                 "lycan_wolf"
+	
+	    "AttacksEnabled"            "ground"
+	
+	    // Abilities
+	    //----------------------------------------------------------------
+	    "Ability1"                  "far_seer_wolves_critical_strike"
+	    "Ability2"                  "lycan_summon_wolves_invisibility"
+	    "Ability3"                  ""          // Ability 3
+	    "Ability4"                  ""          // Ability 4
+	
+	    // Armor
+	    //----------------------------------------------------------------
+	    "ArmorPhysical"             "0"         // Physical protection.
+	    "MagicalResistance"         "0"     // Magical protection.
+	
+	    // Attack
+	    //----------------------------------------------------------------
+	    "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
+	    "AttackDamageType"          "DAMAGE_TYPE_ArmorPhysical"
+	    "AttackDamageMin"           "21"        // Damage range min.
+	    "AttackDamageMax"           "22"        // Damage range max.    
+	    "AttackRate"                "1.15"      // Speed of attack.
+	    "AttackAnimationPoint"      "0.33"      // Normalized time in animation cycle to attack.
+	    "AttackAcquisitionRange"    "500"       // Range within a target can be acquired.
+	    "AttackRange"               "128"       // Range within a target can be attacked.
+	    "ProjectileModel"           ""          // Particle system model for projectile.
+	    "ProjectileSpeed"           "0"         // Speed of projectile.        
+	
+	    // Bounds
+	    //----------------------------------------------------------------
+	    "BoundsHullName"            "DOTA_HULL_SIZE_SMALL"          // Hull type used for navigation/locomotion.
+	    "RingRadius"                "70"
+	    "HealthBarOffset"           "160"
+	    "FormationRank"             "0"
+	
+	    // Bounty
+	    //----------------------------------------------------------------
+	    "BountyXP"                  "20"        // Experience earn.
+	    "BountyGoldMin"             "36"        // Gold earned min.
+	    "BountyGoldMax"             "36"        // Gold earned max.
+	
+	    // Movement
+	    //----------------------------------------------------------------
+	    "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
+	    "MovementSpeed"             "350"       // Speed.
+	
+	    // Status
+	    //----------------------------------------------------------------
+	    "StatusHealth"              "500"       // Base health.
+	    "StatusHealthRegen"         "0.5"       // Health regeneration rate.
+	    "StatusMana"                "0"         // Base mana.
+	    "StatusManaRegen"           "0"         // Mana regeneration rate.       
+	    
+	    // Vision
+	    //----------------------------------------------------------------
+	    "VisionDaytimeRange"        "1200"      // Range of vision during day light.
+	    "VisionNighttimeRange"      "800"       // Range of vision at night time.
+	
+	    // Attack Damage types
+	    //----------------------------------------------------------------                          // Attack Damage types name.
+	    "AttackType"                "normal"
+	    "ArmorType"                 "heavy"
+	}
 	//------------------------------------------------------------------------------------
 	//- Units for firelord_summon_lava_spawn ability                                     -
 	//------------------------------------------------------------------------------------
@@ -20799,7 +21270,6 @@
 	    "Level"                     "6"
 	    "ModelScale"                "0.85"
 	    "IsSummoned"                "0"
-	    "IsAncient"                 "1"
 	    "ConsideredHero"            "1"
 	    //"IgnoreAddSummonedToSelection" "1"
 	    "UnitLabel"                 "brewmaster_earth"
@@ -20875,7 +21345,6 @@
 	    "Level"                     "6"
 	    "ModelScale"                "0.85"
 	    "IsSummoned"                "0"
-	    "IsAncient"                 "1"
 	    "ConsideredHero"            "1"
 	    //"IgnoreAddSummonedToSelection" "1"
 	    "UnitLabel"                 "brewmaster_storm"
@@ -20953,7 +21422,6 @@
 	    "Level"                     "6"
 	    "ModelScale"                "0.85"
 	    "IsSummoned"                "0"
-	    "IsAncient"                 "1"
 	    "ConsideredHero"            "1"
 	    //"IgnoreAddSummonedToSelection" "1"
 	    "UnitLabel"                 "brewmaster_fire"
@@ -21028,12 +21496,12 @@
 	    "SoundSet"                  "Hero_DoomBringer"          
 	    "IdleSoundLoop"             "Hero_DoomBringer.IdleLoop"
 	    "GameSoundsFile"            "soundevents/game_sounds_heroes/game_sounds_doombringer.vsndevts"
-	    "IsAncient"                 "1"
 	    "ConsideredHero"            "1"
 	    "FormationRank"             "0"
 	    "IsSummoned"                "1"
 	
 	    "AttacksEnabled"            "ground,air"
+	    "LeavesCorpse"              "0"
 	    
 	    "precache"
 	    {
@@ -21051,21 +21519,33 @@
 	    
 	    // Armor
 	    //----------------------------------------------------------------
+	    "ArmorType"                 "unarmored"
 	    "ArmorPhysical"             "3"         // Physical protection.
-	    //"MagicalResistance"           "0"         // Magical protection.
+	    "MagicalResistance"         "0"         // Magical protection.
 	
 	    // Attack
 	    //----------------------------------------------------------------
 	    "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
+	    "AttackType"                "chaos"
 	    "AttackDamageMin"           "41"        // Damage range min.
 	    "AttackDamageMax"           "48"        // Damage range max.
-	    "AttackDamageType"          "DAMAGE_TYPE_ArmorPhysical" //CHAOS
 	    "AttackRate"                "1.8"           // Speed of attack.
 	    "AttackAnimationPoint"      "0.467"     // Normalized time in animation cycle to attack.
 	    "AttackAcquisitionRange"    "600"       // Range within a target can be acquired.
 	    "AttackRange"               "128"       // Range within a target can be attacked.
-	    "ProjectileModel"           ""          // Particle system model for projectile.
-	    "ProjectileSpeed"           ""          // Speed of projectile.
+	    "ProjectileModel"           "particles/econ/items/shadow_fiend/sf_desolation/sf_base_attack_desolation_fire_arcana.vpcf"
+	    "ProjectileSpeed"           "900"          // Speed of projectile.
+	
+	    "SecondaryAttack"
+	    {
+	        "UsedAgainst"           "air"
+	        "AttackCapabilities"    "DOTA_UNIT_CAP_RANGED_ATTACK"
+	        "AttackType"            "chaos"
+	        "AttackDamageMin"       "35.0"
+	        "AttackDamageMax"       "42.0"
+	        "AttackRate"            "1.35"
+	        "AttackRange"           "500"
+	    }
 	
 	    // Bounty
 	    //----------------------------------------------------------------
@@ -21079,12 +21559,6 @@
 	    "StatusHealthRegen"         "0.2"       // Health regeneration rate.
 	    "StatusMana"                "500"           // Base mana.
 	    "StatusManaRegen"           "1.25"          // Mana regeneration rate.
-	
-	    // Attack Damage types
-	    //----------------------------------------------------------------
-	    "TeamName"                  "DOTA_TEAM_BADGUYS"         // Attack Damage types name.
-	    "AttackType"                "normal"
-	    "ArmorType"                     "unarmored"
 	    
 	    // Vision
 	    //-------------------------------------------------------------------------------------------------------------
@@ -21321,6 +21795,7 @@
 	    "Level"                     "1"
 	    "ModelScale"                "0.8"
 	    "SelectionGroup"            "Shaman_Wards"
+	    "UnitLabel"                 "ward"
 	
 	    "AttacksEnabled"            "ground,air"
 	
@@ -21401,6 +21876,7 @@
 	    "Level"                     "1"
 	    "ModelScale"                "1"
 	    "SelectionGroup"            "Venomancer_Wards"
+	    "UnitLabel"                 "ward"
 	
 	    "AttacksEnabled"            "ground,air"
 	
@@ -21481,6 +21957,7 @@
 	    "Level"                     "1"
 	    "ModelScale"                "1.2"
 	    "SelectionGroup"            "Venomancer_Wards"
+	    "UnitLabel"                 "ward"
 	
 	    "AttacksEnabled"            "ground,air"
 	

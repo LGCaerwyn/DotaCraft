@@ -1,20 +1,22 @@
 function EquipOrb( event )
     local caster = event.caster
-    if caster:IsHero() then
+    if caster:IsRealHero() then
         if not caster.original_attack then
             caster.original_attack = caster:GetAttacksEnabled()
         end
         caster:SetAttacksEnabled("ground, air")
+        caster.hasOrb = (caster.hasOrb and caster.hasOrb + 1) or 1
     end
 end
 
 function UnequipOrb( event )
     local caster = event.caster
-    if caster:IsHero() then
-        caster:SetAttacksEnabled(caster.original_attack)
-        if caster.original_attack_type then
-            caster:SetAttackCapability(caster.original_attack_type)
+    if caster:IsRealHero() then
+        if not caster:HasModifier("modifier_demon_form") then
+            caster:SetAttacksEnabled(caster.original_attack)
         end
+        caster.hasOrb = caster.hasOrb - 1
+        if caster.hasOrb == 0 then caster.hasOrb = false end
     end
 end
 
@@ -27,7 +29,7 @@ function Splash(event)
     
     local splash_targets = FindUnitsInRadius(attacker:GetTeamNumber(), target:GetAbsOrigin(), nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES, FIND_ANY_ORDER, false)
     for _,unit in pairs(splash_targets) do
-        if unit ~= target and not unit:HasFlyMovementCapability() and not IsCustomBuilding(unit) then
+        if unit ~= target and not unit:HasFlyMovementCapability() and not IsCustomBuilding(unit) and not unit:IsWard() then
             ApplyDamage({victim = unit, attacker = attacker, damage = full_damage, ability = ability, damage_type = DAMAGE_TYPE_PHYSICAL})
         end
     end
@@ -40,8 +42,7 @@ function Purge(event)
     local duration = ability:GetSpecialValueFor('duration')
     local bSummoned = target:IsSummoned()
 
-    target:Purge(true, false, false, false, true)
-    target:RemoveModifierByName("modifier_brewmaster_storm_cyclone")
+    target:QuickPurge(true, false)
     ParticleManager:CreateParticle('particles/generic_gameplay/generic_purge.vpcf', PATTACH_ABSORIGIN_FOLLOW, target)
     target:EmitSound("DOTA_Item.DiffusalBlade.Target")
 

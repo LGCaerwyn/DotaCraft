@@ -52,6 +52,16 @@ function dotacraft:FilterExecuteOrder( filterTable )
     -- Don't need this.
     if order_type == DOTA_UNIT_ORDER_RADAR then return end
 
+    -- Redirect move-to-target to move-to-position in flying units, to prevent clumping issues
+    if order_type == DOTA_UNIT_ORDER_MOVE_TO_TARGET and unit and unit:HasFlyMovementCapability() then
+        order_type = DOTA_UNIT_ORDER_MOVE_TO_POSITION
+        point = EntIndexToHScript(targetIndex):GetAbsOrigin()
+        filterTable["order_type"] = DOTA_UNIT_ORDER_MOVE_TO_POSITION
+        filterTable["position_x"] = point.x
+        filterTable["position_y"] = point.y
+        filterTable["position_z"] = point.z
+    end
+
     -- Remove moving timers
     ForAllSelectedUnits(issuer, function(v)
         if v.moving_timer then
@@ -90,10 +100,10 @@ function dotacraft:FilterExecuteOrder( filterTable )
                 SendErrorMessage(issuer, "#error_full_health")
             end
             return false
-        elseif requiresHealthDeficit and not healthDeficit then
+        elseif requiresHealthDeficit and healthDeficit then
             SendErrorMessage(issuer, "#error_full_health")
             return false
-        elseif requiresManaDeficit and not manaDeficit then
+        elseif requiresManaDeficit and manaDeficit then
             SendErrorMessage(issuer, "#error_full_mana")
             return false
         end
@@ -143,13 +153,17 @@ function dotacraft:FilterExecuteOrder( filterTable )
 
                     caster.skip = true
                     if order_type == DOTA_UNIT_ORDER_CAST_POSITION then
-                        ExecuteOrderFromTable({ UnitIndex = entityIndex, OrderType = order_type, Position = point, AbilityIndex = abil:GetEntityIndex(), Queue = queue})
+                        ExecuteOrderFromTable({UnitIndex = entityIndex, OrderType = order_type, Position = point, AbilityIndex = abil:GetEntityIndex(), Queue = queue})
 
                     elseif order_type == DOTA_UNIT_ORDER_CAST_TARGET then
-                        ExecuteOrderFromTable({ UnitIndex = entityIndex, OrderType = order_type, TargetIndex = targetIndex, AbilityIndex = abil:GetEntityIndex(), Queue = queue})
+                        ExecuteOrderFromTable({UnitIndex = entityIndex, OrderType = order_type, TargetIndex = targetIndex, AbilityIndex = abil:GetEntityIndex(), Queue = queue})
 
-                    else --order_type == DOTA_UNIT_ORDER_CAST_NO_TARGET or order_type == DOTA_UNIT_ORDER_CAST_TOGGLE or order_type == DOTA_UNIT_ORDER_CAST_TOGGLE_AUTO
-                        ExecuteOrderFromTable({ UnitIndex = entityIndex, OrderType = order_type, AbilityIndex = abil:GetEntityIndex(), Queue = queue})
+                    elseif order_type == DOTA_UNIT_ORDER_CAST_TOGGLE then
+                        if abil:GetToggleState() == ability:GetToggleState() then --order_type == DOTA_UNIT_ORDER_CAST_NO_TARGET or order_type == DOTA_UNIT_ORDER_CAST_TOGGLE_AUTO
+                            ExecuteOrderFromTable({UnitIndex = entityIndex, OrderType = DOTA_UNIT_ORDER_CAST_TOGGLE, AbilityIndex = abil:GetEntityIndex(), Queue = queue})    
+                        end
+                    else
+                        ExecuteOrderFromTable({UnitIndex = entityIndex, OrderType = order_type, AbilityIndex = abil:GetEntityIndex(), Queue = queue})
                     end
                 end
             end
@@ -167,13 +181,13 @@ function dotacraft:FilterExecuteOrder( filterTable )
         print(unit:GetUnitName().." "..ORDERS[order_type].." "..item_name)
 
         local player = unit:GetPlayerOwner()
-        local pID = player:GetPlayerID()
+        local playerID = player:GetPlayerID()
 
         local bSellCondition = unit:CanSellItems() and item:IsSellable()
         if bSellCondition then
             SellCustomItem(unit, item)
         else
-            SendErrorMessage( pID, "#error_cant_sell" )
+            SendErrorMessage( playerID, "#error_cant_sell" )
         end
 
         return false
@@ -294,7 +308,7 @@ function dotacraft:FilterExecuteOrder( filterTable )
                     unit.skip = true
 
                     -- Send the attack
-                    ExecuteOrderFromTable({ UnitIndex = unit_index, OrderType = DOTA_UNIT_ORDER_ATTACK_TARGET, TargetIndex = targetIndex, Queue = queue})
+                    ExecuteOrderFromTable({UnitIndex = unit_index, OrderType = DOTA_UNIT_ORDER_ATTACK_TARGET, TargetIndex = targetIndex, Queue = queue})
 
                 else
                     unit.skip = true
@@ -307,7 +321,7 @@ function dotacraft:FilterExecuteOrder( filterTable )
                     if (maxPos-targetOrigin):Length2D() > (attackerOrigin-targetOrigin):Length2D() then
                         pos = attackerOrigin --stay in place if the order would move the attacker backwards
                     end
-                    ExecuteOrderFromTable({ UnitIndex = unit_index, OrderType = DOTA_UNIT_ORDER_ATTACK_MOVE, Position = pos, Queue = queue})
+                    ExecuteOrderFromTable({UnitIndex = unit_index, OrderType = DOTA_UNIT_ORDER_ATTACK_MOVE, Position = pos, Queue = queue})
                     
                     if not errorMsg then
                         if unit:GetAttackType() == "magic" and target:IsMagicImmune() then
@@ -322,8 +336,8 @@ function dotacraft:FilterExecuteOrder( filterTable )
                             local error_type = GetMovementCapability(target)
                             if error_type == "air" then
                                 errorMsg = "#error_cant_target_air"
-                            elseif error_type == "ground" then
-                                errorMsg = "#error_must_target_air"
+                            else
+                                errorMsg = "#error_cant_attack_that"
                             end
                         end
                         SendErrorMessage( unit:GetPlayerOwnerID(), errorMsg )
@@ -341,7 +355,7 @@ function dotacraft:FilterExecuteOrder( filterTable )
     if order_type == DOTA_UNIT_ORDER_MOVE_TO_POSITION and numBuildings > 0 then
         if unit and IsCustomBuilding(unit) and not IsUprooted(unit) then
 
-            local event = { pID = issuer, mainSelected = unit:GetEntityIndex(), rally_type = "position", pos_x = x, pos_y = y, pos_z = z }
+            local event = {PlayerID = issuer, mainSelected = unit:GetEntityIndex(), rally_type = "position", pos_x = x, pos_y = y, pos_z = z}
             dotacraft:OnBuildingRallyOrder( event )
         end
     end
@@ -389,21 +403,19 @@ end
 --              Replenish Right-Click         --
 ------------------------------------------------
 function dotacraft:MoonWellOrder( event )
-    local pID = event.pID
-    local entityIndex = event.mainSelected
-    local target = EntIndexToHScript(entityIndex)
+    local entityIndex = event.well
     local targetIndex = event.targetIndex
-    local moon_well = EntIndexToHScript(targetIndex)
+    local moon_well = EntIndexToHScript(entityIndex)
 
     local replenish = moon_well:FindAbilityByName("nightelf_replenish_mana_and_life")
-    moon_well:CastAbilityOnTarget(target, replenish, moon_well:GetPlayerOwnerID())
+    ExecuteOrderFromTable({UnitIndex = entityIndex, OrderType = DOTA_UNIT_ORDER_CAST_TARGET, TargetIndex = targetIndex, AbilityIndex = replenish:GetEntityIndex(), Queue = false})
 end
 
 ------------------------------------------------
---                Burrow Right-Click          --
+--               Burrow Right-Click           --
 ------------------------------------------------
 function dotacraft:BurrowOrder( event )
-    local pID = event.pID
+    local playerID = event.PlayerID
     local entityIndex = event.mainSelected
     local burrowIndex = event.targetIndex
     local burrow = EntIndexToHScript(burrowIndex)
@@ -416,25 +428,80 @@ function dotacraft:BurrowOrder( event )
 
     if peons_inside < 4 then
         local ability = burrow:FindAbilityByName("orc_burrow_peon")
-        local selectedEntities = PlayerResource:GetSelectedEntities(pID)
+        local selectedEntities = PlayerResource:GetSelectedEntities(playerID)
 
         -- Send the main unit
-        ExecuteOrderFromTable({ UnitIndex = burrowIndex, OrderType = DOTA_UNIT_ORDER_CAST_TARGET, TargetIndex = entityIndex, AbilityIndex = ability:GetEntityIndex(), Queue = false})
+        ExecuteOrderFromTable({UnitIndex = burrowIndex, OrderType = DOTA_UNIT_ORDER_CAST_TARGET, TargetIndex = entityIndex, AbilityIndex = ability:GetEntityIndex(), Queue = false})
         
         -- Send the others
         local maxPeons = 4 - peons_inside
-        for _,entityIndex in pairs(selectedEntities) do
-            local unit = EntIndexToHScript(entityIndex)
-            if unit:GetUnitName() == "orc_peon" then
+        for _,entIndex in pairs(selectedEntities) do
+            local unit = EntIndexToHScript(entIndex)
+            if entIndex ~= entityIndex and unit:GetUnitName() == "orc_peon" then
                 if maxPeons > 0 then
                     maxPeons = maxPeons - 1
-                    ExecuteOrderFromTable({ UnitIndex = burrowIndex, OrderType = DOTA_UNIT_ORDER_CAST_TARGET, TargetIndex = entityIndex, AbilityIndex = ability:GetEntityIndex(), Queue = false})
+                    ExecuteOrderFromTable({UnitIndex = burrowIndex, OrderType = DOTA_UNIT_ORDER_CAST_TARGET, TargetIndex = entIndex, AbilityIndex = ability:GetEntityIndex(), Queue = false})
                 else
                     break
                 end
             end
         end
+    else
+        BuildingHelper:RepairCommand({PlayerID = playerID, targetIndex = burrowIndex})
     end
+end
+
+------------------------------------------------
+--        Hippogryph-Archer Right-Click       --
+------------------------------------------------
+function dotacraft:HippogryphRiderOrder(event)
+    local playerID = event.PlayerID
+    if Players:HasResearch(playerID, "nightelf_research_hippogryph_taming") then
+        Timers:CreateTimer(0.03, function()
+            local archerIndex = event.archer
+            local hippoIndex = event.hippo
+            local archer = EntIndexToHScript(archerIndex)
+            local hippogryph = EntIndexToHScript(hippoIndex)
+
+            local pickup = hippogryph:FindAbilityByName("nightelf_pick_up_archer")
+            if pickup:IsFullyCastable() then
+                pickup.archer = archer
+                ExecuteOrderFromTable({UnitIndex = hippoIndex, OrderType = DOTA_UNIT_ORDER_CAST_NO_TARGET, AbilityIndex = pickup:GetEntityIndex(), Queue = false})
+            end
+        end)
+    end
+end
+
+------------------------------------------------
+--      Acolyte-Sacrifice Pit Right-Click     --
+------------------------------------------------
+function dotacraft:SacrificeOrder(event)
+    local pitIndex = event.pit
+    local targetIndex = event.targetIndex
+    local pit = EntIndexToHScript(pitIndex)
+
+    Timers:CreateTimer(0.03, function()
+        local sacrifice = pit:FindAbilityByName("undead_train_shade")
+        ExecuteOrderFromTable({UnitIndex = pitIndex, OrderType = DOTA_UNIT_ORDER_CAST_TARGET, TargetIndex = targetIndex, AbilityIndex = sacrifice:GetEntityIndex(), Queue = false})
+    end)
+end
+
+------------------------------------------------
+--           Tree-GoldMine Right-Click        --
+------------------------------------------------
+function dotacraft:EntangleOrder(event)
+    local playerID = event.PlayerID
+    Timers:CreateTimer(0.03, function()
+        local treeIndex = event.tree
+        local targetIndex = event.targetIndex
+        local tree = EntIndexToHScript(treeIndex)
+        local mine = EntIndexToHScript(targetIndex)
+
+        local entangle = tree:FindAbilityByName("nightelf_entangle_gold_mine")
+        if entangle:IsFullyCastable() and not mine.building_on_top then
+            ExecuteOrderFromTable({UnitIndex = treeIndex, OrderType = DOTA_UNIT_ORDER_CAST_TARGET, TargetIndex = targetIndex, AbilityIndex = entangle:GetEntityIndex(), Queue = false})
+        end
+    end)
 end
 
 ------------------------------------------------
@@ -442,32 +509,30 @@ end
 --            Unit->Shop Left-Click           --
 ------------------------------------------------
 function dotacraft:ShopActiveOrder( event )
-    local pID = event.PlayerID
+    local playerID = event.PlayerID
     local shop = EntIndexToHScript(event.shop)
     local unit = EntIndexToHScript(event.unit)
-    local player = PlayerResource:GetPlayer(pID)
+    local player = PlayerResource:GetPlayer(playerID)
 
     -- Send true in panorama order, false if autoassigned
     shop.targeted = event.targeted or false
 
     -- Set the current unit of this shop for this player
-    shop.current_unit[pID] = unit
+    shop.current_unit[playerID] = unit
     
-    if shop.active_particle[pID] then
-        ParticleManager:DestroyParticle(shop.active_particle[pID], true)
+    if shop.active_particle[playerID] then
+        ParticleManager:DestroyParticle(shop.active_particle[playerID], true)
     end
-    shop.active_particle[pID] = ParticleManager:CreateParticleForPlayer("particles/custom/shop_arrow.vpcf", PATTACH_OVERHEAD_FOLLOW, unit, player)
+    shop.active_particle[playerID] = ParticleManager:CreateParticleForPlayer("particles/custom/shop_arrow.vpcf", PATTACH_OVERHEAD_FOLLOW, unit, player)
 
-    ParticleManager:SetParticleControl(shop.active_particle[pID], 0, unit:GetAbsOrigin())
+    ParticleManager:SetParticleControl(shop.active_particle[playerID], 0, unit:GetAbsOrigin())
 end
 
 ------------------------------------------------
 --          Rally Point Right-Click           --
 ------------------------------------------------
 function dotacraft:OnBuildingRallyOrder( event )
-
-    -- Arguments
-    local pID = event.pID
+    local playerID = event.PlayerID
     local mainSelected = event.mainSelected
     local rally_type = event.rally_type
     local targetIndex = event.targetIndex -- Only on "mine" or "target" rally type
@@ -478,8 +543,8 @@ function dotacraft:OnBuildingRallyOrder( event )
         position = Vector(event.pos_x, event.pos_y, event.pos_z)
     end
 
-    local player = PlayerResource:GetPlayer(pID)
-    local units = PlayerResource:GetSelectedEntities(pID)
+    local player = PlayerResource:GetPlayer(playerID)
+    local units = PlayerResource:GetSelectedEntities(playerID)
     local target
     if targetIndex then
         local target = EntIndexToHScript(targetIndex)
@@ -489,7 +554,7 @@ function dotacraft:OnBuildingRallyOrder( event )
         end
     end
 
-    Players:ClearPlayerFlags(pID)
+    Players:ClearPlayerFlags(playerID)
 
     for k,v in pairs(units) do
         local building = EntIndexToHScript(v)

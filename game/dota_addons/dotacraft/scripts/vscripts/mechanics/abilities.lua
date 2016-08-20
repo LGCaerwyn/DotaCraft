@@ -27,6 +27,11 @@ function CDOTABaseAbility:IsAllowedTarget(target)
         return false,"error_must_target_air"
     end
 
+    local bIgnoreWard = target:IsWard() and not self:AffectsWards()
+    if bIgnoreWard then
+        return false,"error_cant_target_wards"
+    end
+
     local maxLevel = self:GetKeyValue("MaxCreepLevel")
     if maxLevel and target:GetLevel() > maxLevel then
         return false,"error_cant_target_level6"
@@ -61,8 +66,15 @@ function CDOTABaseAbility:IsAllowedTarget(target)
     end
 
     local bNeedsManaDeficit = self:GetKeyValue("RequiresManaDeficit")
-    if bNeedsManaDeficit and target:GetMana() == maxMana then
-        return false,"error_full_mana"
+    if bNeedsManaDeficit then
+        if bNeedsManaDeficit == "self" then
+            if self:GetCaster():GetMaxMana() == self:GetCaster():GetMana() then
+                return false,"error_full_mana"
+            end
+
+        elseif target:GetMana() == maxMana then
+            return false,"error_full_mana"
+        end
     end
 
     return true
@@ -73,7 +85,7 @@ function CDOTABaseAbility:AffectsBuildings()
     return self:HasTargetType(DOTA_UNIT_TARGET_BUILDING)
 end
 
--- Keyword 'organic' in TargetsAllowed will prevent the ability from affecting (targeting/damaging/modifying) units marked with "Mechanical" "1"
+-- Keyword 'organic' in TargetsAllowed will prevent the ability from affecting (targeting/damaging/modifying) units marked labeled "mechanical"
 function CDOTABaseAbility:AffectsMechanical()
     local targets = self:GetKeyValue("TargetsAllowed") or ""
     return not targets:match("organic")
@@ -89,6 +101,12 @@ end
 function CDOTABaseAbility:AffectsGround()
     local targets = self:GetKeyValue("TargetsAllowed") or ""
     return not targets:match("air")
+end
+
+-- Keyword 'ward' in TargetsAllowed will allow the ability to affect units marked labeled "ward"
+function CDOTABaseAbility:AffectsWards()
+    local targets = self:GetKeyValue("TargetsAllowed") or ""
+    return targets:match("ward")
 end
 
 function CDOTABaseAbility:HasTargetType(flag)
@@ -133,31 +151,6 @@ function CDOTABaseAbility:ApplyDamageUnitsMax(damage, units, maxDamage)
             end
         end
     end
-end
-
--- Returns int, 0 if it doesnt exist
-function MaxResearchRank( research_name )
-    local unit_upgrades = GameRules.UnitUpgrades
-    local upgrade_name = GetResearchAbilityName( research_name )
-
-    if unit_upgrades[upgrade_name] and unit_upgrades[upgrade_name].max_rank then
-        return tonumber(unit_upgrades[upgrade_name].max_rank)
-    else
-        return 0
-    end
-end
-
--- Returns string with the "short" ability name, without any rank or suffix
-function GetResearchAbilityName( research_name )
-
-    local ability_name = string.gsub(research_name, "_research" , "")
-    ability_name = string.gsub(ability_name, "_disabled" , "")
-    ability_name = string.gsub(ability_name, "0" , "")
-    ability_name = string.gsub(ability_name, "1" , "")
-    ability_name = string.gsub(ability_name, "2" , "")
-    ability_name = string.gsub(ability_name, "3" , "")
-
-    return ability_name
 end
 
 -- A BuildingHelper ability is identified by the "Building" key.
@@ -211,7 +204,6 @@ function GenerateAbilityString(player, ability_table)
         end
         index = index + 1
         if ability_available then
-            print(index,ability_name,ability_available)
             abilities_string = abilities_string.."1,"
         else
             abilities_string = abilities_string.."0,"
@@ -235,24 +227,7 @@ function ToggleOff( ability )
 end
 
 function IsMultiOrderAbility( ability )
-    if IsValidEntity(ability) then
-        local ability_name = ability:GetAbilityName()
-        local ability_table = GameRules.AbilityKV[ability_name]
-
-        if not ability_table then
-            ability_table = GameRules.ItemKV[ability_name]
-        end
-
-        if ability_table then
-            local AbilityMultiOrder = ability_table["AbilityMultiOrder"]
-            if AbilityMultiOrder and AbilityMultiOrder == 1 then
-                return true
-            end
-        else
-            print("Cant find ability table for "..ability_name)
-        end
-    end
-    return false
+    return IsValidEntity(ability) and ability:GetKeyValue("AbilityMultiOrder")
 end
 
 function SetAbilityLayout( unit, layout_size )

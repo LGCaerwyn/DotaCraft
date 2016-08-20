@@ -179,22 +179,6 @@
 					"ScriptFile"    "buildings/rally_point.lua"
 					"Function"      "MoveToRallyPoint"
 				}
-
-				"RunScript"
-				{
-					"ScriptFile"    "units/upgrades.lua"
-					"Function"      "ApplyMultiRankUpgrade"
-					"ResearchName"	"nightelf_research_strength_of_the_moon"
-					"WearableType"	"weapon"
-				}
-
-				"RunScript"
-				{
-					"ScriptFile"    "units/upgrades.lua"
-					"Function"      "ApplyMultiRankUpgrade"
-					"ResearchName"	"nightelf_research_moon_armor"
-					"WearableType"	"armor"
-				}
 			}
 		}
 	}
@@ -291,24 +275,8 @@
 				
 				"RunScript"
 				{
-					"ScriptFile"    "units/upgrades.lua"
+					"ScriptFile"    "units/nightelf/nightelf_upgrades.lua"
 					"Function"      "ApplyMoonGlaiveUpgrade"
-				}
-
-				"RunScript"
-				{
-					"ScriptFile"    "units/upgrades.lua"
-					"Function"      "ApplyMultiRankUpgrade"
-					"ResearchName"	"nightelf_research_strength_of_the_moon"
-					"WearableType"	"weapon"
-				}
-
-				"RunScript"
-				{
-					"ScriptFile"    "units/upgrades.lua"
-					"Function"      "ApplyMultiRankUpgrade"
-					"ResearchName"	"nightelf_research_moon_armor"
-					"WearableType"	"armor"
 				}
 			}
 		}
@@ -419,13 +387,6 @@
 					"ScriptFile"    "buildings/rally_point.lua"
 					"Function"      "MoveToRallyPoint"
 				}
-
-				"RunScript"
-				{
-					"ScriptFile"    "units/upgrades.lua"
-					"Function"      "ApplyMultiRankUpgrade"
-					"ResearchName"	"nightelf_research_strength_of_the_moon"
-				}
 			}
 		}
 	}
@@ -535,22 +496,6 @@
 					"ScriptFile"    "buildings/rally_point.lua"
 					"Function"      "MoveToRallyPoint"
 				}
-
-				"RunScript"
-				{
-					"ScriptFile"    "units/upgrades.lua"
-					"Function"      "ApplyMultiRankUpgrade"
-					"ResearchName"	"nightelf_research_strength_of_the_wild"
-					"WearableType"	"weapon"
-				}
-
-				"RunScript"
-				{
-					"ScriptFile"    "units/upgrades.lua"
-					"Function"      "ApplyMultiRankUpgrade"
-					"ResearchName"	"nightelf_research_reinforced_hides"
-					"WearableType"	"armor"
-				}
 			}
 		}
 	}
@@ -643,14 +588,6 @@
 				{
 					"ScriptFile"    "buildings/rally_point.lua"
 					"Function"      "MoveToRallyPoint"
-				}
-
-				"RunScript"
-				{
-					"ScriptFile"	"units/upgrades.lua"
-					"Function"		"ApplyMultiRankUpgrade"
-					"ResearchName"	"nightelf_research_druid_of_the_claw_training"
-					"wearable_type"	"training"
 				}
 			}
 		}
@@ -841,22 +778,6 @@
 					"ScriptFile"    "buildings/rally_point.lua"
 					"Function"      "MoveToRallyPoint"
 				}
-
-				"RunScript"
-				{
-					"ScriptFile"    "units/upgrades.lua"
-					"Function"      "ApplyMultiRankUpgrade"
-					"ResearchName"	"nightelf_research_strength_of_the_wild"
-					"WearableType"	"weapon"
-				}
-
-				"RunScript"
-				{
-					"ScriptFile"    "units/upgrades.lua"
-					"Function"      "ApplyMultiRankUpgrade"
-					"ResearchName"	"nightelf_research_reinforced_hides"
-					"WearableType"	"armor"
-				}
 			}
 		}
 	}
@@ -966,14 +887,6 @@
 					"ScriptFile"    "buildings/rally_point.lua"
 					"Function"      "MoveToRallyPoint"
 				}
-
-				"RunScript"
-				{
-					"ScriptFile"	"units/upgrades.lua"
-					"Function"		"ApplyMultiRankUpgrade"
-					"ResearchName"	"nightelf_research_druid_of_the_talon_training"
-					"wearable_type"	"training"
-				}
 			}
 		}
 	}
@@ -1067,22 +980,6 @@
 					"ScriptFile"    "buildings/rally_point.lua"
 					"Function"      "MoveToRallyPoint"
 				}
-
-				"RunScript"
-				{
-					"ScriptFile"    "units/upgrades.lua"
-					"Function"      "ApplyMultiRankUpgrade"
-					"ResearchName"	"nightelf_research_strength_of_the_wild"
-					"WearableType"	"weapon"
-				}
-
-				"RunScript"
-				{
-					"ScriptFile"    "units/upgrades.lua"
-					"Function"      "ApplyMultiRankUpgrade"
-					"ResearchName"	"nightelf_research_reinforced_hides"
-					"WearableType"	"armor"
-				}
 			}
 		}
 	}
@@ -1175,22 +1072,6 @@
 				{
 					"ScriptFile"    "buildings/rally_point.lua"
 					"Function"      "MoveToRallyPoint"
-				}
-
-				"RunScript"
-				{
-					"ScriptFile"    "units/upgrades.lua"
-					"Function"      "ApplyMultiRankUpgrade"
-					"ResearchName"	"nightelf_research_strength_of_the_wild"
-					"WearableType"	"weapon"
-				}
-
-				"RunScript"
-				{
-					"ScriptFile"    "units/upgrades.lua"
-					"Function"      "ApplyMultiRankUpgrade"
-					"ResearchName"	"nightelf_research_reinforced_hides"
-					"WearableType"	"armor"
 				}
 			}
 		}

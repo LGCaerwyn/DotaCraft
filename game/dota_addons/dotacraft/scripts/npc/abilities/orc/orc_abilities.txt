@@ -238,6 +238,8 @@
 	"AbilityUnitTargetFlags"	"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES | DOTA_UNIT_TARGET_FLAG_INVULNERABLE"
 	"SpellImmunityType"			"SPELL_IMMUNITY_ENEMIES_YES"
 
+	"TargetsAllowed"            "ward"
+
 	"AbilityCastRange"			"700"
 	"AbilityCastPoint"			"0"
 	"AbilityCooldown"			"1"
@@ -519,15 +521,15 @@
             {
                 "RunScript"
                 {
-                    "ScriptFile"    "mechanics/abilities.lua"
-                    "Function"      "ToggleOnAutocast"
+                    "ScriptFile"    "units/orc/shaman.lua"
+                    "Function"      "BloodlustAutocast"
                 }
             }
         }
 
         "modifier_bloodlust_autocast_attackstart"
         {
-            "IsHidden"  "1"
+            "IsHidden" 	 "1"
             "OnAttack"
             {
                 "RunScript"
@@ -544,7 +546,7 @@
                     "ScriptFile"    "units/orc/shaman.lua"
                     "Function"      "BloodlustAutocast_Attacked"
                 }
-            }      
+            }
         }
     }
 }
@@ -792,7 +794,7 @@
 	"AbilityUnitTargetFlags"	"DOTA_UNIT_TARGET_FLAG_NOT_MAGIC_IMMUNE_ALLIES"
 		
 	"AbilityCastRange"			"750"
-	"AbilityCastPoint"			"0"
+	"AbilityCastPoint"			"0.3"
 	"AbilityCooldown"			"0"
 	"AbilityManaCost"			"75"
 		
@@ -907,7 +909,9 @@
 	"AbilityCastPoint"			"0.35"
 	"AbilityCooldown"			"0"
 	"AbilityManaCost"			"100"
-		
+	
+	"TargetsAllowed"            "ward"
+
 	"AOERadius"					"%radius"
 	"AbilitySpecial"
 	{
@@ -1023,9 +1027,11 @@
 	"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_HIDDEN"
 	"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_2"
 		
-	"AbilityCastPoint"			"0.7"
-	"AbilityCooldown"			"30"
+	"AbilityCastPoint"			"0.0"
+	"AbilityCooldown"			"0" //Can always go into ethereal form
 	"AbilityManaCost"			"0"
+
+	"AbilityMultiOrder"				"1"
 		
 	"AbilitySpecial"
 	{
@@ -1034,11 +1040,17 @@
 			"var_type"					"FIELD_INTEGER"
 			"bonus_spell_damage"		"-66"
 		}
+		"02"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"transformation_time"		"0.7"
+		}
 	}
 
 	"precache"
 	{
 		"particle" 	"particles/units/heroes/hero_pugna/pugna_decrepify.vpcf"
+		"soundfile"	"soundevents/game_sounds_heroes/game_sounds_spirit_breaker.vsndevts"
 		"soundfile" "soundevents/game_sounds_heroes/game_sounds_pugna.vsndevts"
 	}
 	
@@ -1046,13 +1058,33 @@
 	{
 		"RunScript"
 		{
-			"ScriptFile"	"units/orc/spiritwalker.lua"
-			"Function"		"EtherStart"
+		    "ScriptFile"    "units/orc/spiritwalker.lua"
+		    "Function"      "EtherealStart"
 		}
 	}
 
 	"Modifiers"
 	{
+		"modifier_ethereal_form_transform"
+		{
+			"IsHidden"  "1"
+            "Duration"  "%transformation_time"
+
+            "States"
+            {
+                "MODIFIER_STATE_STUNNED"        "MODIFIER_STATE_VALUE_ENABLED"
+            }
+
+            "OnDestroy"
+            {
+                "RunScript"
+				{
+					"ScriptFile"	"units/orc/spiritwalker.lua"
+					"Function"		"EtherealForm"
+				}
+            }
+		}
+
 		"modifier_ethereal_form"
 		{
 			"OnCreated"
@@ -1105,22 +1137,56 @@
 "orc_corporeal_form"
 {
 	"BaseClass"					"ability_datadriven"
-	"AbilityTextureName"		"orc_ethereal_form"
+	"AbilityTextureName"		"orc_corporeal_form"
 	"MaxLevel"					"1"
 		
 	"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 	"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_2"
 		
-	"AbilityCastPoint"			"0.7"
+	"AbilityCastPoint"			"0.0"
 	"AbilityCooldown"			"30"
 	"AbilityManaCost"			"0"
+
+	"AbilityMultiOrder"				"1"
+
+	"AbilitySpecial"
+	{
+	    "01"
+		{
+			"var_type"					"FIELD_FLOAT"
+			"transformation_time"		"0.7"
+		}
+	}
 			
 	"OnSpellStart"
 	{
 		"RunScript"
 		{
-			"ScriptFile"	"units/orc/spiritwalker.lua"
-			"Function"		"EtherEnd"
+		    "ScriptFile"    "units/orc/spiritwalker.lua"
+		    "Function"      "CorporealStart"
+		}
+	}
+
+	"Modifiers"
+	{
+		"modifier_corporeal_form_transform"
+		{
+			"IsHidden"  "1"
+            "Duration"  "%transformation_time"
+
+            "States"
+            {
+                "MODIFIER_STATE_STUNNED"        "MODIFIER_STATE_VALUE_ENABLED"
+            }
+
+            "OnDestroy"
+            {
+                "RunScript"
+				{
+					"ScriptFile"	"units/orc/spiritwalker.lua"
+					"Function"		"CorporealForm"
+				}
+            }
 		}
 	}
 }
@@ -1394,7 +1460,36 @@
 //=================================================================================
 "orc_war_drums"
 {
-	"BaseClass"					"ability_datadriven"
+	"BaseClass"					"ability_lua"
+	"ScriptFile"				"units/orc/kodobeast.lua"
+	"AbilityTextureName"		"orc_war_drums"
+	"MaxLevel"					"1"
+		
+	"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+	"AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+	"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
+	
+	"AbilityCastRange"			"900"
+	
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"			"FIELD_INTEGER"
+			"radius"			"900"
+		}
+		"02"
+		{
+			"var_type"			"FIELD_INTEGER"
+			"damage_increase"	"10"
+		}
+	}
+}
+
+"orc_improved_war_drums"
+{
+	"BaseClass"					"ability_lua"
+	"ScriptFile"				"units/orc/kodobeast.lua"
 	"AbilityTextureName"		"orc_research_improved_war_drums"
 	"MaxLevel"					"1"
 		
@@ -1403,57 +1498,20 @@
 	"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
 	
 	"AbilityCastRange"			"900"
-	// Added for visual indication.
 	
 	"AbilitySpecial"
 	{
 		"01"
 		{
-			"var_type"		"FIELD_INTEGER"
-			"radius"		"900"
+			"var_type"			"FIELD_INTEGER"
+			"radius"			"900"
 		}
 		"02"
 		{
-			"var_type"				"FIELD_INTEGER"
-			"damage_increase"		"10 20"
-		}
-		// The damage increase applies to both melee and ranged.
-	}
-
-	"precache"
-	{
-		"particle"  "particles/custom/aura_endurance.vpcf"
-	}
-
-	"Modifiers"
-	{
-		"modifier_war_drums_aura"
-		{
-
-			"Passive"			"1"
-			"IsHidden"			"1"
-			"EffectName"		"particles/custom/aura_endurance.vpcf"
-			"EffectAttachType"	"follow_origin"
-
-			"Aura"          	"modifier_war_drums"
-			"Aura_Radius"   	"%radius"
-			"Aura_Teams"    	"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
-			"Aura_Types"    	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-			"Aura_Flags"    	"DOTA_UNIT_TARGET_FLAG_NONE"
-			"Aura_ApplyToCaster" "1"
-		}
-
-		"modifier_war_drums"
-		{
-			"IsBuff"			"1"
-
-			"Properties"
-			{
-				"MODIFIER_PROPERTY_BASEDAMAGEOUTGOING_PERCENTAGE"	"%damage_increase"
-			}
+			"var_type"			"FIELD_INTEGER"
+			"damage_increase"	"20"
 		}
 	}
-	// Done
 }
 
 //=================================================================================
@@ -1605,7 +1663,7 @@
 	{
 		"RunScript"
 		{
-			"ScriptFile"	"units/orc/trollbatrider.lua"
+			"ScriptFile"	"units/orc/batrider.lua"
 			"Function"		"UnstableSpellStart"
 		}
 	}
@@ -1635,7 +1693,7 @@
 			{
 				"RunScript"
 				{
-					"ScriptFile"	"units/orc/trollbatrider.lua"
+					"ScriptFile"	"units/orc/batrider.lua"
 					"Function"		"UnstableDeath"
 				}
 			}
@@ -1657,8 +1715,7 @@
 		
 	"AbilityBehavior"			"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 	"AbilityUnitTargetTeam"		"DOTA_UNIT_TARGET_TEAM_ENEMY"
-	"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_BUILDING | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
-	"AbilityUnitDamageType"		"DAMAGE_TYPE_PURE"  // Buildings can't take magical damage
+	"AbilityUnitTargetType"		"DOTA_UNIT_TARGET_BUILDING"
 	"AbilityCastAnimation"		"ACT_DOTA_CAST_ABILITY_2"
 	
 	"AbilitySpecial"
@@ -1683,7 +1740,6 @@
 	"precache"
 	{
 		"soundfile"					"soundevents/game_sounds_heroes/game_sounds_jakiro.vsndevts"
-		"particle"					"particles/units/heroes/hero_jakiro/jakiro_liquid_fire_debuff.vpcf"
 	}
 
 	"Modifiers"
@@ -1697,7 +1753,7 @@
 			{
 				"RunScript"
 				{
-					"ScriptFile"	"units/orc/trollbatrider.lua"
+					"ScriptFile"	"units/orc/batrider.lua"
 					"Function"		"LiquidOrb"
 				}
 			}						
@@ -1705,22 +1761,24 @@
 
 		"modifier_liquid_fire_debuff"
 		{
-
-			"IsPurgable"		"0"
-			"IsBuff"			"0"
 			"IsDebuff"			"1"
-
 			"Duration"			"%duration"
 
-			"EffectName"		"particles/units/heroes/hero_jakiro/jakiro_liquid_fire_debuff.vpcf"
-			"EffectAttachType"	"follow_origin"
+			"OnCreated"
+			{
+			    "RunScript"
+			    {
+			        "ScriptFile"    "units/orc/batrider.lua"
+			        "Function"      "LiquidOrbEffect"
+			    }
+			}
 
 			"ThinkInterval"		"0.5"
 			"OnIntervalThink"
 			{
 				"RunScript"
 				{
-					"ScriptFile"	"units/orc/trollbatrider.lua"
+					"ScriptFile"	"units/orc/batrider.lua"
 					"Function"		"LiquidOrbThink"
 				}
 			}
@@ -1778,7 +1836,6 @@
 
 	"precache"
 	{
-		"particle"	"particles/econ/items/earthshaker/egteam_set/hero_earthshaker_egset/earthshaker_aftershock_egset.vpcf"
 		"particle"	"particles/econ/items/earthshaker/egteam_set/hero_earthshaker_egset/earthshaker_totem_buff_egset.vpcf"
 	}
 
@@ -1814,7 +1871,35 @@
 		"modifier_pulverize_attack"
 		{
 			"IsHidden"	"1"
-			"OverrideAnimation"	"ACT_DOTA_CAST_ABILITY_2"
+
+			"OnCreated"
+			{
+			    "RunScript"
+			    {
+			        "ScriptFile"    "units/orc/tauren.lua"
+			        "Function"      "PulverizeStart"
+			    }
+			    "AttachEffect"
+			    {
+			        "EffectName"		"particles/econ/items/earthshaker/egteam_set/hero_earthshaker_egset/earthshaker_totem_buff_egset.vpcf"
+			        "EffectAttachType"  "attach_customorigin"
+			        "Target"            "TARGET"
+			        "ControlPointEntities"
+			        {
+			            "TARGET" "attach_totem"
+			            "TARGET" "attach_totem"
+			            "TARGET" "attach_totem"
+			        }
+			    }
+			}
+			"OnDestroy"
+			{
+			    "RunScript"
+			    {
+			        "ScriptFile"    "units/orc/tauren.lua"
+			        "Function"      "PulverizeEnd"
+			    }
+			}
 			"OnAttackLanded"
 			{	
 				"Damage"
@@ -1825,6 +1910,7 @@
 						"Radius" 	"%half_damage_radius"
 						"Teams" 	"DOTA_UNIT_TARGET_TEAM_ENEMY"
 						"Types" 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+						"Flags"     "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
 					}
 					"Type"				"DAMAGE_TYPE_PHYSICAL"
 					"Damage"			"%extra_damage / 2"
@@ -1838,13 +1924,14 @@
 						"Radius" 	"%full_damage_radius"
 						"Teams" 	"DOTA_UNIT_TARGET_TEAM_ENEMY"
 						"Types" 	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+						"Flags"     "DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
 					}
 					"Type"				"DAMAGE_TYPE_PHYSICAL"
 					"Damage"			"%extra_damage / 2"
 				}
 				"FireEffect"
 				{
-					"EffectName"		"particles/econ/items/earthshaker/egteam_set/hero_earthshaker_egset/earthshaker_aftershock_egset.vpcf"
+					"EffectName"		"particles/custom/orc/pulverize.vpcf"
 					"EffectAttachType"	"follow_origin"
 					"Target"			"TARGET"
 					"ControlPoints"
