@@ -97,7 +97,7 @@
 	
 	// Abilities
 	//----------------------------------------------------------------
-	"Ability1"					""	 //Reference: ACvs
+	"Ability1"					"neutral_envenomed_weapon"
 	
 	// Armor
 	//----------------------------------------------------------------
@@ -249,7 +249,7 @@
 	
 	// Abilities
 	//----------------------------------------------------------------
-	"Ability1"					""	 //Reference: ACac
+	"Ability1"					"neutral_command_aura"
 	
 	// Armor
 	//----------------------------------------------------------------
@@ -339,7 +339,7 @@
 
 	// Abilities
 	//----------------------------------------------------------------
-	"Ability1"					""	 //Reference: ACen
+	"Ability1"					"neutral_ensnare"
 	
 	// Armor
 	//----------------------------------------------------------------
@@ -495,9 +495,9 @@
 	
 	// Abilities
 	//----------------------------------------------------------------
-	"Ability1"					""	 //Reference: Anh2
-	"Ability2"					""	 //Reference: ACif
-	"Ability3"					""	 //Reference: ACd2
+	"Ability1"					"neutral_heal"
+	"Ability2"					"neutral_abolish_magic"
+	"Ability3"					"neutral_inner_fire"
 	
 	// Armor
 	//----------------------------------------------------------------
@@ -543,7 +543,7 @@
 	"StatusHealth"				"450"
 	"StatusHealthRegen"			"0.5"
 	"StatusMana"				"300"
-	"StatsManaRegen"			"0.75"
+	"StatusManaRegen"			"0.75"
 	
 	// Vision
 	//----------------------------------------------------------------
@@ -573,6 +573,7 @@
 	"Level"						"10"
 	"HealthBarOffset"			"140"
 	"UseNeutralCreepBehavior" 	"0"
+	"ConsideredHero"			"1"
 
 	"FormationRank"				"2"
 	"AttacksEnabled"			"ground,air"
@@ -580,9 +581,9 @@
 	
 	// Abilities
 	//----------------------------------------------------------------
-	"Ability1"					""	 //Reference: Advc
-	"Ability2"					""	 //Reference: ACdv
-	"Ability3"					""	 //Reference: ACmi
+	"Ability1"					"neutral_devour"
+	"Ability2"					"neutral_spell_immunity"
+	"Ability3"					""
 	
 	// Armor
 	//----------------------------------------------------------------
@@ -652,6 +653,7 @@
 	"Level"						"6"
 	"HealthBarOffset"			"140"
 	"UseNeutralCreepBehavior" 	"0"
+	"ConsideredHero"			"1"
 
 	"FormationRank"				"0"
 	"AttacksEnabled"			"ground"
@@ -659,8 +661,8 @@
 	
 	// Abilities
 	//----------------------------------------------------------------
-	"Ability1"					""	 //Reference: ACmi
-	"Ability2"					""	 //Reference: ACtb
+	"Ability1"					"neutral_hurl_boulder"
+	"Ability2"					"neutral_spell_immunity"
 	
 	// Armor
 	//----------------------------------------------------------------
@@ -713,7 +715,7 @@
 	"StatusHealth"				"675"
 	"StatusHealthRegen"			"0.5"
 	"StatusMana"				"400"
-	"StatsManaRegen"			"1"
+	"StatusManaRegen"			"1"
 	
 	// Vision
 	//----------------------------------------------------------------
@@ -744,7 +746,7 @@
 	
 	// Abilities
 	//----------------------------------------------------------------
-	"Ability1"					""	 //Reference: ACbb
+	"Ability1"					"neutral_bloodlust"
 	
 	// Armor
 	//----------------------------------------------------------------
@@ -788,7 +790,7 @@
 	"StatusHealth"				"600"
 	"StatusHealthRegen"			"0.5"
 	"StatusMana"				"400"
-	"StatsManaRegen"			"1"
+	"StatusManaRegen"			"1"
 	
 	// Vision
 	//----------------------------------------------------------------
@@ -1047,7 +1049,7 @@
 	
 	// Abilities
 	//----------------------------------------------------------------
-	"Ability1"					""	 //Reference: ACsa
+	"Ability1"					"neutral_searing_arrows"
 	
 	// Armor
 	//----------------------------------------------------------------
@@ -1088,7 +1090,7 @@
 	"StatusHealth"				"350"
 	"StatusHealthRegen"			"0.5"
 	"StatusMana"				"200"
-	"StatsManaRegen"			"0.5"
+	"StatusManaRegen"			"0.5"
 	
 	// Vision
 	//----------------------------------------------------------------
@@ -1124,8 +1126,8 @@
 	
 	// Abilities
 	//----------------------------------------------------------------
-	"Ability1"					""	 //Reference: ACbl
-	"Ability2"					""	 //Reference: ACdm
+	"Ability1"					"neutral_bloodlust"
+	"Ability2"					"neutral_abolish_magic"
 	
 	// Armor
 	//----------------------------------------------------------------
@@ -1166,7 +1168,7 @@
 	"StatusHealth"				"600"
 	"StatusHealthRegen"			"1"
 	"StatusMana"				"400"
-	"StatsManaRegen"			"1"
+	"StatusManaRegen"			"1"
 	
 	// Vision
 	//----------------------------------------------------------------
@@ -1299,7 +1301,7 @@
 	
 	// Abilities
 	//----------------------------------------------------------------
-	"Ability1"					""	 //Reference: ACev
+	"Ability1"					"neutral_evasion"
 	
 	// Armor
 	//----------------------------------------------------------------
@@ -1387,8 +1389,8 @@
 	
 	// Abilities
 	//----------------------------------------------------------------
-	"Ability1"					""	 //Reference: AChw
-	"Ability2"					""	 //Reference: ACs9
+	"Ability1"					"neutral_healing_ward"
+	"Ability2"					"neutral_feral_spirit_pigs"
 	
 	// Armor
 	//----------------------------------------------------------------
@@ -1432,7 +1434,7 @@
 	"StatusHealth"				"600"
 	"StatusHealthRegen"			"0.5"
 	"StatusMana"				"400"
-	"StatsManaRegen"			"1"
+	"StatusManaRegen"			"1"
 	
 	// Vision
 	//----------------------------------------------------------------
@@ -1460,6 +1462,71 @@
 	}
 }
 
+"neutral_spirit_pig"
+{                                       
+    // General
+    //----------------------------------------------------------------
+    "Model"                     "models/items/beastmaster/boar/beast_deming/beast_deming.vmdl"
+    "BaseClass"                 "npc_dota_creature"
+    "SoundSet"                  "Beastmaster_Boar"
+    "Level"                     "2"
+    "ModelScale"                "0.65"
+
+    "AttacksEnabled"            "ground"
+    "LeavesCorpse"              "0"
+
+    // Armor
+    //----------------------------------------------------------------
+    "ArmorPhysical"             "0"     // Physical protection.
+    "MagicalResistance"         "0"     // Magical protection.
+
+    // Attack
+    //----------------------------------------------------------------
+    "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
+    "AttackDamageType"          "DAMAGE_TYPE_ArmorPhysical"
+    "AttackDamageMin"           "11"        // Damage range min.
+    "AttackDamageMax"           "12"        // Damage range max.    
+    "AttackRate"                "1.25"      // Speed of attack.
+    "AttackAnimationPoint"      "0.33"      // Normalized time in animation cycle to attack.
+    "AttackAcquisitionRange"    "500"       // Range within a target can be acquired.
+    "AttackRange"               "128"       // Range within a target can be attacked.      
+
+    // Bounds
+    //----------------------------------------------------------------
+    "RingRadius"                "40"
+    "HealthBarOffset"           "160"
+    "BoundsHullName"            "DOTA_HULL_SIZE_SMALL"          // Hull type used for navigation/locomotion.
+    "FormationRank"             "0"
+
+    // Bounty
+    //----------------------------------------------------------------
+    "BountyXP"                  "20"        // Experience earn.
+    "BountyGoldMin"             "21"        // Gold earned min.
+    "BountyGoldMax"             "21"        // Gold earned max.
+
+    // Movement
+    //----------------------------------------------------------------
+    "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
+    "MovementSpeed"             "350"       // Speed.
+
+    // Status
+    //----------------------------------------------------------------
+    "StatusHealth"              "200"       // Base health.
+    "StatusHealthRegen"         "0.5"       // Health regeneration rate.
+    "StatusMana"                "0"         // Base mana.
+    "StatusManaRegen"           "0"         // Mana regeneration rate.       
+    
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"        "1200"      // Range of vision during day light.
+    "VisionNighttimeRange"      "800"       // Range of vision at night time.
+
+    // Attack Damage types
+    //----------------------------------------------------------------                          // Attack Damage types name.
+    "AttackType"                "normal"
+    "ArmorType"                 "heavy"
+} 
+
 
 //=================================================================================
 // Creature: Razormane Chieftain
@@ -1475,14 +1542,15 @@
 	"Level"						"7"
 	"HealthBarOffset"			"140"
 	"UseNeutralCreepBehavior" 	"0"
+	"ConsideredHero"			"1"
 
 	"FormationRank"				"0"
 	"AttacksEnabled"			"ground"
 	
 	// Abilities
 	//----------------------------------------------------------------
-	"Ability1"					""	 //Reference: ACah
-	"Ability2"					""	 //Reference: ACtb
+	"Ability1"					"neutral_hurl_boulder"
+	"Ability2"					"neutral_thorns_aura"
 	
 	// Armor
 	//----------------------------------------------------------------
@@ -1521,7 +1589,7 @@
 	"StatusHealth"				"950"
 	"StatusHealthRegen"			"0.5"
 	"StatusMana"				"500"
-	"StatsManaRegen"			"1.25"
+	"StatusManaRegen"			"1.25"
 	
 	// Vision
 	//----------------------------------------------------------------
@@ -1649,7 +1717,7 @@
     
     // Abilities
     //----------------------------------------------------------------
-    "Ability1"                  ""   //Reference: ANth
+    "Ability1"                  "neutral_spiked_shell"
     
     // Armor
     //----------------------------------------------------------------
@@ -1724,7 +1792,7 @@
     
     // Abilities
     //----------------------------------------------------------------
-    "Ability1"                  ""   //Reference: ANth
+    "Ability1"                  "neutral_spiked_shell"
     
     // Armor
     //----------------------------------------------------------------
@@ -1793,13 +1861,14 @@
 	"Level"						"7"
 	"HealthBarOffset"			"140"
 	"UseNeutralCreepBehavior" 	"0"
+	"ConsideredHero"			"1"
 
     "FormationRank"				"0"
 	"AttacksEnabled"			"ground"
 	
 	// Abilities
 	//----------------------------------------------------------------
-	"Ability1"					""	 //Reference: ANth
+	"Ability1"					"neutral_spiked_shell"
 	
 	// Armor
 	//----------------------------------------------------------------
@@ -1866,13 +1935,14 @@
     "Level"                     "6"
     "HealthBarOffset"           "140"
     "UseNeutralCreepBehavior" 	"0"
+    "ConsideredHero"			"1"
 
     "FormationRank"				"2"
 	"AttacksEnabled"			"ground,air"
     
     // Abilities
     //----------------------------------------------------------------
-    "Ability1"                  ""   //Reference: ACat
+    "Ability1"                  "neutral_trueshot_aura"
     
     // Armor
     //----------------------------------------------------------------
@@ -1956,8 +2026,8 @@
     
     // Abilities
     //----------------------------------------------------------------
-    "Ability1"                  ""   //Reference: ACav
-    "Ability2"                  ""   //Reference: ACsh
+    "Ability1"                  "neutral_shockwave"
+    "Ability2"                  "neutral_devotion_aura"
     
     // Armor
     //----------------------------------------------------------------
@@ -2045,8 +2115,8 @@
     
     // Abilities
     //----------------------------------------------------------------
-    "Ability1"                  ""   //Reference: ACvs
-    "Ability2"                  ""   //Reference: Ashm
+    "Ability1"                  "neutral_shadow_meld"
+    "Ability2"                  "neutral_envenomed_weapon"
     
     // Armor
     //----------------------------------------------------------------
@@ -2130,7 +2200,7 @@
     
     // Abilities
     //----------------------------------------------------------------
-    "Ability1"                  ""   //Reference: ACen
+    "Ability1"                  "neutral_ensnare"
     
     // Armor
     //----------------------------------------------------------------
@@ -2226,7 +2296,7 @@
 	
 	// Abilities
 	//----------------------------------------------------------------
-	"Ability1"					""	 //Reference: ACpu
+	"Ability1"					"neutral_purge"
 	
 	// Armor
 	//----------------------------------------------------------------
@@ -2569,9 +2639,9 @@
 	
 	// Abilities
 	//----------------------------------------------------------------
-	"Ability1"					""	 //Reference: ACmi
-	"Ability2"					""	 //Reference: ACtb
-	"Ability3"					""	 //Reference: ACtc
+	"Ability1"					"neutral_hurl_boulder"
+	"Ability2"					"neutral_slam"
+	"Ability3"					"neutral_spell_immunity"
 	
 	// Armor
 	//----------------------------------------------------------------
@@ -2705,7 +2775,7 @@
 
 //=================================================================================
 // Creature: Ice Troll Priest
-// Description: "Priest of healing magic. |n|n|cffffcc00Attacks land and air units.|r"
+// Description: "Priest of healing magic. Can cast Abolish Magic. |n|n|cffffcc00Attacks land and air units.|r"
 //=================================================================================
 "neutral_ice_troll_priest"
 {
@@ -2723,7 +2793,8 @@
 	
 	// Abilities
 	//----------------------------------------------------------------
-	"Ability1"					""	 //Reference: Anh1
+	"Ability1"					"neutral_heal"
+	"Ability2"					"neutral_abolish_magic"
 	
 	// Armor
 	//----------------------------------------------------------------
@@ -2880,9 +2951,9 @@
 	
 	// Abilities
 	//----------------------------------------------------------------
-	"Ability1"					""	 //Reference: Anh2
-	"Ability2"					""	 //Reference: ACf2
-	"Ability3"					""	 //Reference: ACd2
+	"Ability1"					"neutral_heal"
+	"Ability2"					"neutral_frost_armor"
+	"Ability3"					"neutral_abolish_magic"
 	
 	// Armor
 	//----------------------------------------------------------------
@@ -2960,7 +3031,7 @@
 	
 	// Abilities
 	//----------------------------------------------------------------
-	"Ability1"					""	 //Reference: ACat
+	"Ability1"					"neutral_trueshot_aura"
 	
 	// Armor
 	//----------------------------------------------------------------
@@ -3044,7 +3115,7 @@
 	
 	// Abilities
 	//----------------------------------------------------------------
-	"Ability1"					""	 //Reference: ACen
+	"Ability1"					"neutral_ensnare"
 	
 	// Armor
 	//----------------------------------------------------------------
@@ -3131,8 +3202,8 @@
 	
 	// Abilities
 	//----------------------------------------------------------------
-	"Ability1"					""	 //Reference: ACsw
-	"Ability2"					""	 //Reference: ACdm
+	"Ability1"					"neutral_slow"
+	"Ability2"					"neutral_abolish_magic"
 	
 	// Armor
 	//----------------------------------------------------------------
@@ -3162,7 +3233,6 @@
 	"BoundsHullName"			"DOTA_HULL_SIZE_HERO"
 	"RingRadius"				"31"
 	"CollisionSize"				"31"
-	"FormationRank"				"2"
 	
 	// Unit Costs
 	//----------------------------------------------------------------
@@ -3221,7 +3291,7 @@
 	
 	// Abilities
 	//----------------------------------------------------------------
-	"Ability1"					"models/creeps/neutral_creeps/n_creep_kobold/kobold_b/n_creep_kobold_b.vmdl"
+	"Ability1"					"neutral_bash"
 	
 	// Armor
 	//----------------------------------------------------------------
@@ -3249,7 +3319,6 @@
 	"BoundsHullName"			"DOTA_HULL_SIZE_HUGE"
 	"RingRadius"				"31"
 	"CollisionSize"				"31"
-	"FormationRank"				"0"
 	
 	// Unit Costs
 	//----------------------------------------------------------------
@@ -3307,6 +3376,7 @@
 	"Level"						"1"
 	"HealthBarOffset"			"140"
 
+	"FormationRank"				"0"
 	"AttacksEnabled"			"ground"
 	
 	// Abilities
@@ -3338,7 +3408,6 @@
 	"BoundsHullName"			"DOTA_HULL_SIZE_HERO"
 	"RingRadius"				"31"
 	"CollisionSize"				"31"
-	"FormationRank"				"0"
 	
 	// Unit Costs
 	//----------------------------------------------------------------
@@ -3389,12 +3458,13 @@
 	"Level"						"5"
 	"HealthBarOffset"			"140"
 
+	"FormationRank"				"2"
 	"AttacksEnabled"			"ground,air"
 	
 	// Abilities
 	//----------------------------------------------------------------
-	"Ability1"					""	 //Reference: ACpu
-	"Ability2"					""	 //Reference: ACls
+	"Ability1"					"neutral_purge"
+	"Ability2"					"neutral_lightning_shield"
 	
 	// Armor
 	//----------------------------------------------------------------
@@ -3424,7 +3494,6 @@
 	"BoundsHullName"			"DOTA_HULL_SIZE_HUGE"
 	"RingRadius"				"32"
 	"CollisionSize"				"32"
-	"FormationRank"				"2"
 	
 	// Unit Costs
 	//----------------------------------------------------------------

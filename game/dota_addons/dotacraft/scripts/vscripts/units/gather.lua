@@ -78,15 +78,14 @@ function Gather( event )
 
     -- For gathering without a return ability
     event:OnLumberGained(function(value)
-        Gatherer:print("Gained "..value.." lumber")
+        --Gatherer:print("Gained "..value.." lumber")
         Players:ModifyLumber(playerID, value)
         PopupLumber(caster, value)
         Scores:IncrementLumberHarvested(playerID, value)
     end)
 
     event:OnTreeDamaged(function(tree)
-        Gatherer:print("OnTreeDamaged: "..tree.health)
-
+        --Gatherer:print("OnTreeDamaged: "..tree.health)
         caster:StartGesture(ACT_DOTA_ATTACK)
 
         -- Hit particle
@@ -112,6 +111,9 @@ function Gather( event )
 
     event:OnGoldMineReached(function(mine)
         Gatherer:print("Gold Mine reached")
+        if IsValidEntity(mine.building_on_top) and not mine:HasRoomForGatherer() then
+            caster:CancelGather()
+        end
     end)
 
     event:OnGoldMineFree(function(mine)
@@ -172,16 +174,12 @@ function Gather( event )
                     PlayerResource:RemoveFromSelection(playerID, caster)
                 end
             end
-
-            -- Particle Counter on overhead
-            counter = #mine:GetGatherers()
-            mine:SetCounter(counter)
         end
     end)
 
     -- For gathering without return
     event:OnGoldGained(function(value, mine)
-        Gatherer:print("Gained "..value.." gold from "..mine:GetUnitName().." "..mine:GetEntityIndex())
+        --Gatherer:print("Gained "..value.." gold from "..mine:GetUnitName().." "..mine:GetEntityIndex())
         if IsValidEntity(mine.building_on_top) then
             mine.building_on_top:SetMana(mine:GetHealth())
         end
@@ -262,13 +260,12 @@ function ReturnResources( event )
     event:OnLumberDepositReached(function(building)
         Gatherer:print("Lumber deposit reached: ".. building:GetUnitName())
         local lumber_gathered = caster:GetModifierStackCount("modifier_carrying_lumber",caster)
-        caster:RemoveModifierByName("modifier_carrying_lumber")
+        caster:RemoveCarriedResource("lumber")
         if lumber_gathered > 0 then
             PopupLumber(caster, lumber_gathered)
             Players:ModifyLumber(playerID, lumber_gathered)
             Scores:IncrementLumberHarvested( playerID, lumber_gathered)
         end
-        caster.lumber_gathered = 0
     end)
 
     event:OnGoldDepositReached(function(building)
@@ -277,14 +274,12 @@ function ReturnResources( event )
         local upkeep = Players:GetUpkeep( playerID )
         local gold_gain = caster.gold_gathered * upkeep
 
-        caster:RemoveModifierByName("modifier_carrying_gold")
+        caster:RemoveCarriedResource("gold")
         Scores:IncrementGoldMined(playerID, caster.gold_gathered)
         Scores:AddGoldLostToUpkeep(playerID, caster.gold_gathered - gold_gain)
 
         Players:ModifyGold(playerID, gold_gain)
         PopupGoldGain(caster, gold_gain)
-
-        caster.gold_gathered = 0
     end)
 end
 

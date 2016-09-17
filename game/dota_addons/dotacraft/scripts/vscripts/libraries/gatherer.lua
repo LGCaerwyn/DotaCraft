@@ -46,6 +46,7 @@ function Gatherer:start()
     -- Game Event Listeners
     ListenToGameEvent('game_rules_state_change', Dynamic_Wrap(Gatherer, 'OnGameRulesStateChange'), self)
     ListenToGameEvent('npc_spawned', Dynamic_Wrap(Gatherer, 'OnNPCSpawned'), self)
+    ListenToGameEvent('entity_killed', Dynamic_Wrap(Gatherer, 'OnEntityKilled'), self)
     ListenToGameEvent('tree_cut', Dynamic_Wrap(Gatherer, 'OnTreeCut'), self)
 
     -- Panorama Event Listeners
@@ -141,6 +142,13 @@ function Gatherer:OnNPCSpawned(event)
     local npc = EntIndexToHScript(event.entindex)
     if npc:IsGatherer() then
         Gatherer:Init(npc)
+    end
+end
+
+function Gatherer:OnEntityKilled(event)
+    local killed = EntIndexToHScript(event.entindex_killed)
+    if IsValidEntity(killed) and killed:IsGatherer() then
+        killed:CancelGather()
     end
 end
 
@@ -252,8 +260,19 @@ function Gatherer:OnGoldMineClick(event)
     local queue = event.queue == 1
     local unit = EntIndexToHScript(entityIndex)
 
-    Gatherer:print("OnGoldMineClick!")
+    Gatherer:print("OnGoldMineClick! "..gold_mine:GetUnitName())
 
+    if gold_mine:GetUnitName() == "undead_haunted_gold_mine" then
+        local mine = gold_mine.mine
+        if not mine:HasRoomForGatherer() then
+            if gold_mine:GetHealthDeficit() > 0 then
+                BuildingHelper:RepairCommand({PlayerID = playerID, targetIndex = targetIndex})
+            else
+                SendErrorMessage(playerID, "error_haunted_gold_mine_full")
+            end
+            return
+        end
+    end
     unit:GatherFromNearestGoldMine(gold_mine)
 end
 
@@ -668,7 +687,11 @@ function Gatherer:InitGoldMines()
             end
             if free_pos then
                 gold_mine.gatherers[free_pos] = unit
-                print("Added Gatherer, currently ", TableCount(gold_mine.gatherers))
+                local count = TableCount(gold_mine.gatherers)
+                Gatherer:print("Added Gatherer, currently "..count)
+                if IsValidEntity(gold_mine.building_on_top) then
+                    gold_mine:SetCounter(count)
+                end
                 return free_pos
             else
                 return false
@@ -679,7 +702,12 @@ function Gatherer:InitGoldMines()
             for k,v in pairs(gold_mine.gatherers) do
                 if v == unit then
                     gold_mine.gatherers[k] = nil
-                    print("Removed Gatherer currently ", TableCount(gold_mine.gatherers))
+                    local count = TableCount(gold_mine.gatherers)
+                    Gatherer:print("Removed Gatherer, currently "..count)
+
+                    if IsValidEntity(gold_mine.building_on_top) then
+                        gold_mine:SetCounter(count)
+                    end
                     break
                 end
             end
@@ -687,7 +715,7 @@ function Gatherer:InitGoldMines()
 
         function gold_mine:SetCounter(count)
             local building_on_top = gold_mine.building_on_top
-            print("SetGoldMineCounter ",count)
+            Gatherer:print("Set Gold MineCounter to "..count)
 
             for i=1,count do
                 --print("Set ",i," turned on")
@@ -907,6 +935,11 @@ function Gatherer:Init(unit)
         unit:SetModifierStackCount(modifierName, unit, value)
     end
 
+    function unit:RemoveCarriedResource(resource_name)
+        unit[resource_name.."_gathered"] = 0
+        unit:RemoveModifierByName("modifier_carrying_"..resource_name)
+    end
+
     -- Carrying capacity can be enhanced by upgrades, in that case the ability must have a lumber_capacity AbilitySpecial
     function unit:GetLumberCapacity()
         return unit.GatherAbility and unit.GatherAbility:GetLevelSpecialValueFor("lumber_capacity", unit.GatherAbility:GetLevel()-1) or 0
@@ -942,6 +975,10 @@ function Gatherer:Init(unit)
         Gatherer:print("StartGatheringLumber - Gain "..lumber_per_interval.." lumber every "..lumber_interval.." seconds")
         unit:Stop()
         unit:SetForwardVector((tree:GetAbsOrigin() - unit:GetAbsOrigin()):Normalized())
+
+        -- Drop any gold
+        unit:RemoveCarriedResource("gold")
+
         unit.gatherer_timer = Timers:CreateTimer(lumber_interval, function()
             unit:SetForwardVector((tree:GetAbsOrigin() - unit:GetAbsOrigin()):Normalized())
             if damage_to_tree then
@@ -993,6 +1030,9 @@ function Gatherer:Init(unit)
         unit:AddNewModifier(unit, nil, "modifier_gatherer_hidden", {restricted=not unit:GetKeyValue("GoldMineControllable")})
         unit.gatherer_state = "gathering_gold"
         
+        -- Drop any lumber
+        unit:RemoveCarriedResource("lumber")
+
         unit.gatherer_timer = Timers:CreateTimer(gold_interval, function()
             local gold_gain = gold_per_interval
             if damage_to_mine then
@@ -1671,78 +1711,3 @@ end
 function IsMineOccupiedByTeam( mine, teamID )
     return (IsValidEntity(mine.building_on_top) and mine.building_on_top:GetTeamNumber() == teamID)
 end
-
-------------------------------------------------
---               Functional Lua               --
-------------------------------------------------
-
--- map(double, {1,2,3,4}) -> {2,4,6,8}
-function map(func, tbl)
-    local newtbl = {}
-    for i,v in pairs(tbl) do
-        newtbl[i] = func(v)
-    end
-    return newtbl
-end
-
--- filter(is_even, {1,2,3,4}) -> {2,4}
-function filter(func, tbl)
-    local newtbl= {}
-    for i,v in pairs(tbl) do
-        if func(v) then
-            newtbl[i]=v
-        end
-    end
-    return newtbl
-end
-
--- head({1,2,3,4}) -> 1
-function head(tbl)
-    return tbl[1]
-end
-
--- tail({1,2,3}) -> {2,3}
-function tail(tbl)
-    if #tbl < 1 then
-        return nil
-    else
-        local newtbl = {}
-        local tblsize = #tbl
-        local i = 2
-        while (i <= tblsize) do
-            table.insert(newtbl, i-1, tbl[i])
-            i = i + 1
-        end
-        return newtbl
-    end
-end
-
--- foldr(operator.mul, 1, {1,2,3,4,5}) -> 120
-function foldr(func, val, tbl)
-    for i,v in pairs(tbl) do
-        val = func(val, v)
-    end
-    return val
-end
-
--- reduce(operator.add, {1,2,3,4}) -> 10
-function reduce(func, tbl)
-    return foldr(func, head(tbl), tail(tbl))
-end
-
-operator = {
-    mod = math.mod;
-    pow = math.pow;
-    add = function(n,m) return n + m end;
-    sub = function(n,m) return n - m end;
-    mul = function(n,m) return n * m end;
-    div = function(n,m) return n / m end;
-    gt  = function(n,m) return n > m end;
-    lt  = function(n,m) return n < m end;
-    eq  = function(n,m) return n == m end;
-    le  = function(n,m) return n <= m end;
-    ge  = function(n,m) return n >= m end;
-    ne  = function(n,m) return n ~= m end;
-}
-
----------------------------------------------------------------

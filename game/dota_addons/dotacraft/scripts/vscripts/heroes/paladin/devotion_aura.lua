@@ -9,6 +9,14 @@ end
 
 --------------------------------------------------------------------------------
 
+neutral_devotion_aura = class({})
+
+function neutral_devotion_aura:GetIntrinsicModifierName()
+    return "modifier_devotion_aura"
+end
+
+--------------------------------------------------------------------------------
+
 modifier_devotion_aura = class({})
 
 function modifier_devotion_aura:IsAura()
@@ -69,4 +77,8 @@ end
 
 function modifier_devotion_aura_buff:IsPurgable()
     return false
+end
+
+function modifier_devotion_aura_buff:GetTexture()
+    return "paladin_devotion_aura"
 end

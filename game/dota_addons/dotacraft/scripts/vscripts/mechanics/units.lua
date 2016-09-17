@@ -25,25 +25,23 @@ function Units:Init( unit )
     local bBuilder = IsBuilder(unit)
     local bBuilding = IsCustomBuilding(unit)
     if bBuilder then
-        unit.oldIdle = unit.IsIdle
         function unit:IsIdle()
-            return unit:oldIdle() and unit.state == "idle"
+            return not unit:IsMoving() and unit.state == "idle"
         end
     end
 
     -- Attack system, only applied to units and buildings with an attack
     local attacks_enabled = unit:GetAttacksEnabled()
     if attacks_enabled ~= "none" then
-        if bBuilder then
+        if bBuilder or unit:GetUnitName() == "neutral_goblin_sapper" then
             ApplyModifier(unit, "modifier_attack_system_passive")
         else
             ApplyModifier(unit, "modifier_attack_system")
         end
 
         -- Neutral AI aggro and leashing
-        if unit:GetTeamNumber() == DOTA_TEAM_NEUTRALS and string.match(unit:GetUnitName(), "neutral_") then
+        if unit:IsNeutral() then
             ApplyModifier(unit,"modifier_neutral_idle_aggro")
-
             NeutralAI:Start( unit )
         end
     end
@@ -344,6 +342,14 @@ function IsCustomShop( unit )
     return unit:HasAbility("ability_shop")
 end
 
+function CDOTA_BaseNPC:CanSellToTarget( unit )
+    return IsCustomShop(unit) and (unit:GetTeamNumber() == DOTA_TEAM_NEUTRALS or not self:IsOpposingTeam(unit)) and not unit:SellsUnits()
+end
+
+function CDOTA_BaseNPC:SellsUnits()
+    return self:GetKeyValue("SellsNPCs") or self:GetKeyValue("SellsHeroes")
+end
+
 function CDOTA_BaseNPC:IsMechanical()
     return self:GetUnitLabel():match("mechanical")
 end
@@ -358,6 +364,17 @@ end
 
 function CDOTA_BaseNPC:IsFlyingUnit()
     return self:GetKeyValue("MovementCapabilities") == "DOTA_UNIT_CAP_MOVE_FLY"
+end
+
+function CDOTA_BaseNPC:IsTransportableOnZeppelin(unit)
+    local size = self:GetKeyValue("TransportSize") or 1
+    local bTransportable = not IsCustomBuilding(self) and not self:IsWard() and not self:IsFlyingUnit() and not self:IsOutOfGame() and not self:IsUnselectable()
+    local bSameOwner = self:GetPlayerOwnerID() == unit:GetPlayerOwnerID()  
+    return bSameOwner and bTransportable and unit.transportCount + size <= unit.maxTransportCount
+end
+
+function CDOTA_BaseNPC:IsNeutral()
+    return self:GetTeamNumber() == DOTA_TEAM_NEUTRALS and self:GetUnitName():match("neutral_")
 end
 
 -- Shortcut for a very common check
@@ -428,11 +445,20 @@ function FindOrganicAlliesInRadius( unit, radius, point )
     local allies = FindUnitsInRadius(team, position, nil, radius, DOTA_UNIT_TARGET_TEAM_FRIENDLY, target_type, flags, FIND_CLOSEST, false)
     local organic_allies = {}
     for _,ally in pairs(allies) do
-        if not IsCustomBuilding(ally) and not ally:IsMechanical() then
+        if not IsCustomBuilding(ally) and not ally:IsWard() and not ally:IsMechanical() then
             table.insert(organic_allies, ally)
         end
     end
     return organic_allies
+end
+
+-- Returns the first unit that passes the filter
+function FindFirstUnit(list, filter)
+    for _,unit in ipairs(list) do
+        if filter(unit) then
+            return unit
+        end
+    end
 end
 
 function HasGoldMineDistanceRestriction( unit_name )

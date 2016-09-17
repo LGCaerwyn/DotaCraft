@@ -308,7 +308,7 @@
 "item_replenishment_potion"
 {
 	"BaseClass"						"item_datadriven"
-	"AbilityTextureName"			"item_replenishment_potion"
+	"AbilityTextureName"			"item_potion_of_invulnerability"
 	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_DONT_RESUME_ATTACK"
 	"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
 	"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
@@ -324,7 +324,7 @@
 	"ItemSellable"                  "1"
 	"ItemDroppable"                 "1"
 
-	"ItemCost"						"1200"
+	"ItemCost"						"150"
 	"ItemShopTags"					"common"
 	"ItemQuality"					"common"
 	"ItemStackable"					"1"
@@ -464,20 +464,23 @@
 			"Target"		"CASTER"
 			"Duration"		"%duration"
 		}
+
+		"SpendCharge"
+		{}
 	}
 
 	"Modifiers"
 	{
 	    "modifier_invisibility_potion"
 	    {
+	    	"TextureName"		"item_potion_of_invisibility"
 	        "IsPurgable"        "1"
-	
 	        "OnCreated"
 	        {
 	            "ApplyModifier"
 	            {
 	                "ModifierName"  "modifier_invisibility"
-	                "Target"        "TARGET"
+	                "Target"        "CASTER"
 	            }
 	        }
 
@@ -486,7 +489,7 @@
 	            "RemoveModifier"
 	            {
 	                "ModifierName"  "modifier_invisibility"
-	                "Target"        "TARGET"
+	                "Target"        "CASTER"
 	            }
 	        }
 
@@ -494,8 +497,8 @@
 	        {
 	            "RemoveModifier"
 	            {
-	                "ModifierName"  "modifier_human_invisibility"
-	                "Target"        "TARGET"
+	                "ModifierName"  "modifier_invisibility_potion"
+	                "Target"        "CASTER"
 	            }
 	        }
 
@@ -503,8 +506,8 @@
 	        {
 	            "RemoveModifier"
 	            {
-	                "ModifierName"  "modifier_human_invisibility"
-	                "Target"        "TARGET"
+	                "ModifierName"  "modifier_invisibility_potion"
+	                "Target"        "CASTER"
 	            }
 	        }
 	    }

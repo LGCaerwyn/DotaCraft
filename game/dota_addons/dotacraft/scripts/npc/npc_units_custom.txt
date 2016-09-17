@@ -226,8 +226,8 @@
 		"Ability1"					"human_train_peasant"
 		"Ability2"					"human_call_to_arms"
 		"Ability3"					"human_call_to_arms_peasant"
-		"Ability4"					"human_castle_passive"	 //Reference: Amic
-		"Ability5"					"human_research_backpack"	 //Reference: Argl
+		"Ability4"					"human_castle_passive"
+		"Ability5"					"human_research_backpack"
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -404,7 +404,7 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
-		"Ability1"					""	 //Reference: Abds
+		"Ability1"					""
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -1240,7 +1240,7 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"6"
-		"Ability1"					"human_train_priest"	 //Reference: Abds
+		"Ability1"					"human_train_priest"
 		"Ability2"					"human_train_sorceress"
 		"Ability3"					"human_train_spell_breaker"
 		"Ability4"					"human_research_priest_training1"
@@ -1331,7 +1331,7 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
-		"Ability1"					"human_train_gryphon_rider"	 //Reference: Abds
+		"Ability1"					"human_train_gryphon_rider"
 		"Ability2"					"human_train_dragonhawk_rider"
 		"Ability3"					"human_research_storm_hammers"
 		"Ability4"					"human_research_cloud"
@@ -1410,7 +1410,7 @@
 		"HealthBarOffset"			"140"
 		"HasInventory"				"1"
 	
-		"UnitLabel"					"human_shop"
+		"ShopType"					"team"
 	
 		// Research
 		"Upgrades"
@@ -1422,8 +1422,8 @@
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
 		"Ability1"					""
-		"Ability2"					""	 //Reference: Aall
-		"Ability3"					""	 //Reference: Apit
+		"Ability2"					""
+		"Ability3"					""
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -1630,8 +1630,8 @@
 	
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					"human_back_to_work"	 //Reference: Ahar
-		"Ability3"					""	 //Reference: Ahrp
+		"Ability1"					"human_back_to_work"
+		"Ability3"					""
 			
 		// Armor
 		//----------------------------------------------------------------
@@ -1852,7 +1852,7 @@
 		
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					"human_long_rifles_disabled"	 //Reference: Aihn
+		"Ability1"					"human_long_rifles_disabled"
 		"Ability10"					"human_backpack_disabled"
 		
 		// Armor
@@ -1960,7 +1960,7 @@
 		
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					"human_animal_war_training_disabled"	 //Reference: Aihn
+		"Ability1"					"human_animal_war_training_disabled"
 		"Ability10"					"human_backpack_disabled"
 		//"Ability11"				"human_knight_mounted_rider"
 		
@@ -2079,10 +2079,10 @@
 	
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					"lina_arcana"	 //Reference: Aivs
-		"Ability2"					"human_slow"	 //Reference: Aply
-		"Ability3"					"human_invisibility_disabled"	 //Reference: Aslo
-		"Ability4"					"human_polymorph_disabled"	 //Reference: Aihn
+		"Ability1"					"lina_arcana"
+		"Ability2"					"human_slow"
+		"Ability3"					"human_invisibility_disabled"
+		"Ability4"					"human_polymorph_disabled"
 		"Ability10"					"human_backpack_disabled"
 		
 		// Armor
@@ -2194,9 +2194,9 @@
 		
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					"human_heal"	 //Reference: Ahea
-		"Ability2"					"human_dispel_magic_disabled"	 //Reference: Ainf
-		"Ability3"					"human_inner_fire_disabled"	 //Reference: Adis
+		"Ability1"					"human_heal"
+		"Ability2"					"human_dispel_magic_disabled"
+		"Ability3"					"human_inner_fire_disabled"
 		"Ability10"					"human_backpack_disabled"
 		
 		// Armor
@@ -2310,10 +2310,10 @@
 	
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					"human_spell_steal"	 //Reference: Asps
-		"Ability2"					"human_control_magic_disabled"	 //Reference: Acmg
-		"Ability3"					"generic_spell_immunity"	 //Reference: Amim
-		"Ability4"					"human_feedback"	 //Reference: Afbk
+		"Ability1"					"human_spell_steal"
+		"Ability2"					"human_control_magic_disabled"
+		"Ability3"					"generic_spell_immunity"
+		"Ability4"					"human_feedback"
 		"Ability10"					"human_backpack_disabled"
 		
 		// Armor
@@ -2425,9 +2425,9 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"5"
-		"Ability1"					"human_true_sight"	 //Reference: Agyb
-		"Ability2"					"human_flying_machine_bombs_disabled"	 //Reference: Agyv
-		"Ability3"					"human_flak_cannons_disabled"	 //Reference: Aflk
+		"Ability1"					"human_true_sight"
+		"Ability2"					"human_flying_machine_bombs_disabled"
+		"Ability3"					"human_flak_cannons_disabled"
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -2540,8 +2540,8 @@
 	
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					"human_aerial_shackles"	 //Reference: Aclf
-		"Ability2"					"human_cloud_disabled"	 //Reference: Amls
+		"Ability1"					"human_aerial_shackles"
+		"Ability2"					"human_cloud_disabled"
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -2639,6 +2639,7 @@
 	    "GameSoundsFile"            "soundevents/game_sounds_heroes/game_sounds_techies.vsndevts"
 	
 		"AttacksEnabled"			"ground"
+		"TransportSize"				"2"
 	
 		"Artillery"					"1"
 		"SplashAttack"				"1"
@@ -2658,8 +2659,8 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"Ability1"					"attack_ground"
-		"Ability2"					"human_flare_disabled"	 //Reference: Afla
-		"Ability3"					"human_fragmentation_shards_disabled"	 //Reference: Afsh
+		"Ability2"					"human_flare_disabled"
+		"Ability3"					"human_fragmentation_shards_disabled"
 		"Ability4"					"minimum_range"
 		
 		// Armor
@@ -2758,6 +2759,7 @@
 		"AttacksEnabled"			"building"
 		"LeavesCorpse"				"0"
 		"UnitLabel"					"mechanical"
+		"TransportSize"				"4"
 	
 		// Research
 		"Upgrades"
@@ -2768,8 +2770,8 @@
 		
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					"human_barrage_disabled"	 //Reference: Srtt
-		"Ability2"					""	 //Reference: Aroc
+		"Ability1"					"human_barrage_disabled"
+		"Ability2"					""
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -2878,7 +2880,7 @@
 		
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					"human_storm_hammers_disabled"	 //Reference: Asth
+		"Ability1"					"human_storm_hammers_disabled"
 		"Ability10"					"human_gryphon_mounted_rider"
 		
 		// Armor
@@ -3048,13 +3050,14 @@
 		"AttacksEnabled"			"ground"
 		"HasQueue"					"1"
 		"HasDeathAnimation"			"1"
+		"FormationRank"				"5"
 		
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"6"
-		"Ability1"					"nightelf_train_dryad"	 //Reference: Abds
-		"Ability2"					"nightelf_train_druid_of_the_claw"	 //Reference: Aeat
-		"Ability3"					"nightelf_train_mountain_giant"	 //Reference: Aro1
+		"Ability1"					"nightelf_train_dryad"
+		"Ability2"					"nightelf_train_druid_of_the_claw"
+		"Ability3"					"nightelf_train_mountain_giant"
 		"Ability4"					"nightelf_research_abolish_magic"
 		"Ability5"					"nightelf_research_druid_of_the_claw_training1"
 		"Ability6"					"nightelf_research_resistant_skin"
@@ -3146,13 +3149,14 @@
 		"AttacksEnabled"			"ground"
 		"HasQueue"					"1"
 		"HasDeathAnimation"			"1"
+		"FormationRank"				"5"
 		
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"6"
-		"Ability1"					"nightelf_train_archer"	 //Reference: Abds
-		"Ability2"					"nightelf_train_huntress"	 //Reference: Aeat
-		"Ability3"					"nightelf_train_glaive_thrower"	 //Reference: Aro1
+		"Ability1"					"nightelf_train_archer"
+		"Ability2"					"nightelf_train_huntress"
+		"Ability3"					"nightelf_train_glaive_thrower"
 		"Ability4"					"nightelf_research_sentinel"
 		"Ability5"					"nightelf_research_improved_bows"
 		"Ability6"					"nightelf_uproot"
@@ -3245,13 +3249,14 @@
 		"AttacksEnabled"			"ground"
 		"HasQueue"					"1"
 		"HasDeathAnimation"			"1"
+		"FormationRank"				"5"
 		
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"6"
-		"Ability1"					"nightelf_train_druid_of_the_talon"	 //Reference: Abds
-		"Ability2"					"nightelf_train_hippogryph"	 //Reference: Aeat
-		"Ability3"					"nightelf_train_faerie_dragon"	 //Reference: Aro1
+		"Ability1"					"nightelf_train_druid_of_the_talon"
+		"Ability2"					"nightelf_train_hippogryph"
+		"Ability3"					"nightelf_train_faerie_dragon"
 		"Ability4"					"nightelf_research_druid_of_the_talon_training1"
 		"Ability5"					"nightelf_research_hippogryph_taming"
 		"Ability6"					"nightelf_research_mark_of_the_talon"
@@ -3341,13 +3346,14 @@
 		"AttacksEnabled"			"ground,air"
 		"HasQueue"					"1"
 		"HasDeathAnimation"			"1"
+		"FormationRank"				"5"
 		
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
-		"Ability1"					"nightelf_uproot"	 //Reference: Abds
-		"Ability2"					""	 //Reference: Aeat
-		"Ability3"					""	 //Reference: Aro2
+		"Ability1"					"nightelf_uproot"
+		"Ability2"					""
+		"Ability3"					""
 		"Ability12"					"nightelf_natures_blessing_disabled"
 		"Ability13"					"nightelf_eat_tree"
 		
@@ -3429,20 +3435,20 @@
 		"Level"						"1"
 		"HealthBarOffset"			"140"
 	
-		"UnitLabel"					"nightelf_shop"
-	
+		"ShopType"					"team"
 		"AttacksEnabled"			"ground"
 		"HasQueue"					"1"
 		"HasDeathAnimation"			"1"
+		"FormationRank"				"5"
 		
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
-		"Ability1"					"nightelf_uproot"	 //Reference: Abds
+		"Ability1"					"nightelf_uproot"
 		"Ability2"					""
-		"Ability3"					""	 //Reference: Aeat
-		"Ability4"					""	 //Reference: Aro1
-		"Ability5"					""	 //Reference: Apit
+		"Ability3"					""
+		"Ability4"					""
+		"Ability5"					""
 		"Ability12"					"nightelf_natures_blessing_disabled"
 		"Ability13"					"nightelf_eat_tree"
 		
@@ -3531,16 +3537,17 @@
 		"AttacksEnabled"			"ground"
 		"HasQueue"					"1"
 		"HasDeathAnimation"			"1"
+		"FormationRank"				"5"
 		
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"5"
-		"Ability1"					"nightelf_train_wisp"	 //Reference: Aent
-		"Ability2"					"nightelf_uproot"	 //Reference: Aeat
-		"Ability3"					"nightelf_research_backpack"	 //Reference: Aro1
+		"Ability1"					"nightelf_train_wisp"
+		"Ability2"					"nightelf_uproot"
+		"Ability3"					"nightelf_research_backpack"
 		"Ability4"					"nightelf_entangle_gold_mine_passive" //Shows while the tree has a mine entangled
 		"Ability5"					"nightelf_entangle_gold_mine"	//Hidden while the tree has a mine entangled
-		"Ability6"					"nightelf_train_tree_of_ages"	 //Reference: Arlm
+		"Ability6"					"nightelf_train_tree_of_ages"
 		"Ability12"					"nightelf_natures_blessing_disabled"
 		"Ability13"					"nightelf_eat_tree"
 	
@@ -3640,6 +3647,7 @@
 		"AttacksEnabled"			"ground"
 		"HasQueue"					"1"
 		"HasDeathAnimation"			"1"
+		"FormationRank"				"5"
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -3650,7 +3658,7 @@
 		"Ability4"					"nightelf_research_backpack"
 		"Ability5"					"nightelf_entangle_gold_mine_passive" //Shows while the tree has a mine entangled
 		"Ability6"					"nightelf_entangle_gold_mine"	//Hidden while the tree has a mine entangled
-		"Ability7"					"nightelf_train_tree_of_eternity"	 //Reference: Arlm
+		"Ability7"					"nightelf_train_tree_of_eternity"
 		"Ability12"					"nightelf_natures_blessing_disabled"
 		"Ability13"					"nightelf_eat_tree"
 	
@@ -3749,6 +3757,7 @@
 		"AttacksEnabled"			"ground"
 		"HasQueue"					"1"
 		"HasDeathAnimation"			"1"
+		"FormationRank"				"5"
 		
 		// Abilities
 		//----------------------------------------------------------------
@@ -3944,7 +3953,7 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
-		"Ability1"					"nightelf_train_chimaera"	 //Reference: Abds
+		"Ability1"					"nightelf_train_chimaera"
 		"Ability2"					"nightelf_research_corrosive_breath"
 		
 		// Armor
@@ -4111,8 +4120,8 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
-		"Ability1"					"nightelf_replenish_mana_and_life"	 //Reference: Abds
-		"Ability2"					"nightelf_well_spring_disabled"	 //Reference: Ambt
+		"Ability1"					"nightelf_replenish_mana_and_life"
+		"Ability2"					"nightelf_well_spring_disabled"
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -4285,10 +4294,10 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"6"
-		"Ability1"					"nightelf_gather"	 //Reference: Adtn - nightelf_detonate
-		"Ability2"					"nightelf_detonate"	 //Reference: Aren - nightelf_renew
-		"Ability3"					"nightelf_build_ancient_of_lore"	 //Reference: Awha - nightelf_gather
-		"Ability4"					"nightelf_build_ancient_of_wind"	 //Reference: Ault - Ultravision
+		"Ability1"					"nightelf_gather"
+		"Ability2"					"nightelf_detonate"
+		"Ability3"					"nightelf_build_ancient_of_lore"
+		"Ability4"					"nightelf_build_ancient_of_wind"
 		"Ability5"					"nightelf_build_ancient_protector"
 		"Ability6"					"nightelf_build_chimaera_roost"
 		"Ability7"					"build_nightelf_items"
@@ -4400,12 +4409,12 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"6"
-		"Ability1"					"nightelf_mount_hippogryph"	 //Reference: Aco2 Couple Instant (Archer)
-		"Ability2"					"nightelf_shadow_meld"	 //Reference: Ashm
+		"Ability1"					"nightelf_mount_hippogryph"
+		"Ability2"					"nightelf_shadow_meld"
 		"Ability3"					"nightelf_marksmanship_disabled"
 		"Ability4"					"nightelf_improved_bows_disabled"	
-		"Ability5"					"nightelf_ultravision_disabled"	 //Reference: Ault - Ultravision
-		"Ability6"					"nightelf_elunes_grace"	 //Reference: Aegr
+		"Ability5"					"nightelf_ultravision_disabled"
+		"Ability6"					"nightelf_elunes_grace"
 		"Ability10"					"nightelf_backpack_disabled"
 		"Ability11"					"nightelf_night_regen"
 		
@@ -4514,11 +4523,11 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"6"
-		"Ability1"					"nightelf_sentinel"	 //Reference: Aesn
-		"Ability2"					"nightelf_shadow_meld"	 //Reference: Ashm
-		"Ability3"					"nightelf_moon_glaive"	 //Reference: Amgl - Gets replaced by "nightelf_upgraded_moon_glaive" after the research
+		"Ability1"					"nightelf_sentinel"
+		"Ability2"					"nightelf_shadow_meld"
+		"Ability3"					"nightelf_moon_glaive"
 		"Ability4"					""
-		"Ability5"					"nightelf_ultravision_disabled"	 //Reference: Ault - Ultravision
+		"Ability5"					"nightelf_ultravision_disabled"
 		"Ability10"					"nightelf_backpack_disabled"
 		"Ability11"					"nightelf_night_regen"
 		
@@ -4622,6 +4631,7 @@
 		"AttacksEnabled"			"ground"
 		"LeavesCorpse"				"0"
 		"UnitLabel"					"mechanical"
+		"TransportSize"				"2"
 	
 		"SplashAttack"				"1"
 		"SplashFullRadius"			"25"
@@ -4640,8 +4650,8 @@
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
 		"Ability1"					"attack_ground"
-		"Ability2"					"nightelf_vorpal_blades_disabled"	 //Reference: Aimp - Vorpal Blades
-		"Ability3"					"nightelf_ultravision_disabled"	 //Reference: Ault - Ultravision
+		"Ability2"					"nightelf_vorpal_blades_disabled"
+		"Ability3"					"nightelf_ultravision_disabled"
 		"Ability4"					"minimum_range"
 		
 		// Armor
@@ -4742,11 +4752,11 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"6"
-		"Ability1"					"nightelf_abolish_magic_disabled"	 //Reference: Aadm
-		"Ability2"					"nightelf_slow_poison"	  	//Reference: Aspo
-		"Ability3"					"generic_spell_immunity"	//Reference: Amim
+		"Ability1"					"nightelf_abolish_magic_disabled"
+		"Ability2"					"nightelf_slow_poison"
+		"Ability3"					"generic_spell_immunity"
 		"Ability4"					""
-		"Ability5"					"nightelf_ultravision_disabled"	 //Reference: Ault - Ultravision
+		"Ability5"					"nightelf_ultravision_disabled"
 		"Ability10"					"nightelf_backpack_disabled"
 		"Ability11"					"nightelf_night_regen"
 		
@@ -4968,6 +4978,7 @@
 	
 		"AttacksEnabled"			"ground"
 		"LeavesCorpse"				"0"
+		"TransportSize"				"2"
 	
 		// Research
 		"Upgrades"
@@ -4979,10 +4990,10 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"6"
-		"Ability1"					"nightelf_taunt"	 //Reference: Atau
-		"Ability2"					"nightelf_resistant_skin_disabled"	 //Reference: Arsk
-		"Ability3"					"nightelf_hardened_skin_disabled"	 //Reference: Assk
-		"Ability4"					"nightelf_war_club"	 //Reference: Agra
+		"Ability1"					"nightelf_taunt"
+		"Ability2"					"nightelf_resistant_skin_disabled"
+		"Ability3"					"nightelf_hardened_skin_disabled"
+		"Ability4"					"nightelf_war_club"
 		"Ability9"					"nightelf_backpack_disabled"
 		"Ability10"					"nightelf_mountain_giant_model"
 		"Ability11"					"nightelf_night_regen"
@@ -5078,6 +5089,7 @@
 	
 		"AttacksEnabled"			"ground"
 		"LeavesCorpse"				"0"
+		"TransportSize"				"2"
 	
 		// Research
 		"Upgrades"
@@ -5089,10 +5101,10 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"6"
-		"Ability1"					"nightelf_taunt"	 //Reference: Atau
-		"Ability2"					"nightelf_resistant_skin"	 //Reference: Arsk
-		"Ability3"					"nightelf_hardened_skin"	 //Reference: Assk
-		"Ability4"					"nightelf_war_club"	 //Reference: Agra
+		"Ability1"					"nightelf_taunt"
+		"Ability2"					"nightelf_resistant_skin"
+		"Ability3"					"nightelf_hardened_skin"
+		"Ability4"					"nightelf_war_club"
 		"Ability9"					"nightelf_backpack_disabled"
 		"Ability10"					"nightelf_mountain_giant_model"
 		"Ability11"					"nightelf_night_regen"
@@ -5205,10 +5217,10 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"6"
-		"Ability1"					"nightelf_storm_crow_form"	 //Reference: Arav
-		"Ability2"					"nightelf_faerie_fire"	 //Reference: Afa2
+		"Ability1"					"nightelf_storm_crow_form"
+		"Ability2"					"nightelf_faerie_fire"
 		"Ability3"					"nightelf_cyclone"
-		"Ability4"					"nightelf_ultravision_disabled"	 //Reference: Ault - Ultravision
+		"Ability4"					"nightelf_ultravision_disabled"
 		"Ability9"					"nightelf_backpack_disabled"
 		"Ability10"					"nightelf_storm_crow_form_off"
 		"Ability11"					"nightelf_night_regen"
@@ -5328,7 +5340,7 @@
 		"Ability1"					"nightelf_mana_flare"
 		"Ability2"					"generic_spell_immunity"	
 		"Ability3"					"nightelf_phase_shift"
-		"Ability4"					"nightelf_ultravision_disabled"	 //Reference: Ault - Ultravision
+		"Ability4"					"nightelf_ultravision_disabled"
 		"Ability11"					"nightelf_night_regen"
 		
 		// Armor
@@ -5433,8 +5445,8 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
-		"Ability1"					"nightelf_pick_up_archer"	 //Reference: Acoh
-		"Ability2"					"nightelf_ultravision_disabled"	 //Reference: Ault - Ultravision
+		"Ability1"					"nightelf_pick_up_archer"
+		"Ability2"					"nightelf_ultravision_disabled"
 		"Ability11"					"nightelf_night_regen"
 		
 		// Armor
@@ -5532,8 +5544,8 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"6"
-		"Ability1"					"nightelf_dismount"	 //Reference: Adec
-		"Ability2"					"nightelf_ultravision_disabled"	 //Reference: Ault - Ultravision
+		"Ability1"					"nightelf_dismount"
+		"Ability2"					"nightelf_ultravision_disabled"
 		"Ability3"					"nightelf_marksmanship_disabled"
 		"Ability4"					"nightelf_improved_bows_disabled"
 		"Ability11"					"nightelf_night_regen"
@@ -5642,9 +5654,9 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
-		"Ability1"					"nightelf_corrosive_breath_disabled"	 //Reference: Acor
-		"Ability2"					"nightelf_chimaera_attack"	 //Reference: Alit //Lightning Attack
-		"Ability3"					"nightelf_ultravision_disabled"	 //Reference: Ault - Ultravision
+		"Ability1"					"nightelf_corrosive_breath_disabled"
+		"Ability2"					"nightelf_chimaera_attack"
+		"Ability3"					"nightelf_ultravision_disabled"
 		"Ability11"					"nightelf_night_regen"
 		
 		// Armor
@@ -5870,8 +5882,8 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"6"
-		"Ability1"					"orc_train_grunt"	 //Reference: Abds
-		"Ability2"					"orc_train_troll_headhunter"	 //Reference: Aspi
+		"Ability1"					"orc_train_grunt"
+		"Ability2"					"orc_train_troll_headhunter"
 		"Ability3"					"orc_train_demolisher"
 		"Ability4"					"orc_research_berserker_strength"
 		"Ability5"					"orc_research_berserker_upgrade"
@@ -5963,8 +5975,8 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"6"
-		"Ability1"					"orc_train_raider"	 //Reference: Abds
-		"Ability2"					"orc_train_kodo_beast"	 //Reference: Aspi
+		"Ability1"					"orc_train_raider"
+		"Ability2"					"orc_train_kodo_beast"
 		"Ability3"					"orc_train_wind_rider"
 		"Ability4"					"orc_train_troll_batrider"
 		"Ability5"					"orc_research_ensnare"
@@ -6059,9 +6071,9 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
-		"Ability1"					"orc_train_peon"	 //Reference: Abdl
-		"Ability2"					"orc_research_pillage"	 //Reference: Aspi
-		"Ability3"					"orc_research_backpack"	 //Reference: Argl
+		"Ability1"					"orc_train_peon"
+		"Ability2"					"orc_research_pillage"
+		"Ability3"					"orc_research_backpack"
 		"Ability4"					"orc_train_stronghold"
 		
 		// Armor
@@ -6152,9 +6164,9 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
-		"Ability1"					"orc_train_peon"	 //Reference: Abdl
-		"Ability2"					"orc_research_pillage"	 //Reference: Aspi
-		"Ability3"					"orc_research_backpack"	 //Reference: Argl
+		"Ability1"					"orc_train_peon"
+		"Ability2"					"orc_research_pillage"
+		"Ability3"					"orc_research_backpack"
 		"Ability4"					"orc_train_fortress"
 		
 		// Armor
@@ -6245,9 +6257,9 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
-		"Ability1"					"orc_train_peon"	 //Reference: Abdl
-		"Ability2"					"orc_research_pillage"	 //Reference: Aspi
-		"Ability3"					"orc_research_backpack"	 //Reference: Argl
+		"Ability1"					"orc_train_peon"
+		"Ability2"					"orc_research_pillage"
+		"Ability3"					"orc_research_backpack"
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -6336,12 +6348,12 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
-		"Ability1"					"orc_battle_stations"	 //Reference: Abds
-		"Ability2"					"orc_stand_down"	 //Reference: Aspi
-		"Ability3"					"orc_reinforced_defenses"	 //Reference: Abun
-		"Ability4"					"orc_burrow_peon"	 //Reference: Abtl
-		"Ability5"					"orc_back_to_work"	 //Reference: Astd
-		"Ability6"					""	 //Reference: Arbr
+		"Ability1"					"orc_battle_stations"
+		"Ability2"					"orc_stand_down"
+		"Ability3"					"orc_reinforced_defenses"
+		"Ability4"					"orc_burrow_peon"
+		"Ability5"					"orc_back_to_work"
+		"Ability6"					""
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -6434,8 +6446,8 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"6"
-		"Ability1"					"orc_train_shaman"	 //Reference: Abds
-		"Ability2"					"orc_train_troll_witch_doctor"	 //Reference: Aspi
+		"Ability1"					"orc_train_shaman"
+		"Ability2"					"orc_train_troll_witch_doctor"
 		"Ability3"					"orc_train_spirit_walker"
 		"Ability4"					"orc_research_shaman_training1"
 		"Ability5"					"orc_research_witch_doctor_training1"
@@ -6525,8 +6537,8 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
-		"Ability1"					"orc_train_tauren"	 //Reference: Abds
-		"Ability2"					"orc_research_pulverize"	 //Reference: Aspi
+		"Ability1"					"orc_train_tauren"
+		"Ability2"					"orc_research_pulverize"
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -6603,7 +6615,7 @@
 		"HasInventory"				"1"
 		"ConsideredHero"			"1"
 	
-		"UnitLabel"					"orc_shop"
+		"ShopType"					"team"
 		"HasDeathAnimation"			"1"
 	
 		"Upgrades"
@@ -6615,9 +6627,9 @@
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
 		"Ability1"					""
-		"Ability2"					""	 //Reference: Aall
-		"Ability3"					""	 //Reference: Aspi
-		"Ability4"					""	 //Reference: Apit
+		"Ability2"					""
+		"Ability3"					""
+		"Ability4"					""
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -6707,9 +6719,9 @@
 		//----------------------------------------------------------------
 		"AbilityLayout"				"5"
 		"Ability1" 					"ability_hidden_filler"
-		"Ability2"					"orc_research_melee_weapons1"	 //Reference: Abds
-		"Ability3"					"orc_research_unit_armor1"	 //Reference: Aspi
-		"Ability4"					"orc_research_ranged_weapons1"	 //Reference: Arlm
+		"Ability2"					"orc_research_melee_weapons1"
+		"Ability3"					"orc_research_unit_armor1"
+		"Ability4"					"orc_research_ranged_weapons1"
 		"Ability5"					"orc_research_spiked_barricades1"
 		"Ability6"					"orc_research_reinforced_defenses"
 		
@@ -6795,9 +6807,9 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
-		"Ability1"					"orc_reinforced_defenses"	 //Reference: Abds
-		"Ability2"					""	 //Reference: Arbr
-		"Ability3"					""	 //Reference: Aspi
+		"Ability1"					"orc_reinforced_defenses"
+		"Ability2"					""
+		"Ability3"					""
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -6897,7 +6909,7 @@
 		"Ability7"					"orc_build_tauren_totem"				
 		"Ability8"					"build_orc_items" // Provides additional building abilities
 		"Ability9"					""
-		"Ability10"					"orc_pillage_disabled"	 //Reference: Asal
+		"Ability10"					"orc_pillage_disabled"
 	
 		// Gatherer KeyValues
 		"GatherAbility"				"orc_gather"
@@ -7000,7 +7012,7 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
-		"Ability1"					"orc_pillage_disabled"	 //Reference: Asal
+		"Ability1"					"orc_pillage_disabled"
 		"Ability2"					"orc_berserker_strength_disabled"
 		"Ability10"					"orc_backpack_disabled"
 		
@@ -7111,7 +7123,7 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
-		"Ability1"					""	 //Reference: Sbsk
+		"Ability1"					""
 		"Ability2"					""
 		"Ability3"					"orc_troll_regeneration_disabled"
 		"Ability10"					"orc_backpack_disabled"
@@ -7221,7 +7233,7 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
-		"Ability1"					"orc_berserk"	 //Reference: Absk
+		"Ability1"					"orc_berserk"
 		"Ability2"					""
 		"Ability3"					"orc_troll_regeneration_disabled"
 		"Ability10"					"orc_backpack_disabled"
@@ -7320,6 +7332,7 @@
 		"AttacksEnabled"			"ground"
 		"LeavesCorpse"				"0"
 		"UnitLabel"					"mechanical"
+		"TransportSize"				"2"
 	
 		"Artillery"					"1"
 		"SplashAttack"				"1"
@@ -7340,7 +7353,7 @@
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
 		"Ability1"					"attack_ground"
-		"Ability2"					"orc_burning_oil_disabled"	 //Reference: Abof
+		"Ability2"					"orc_burning_oil_disabled"
 		"Ability3"					"minimum_range"
 		
 		// Armor
@@ -7441,9 +7454,9 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
-		"Ability1"					"orc_purge"	 //Reference: Ablo
-		"Ability2"					"orc_lightning_shield"	 //Reference: Alsh
-		"Ability3"					"orc_bloodlust_disabled"	 //Reference: Apg2
+		"Ability1"					"orc_purge"
+		"Ability2"					"orc_lightning_shield"
+		"Ability3"					"orc_bloodlust_disabled"
 		"Ability10"					"orc_backpack_disabled"
 		
 		// Armor
@@ -7557,10 +7570,10 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
-		"Ability1"					"orc_sentry_ward"	 //Reference: Aeye
-		"Ability2"					"orc_stasis_trap"	 //Reference: Ahwd
-		"Ability3"					"orc_healing_ward"	 //Reference: Asta
-		"Ability4"					""	 //Reference: Aion - Inventory(2 slot unit) Orc
+		"Ability1"					"orc_sentry_ward"
+		"Ability2"					"orc_stasis_trap"
+		"Ability3"					"orc_healing_ward"
+		"Ability4"					""
 		"Ability5"					"orc_troll_regeneration_disabled"
 		
 		// Armor
@@ -7671,13 +7684,13 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
-		"Ability1"					"orc_spirit_link"	//Reference: Adis
-		"Ability2"					"orc_disenchant"	 //Reference: Aspl
+		"Ability1"					"orc_spirit_link"
+		"Ability2"					"orc_disenchant"
 		"Ability3"					"orc_ancestral_spirit"	 
-		"Ability4"					"orc_ethereal_form"	 //Reference: Aast
+		"Ability4"					"orc_ethereal_form"
 		"Ability5"					""
-		"Ability6"					""	 //Reference: ACsk - Resistant Skin(3,1 pos, creep)
-		"Ability7"					"orc_corporeal_form"	 //Reference: Acpf
+		"Ability6"					""
+		"Ability7"					"orc_corporeal_form"
 		"Ability10"					"orc_backpack_disabled"
 		
 		// Armor
@@ -7791,8 +7804,8 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
-		"Ability1"					"orc_ensnare"	 //Reference: Aens
-		"Ability2"					"orc_pillage_disabled"	 //Reference: Asal
+		"Ability1"					"orc_ensnare"
+		"Ability2"					"orc_pillage_disabled"
 		"Ability3"					""
 		"Ability10"					"orc_backpack_disabled"
 		
@@ -7899,8 +7912,8 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
-		"Ability1"					"orc_war_drums"	 //Reference: Aakb
-		"Ability2"					"orc_devour"	 //Reference: Adev
+		"Ability1"					"orc_war_drums"
+		"Ability2"					"orc_devour"
 		"Ability10"					"orc_backpack_disabled"
 		
 		// Armor
@@ -8000,7 +8013,7 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
-		"Ability1"					"orc_envenomed_spears_disabled"	 //Reference: Aven
+		"Ability1"					"orc_envenomed_spears_disabled"
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -8100,8 +8113,8 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
-		"Ability1"					"orc_unstable_concoction"	 //Reference: Auco
-		"Ability2"					"orc_liquid_fire_disabled"	 //Reference: Aliq
+		"Ability1"					"orc_unstable_concoction"
+		"Ability2"					"orc_liquid_fire_disabled"
 		"Ability3"					"orc_troll_regeneration_disabled"
 		
 		// Armor
@@ -8208,7 +8221,7 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
-		"Ability1"					"orc_pulverize_disabled"	 //Reference: Awar
+		"Ability1"					"orc_pulverize_disabled"
 		"Ability10"					"orc_backpack_disabled"
 		
 		// Armor
@@ -8508,7 +8521,7 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
-		"Ability1"					"undead_train_acolyte"	 //Reference: Abgl
+		"Ability1"					"undead_train_acolyte"
 		"Ability2"					"undead_research_backpack"
 		"Ability3"					"undead_frost_attack"
 	
@@ -8606,7 +8619,7 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
-		"Ability1"					"undead_train_frost_wyrm"	 //Reference: Abgs
+		"Ability1"					"undead_train_frost_wyrm"
 		"Ability2"					"undead_research_freezing_breath"
 		
 		// Armor
@@ -8794,7 +8807,7 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"6"
-		"Ability1"					"undead_train_ghoul"	 //Reference: Abgs
+		"Ability1"					"undead_train_ghoul"
 		"Ability2"					"undead_train_crypt_fiend"
 		"Ability3"					"undead_train_gargoyle"
 		"Ability4"					"undead_research_cannibalize"
@@ -8892,9 +8905,9 @@
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
 		"Ability1"					"ability_hidden_filler"
-		"Ability2"					"undead_research_unholy_strength1"	 //Reference: Abgs
-		"Ability3"					"undead_research_unholy_armor1"	 //Reference: Agyd
-		"Ability4"					"undead_research_creature_attack1"	 //Reference: Arlm
+		"Ability2"					"undead_research_unholy_strength1"
+		"Ability3"					"undead_research_unholy_armor1"
+		"Ability4"					"undead_research_creature_attack1"
 		"Ability5"					"undead_research_creature_carapace1"
 		"Ability6"					"undead_graveyard_create_corpses"
 		
@@ -8988,7 +9001,7 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"6"
-		"Ability1"					"undead_train_necromancer"	 //Reference: Abgs
+		"Ability1"					"undead_train_necromancer"
 		"Ability2"					"undead_train_banshee"
 		"Ability3"					"undead_research_necromancer_training1"
 		"Ability4"					"undead_research_banshee_training1"
@@ -9173,7 +9186,7 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"6"
-		"Ability1"					"undead_train_meat_wagon"	 //Reference: Abgs
+		"Ability1"					"undead_train_meat_wagon"
 		"Ability2"					"undead_train_abomination"
 		"Ability3"					"undead_train_obsidian_statue"
 		"Ability4"					"undead_research_exhume_corpses"
@@ -9263,14 +9276,14 @@
 		"HasInventory"				"1"
 		"ConsideredHero"			"1"
 	
-		"UnitLabel"					"undead_shop"
+		"ShopType"					"team"
 		
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
 		"Ability1"					""
-		"Ability2"					""	 //Reference: Abgs
-		"Ability3"					""	 //Reference: Apit
+		"Ability2"					""
+		"Ability3"					""
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -9360,8 +9373,8 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
-		"Ability1"					"undead_train_nerubian_tower"	 //Reference: Abgs
-		"Ability2"					"undead_train_spirit_tower"	 //Reference: Abgs
+		"Ability1"					"undead_train_nerubian_tower"
+		"Ability2"					"undead_train_spirit_tower"
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -9450,8 +9463,8 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
-		"Ability1"					"undead_frost_attack"	 //Reference: Abgs
-		"Ability2"					""	 //Reference: Afra
+		"Ability1"					"undead_frost_attack"
+		"Ability2"					""
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -9546,7 +9559,7 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
-		"Ability1"					""	 //Reference: Abgs
+		"Ability1"					""
 	
 		// Armor
 		//----------------------------------------------------------------
@@ -9640,8 +9653,8 @@
 		
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					"undead_train_shade"	 //Reference: Abgs
-		"Ability2"					""	 //Reference: Asac
+		"Ability1"					"undead_train_shade"
+		"Ability2"					""
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -9746,12 +9759,12 @@
 		//----------------------------------------------------------------
 		"AbilityLayout"				"6"
 		"Ability1"					"undead_gather_gold" // Only Gold and Repair
-		"Ability2"					"undead_build_crypt"	 //Reference: Alam
+		"Ability2"					"undead_build_crypt"
 		"Ability3"					"undead_build_temple_of_the_damned_disabled"
 		"Ability4"					"undead_build_slaughterhouse_disabled"
 		"Ability5"					"undead_build_sacrificial_pit_disabled"
 		"Ability6"					"undead_build_boneyard_disabled"
-		"Ability7"					"undead_unsummon_building"	 //Reference: Auns	
+		"Ability7"					"undead_unsummon_building"
 		"Ability10"					"build_undead_items"
 		"Ability11"					"undead_blight_regen"
 			
@@ -9860,8 +9873,8 @@
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
 		"Ability1"					"undead_true_sight"
-		"Ability2"					""	 //Reference: Arst
-		"Ability3"					""	 //Reference: Alam
+		"Ability2"					""
+		"Ability3"					""
 		"Ability4"					""
 		"Ability11"					"undead_blight_regen"
 			
@@ -9962,7 +9975,7 @@
 		"AbilityLayout"				"5"
 		"Ability1"					"undead_gather_lumber"
 		"Ability2"					"undead_return_resources"	
-		"Ability3"					"undead_cannibalize_disabled"	 //Reference: Acan
+		"Ability3"					"undead_cannibalize_disabled"
 		"Ability4"					"undead_ghoul_frenzy_disabled"
 		"Ability10"					"undead_backpack_disabled"
 		"Ability11"					"undead_blight_regen"
@@ -10074,10 +10087,10 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
-		"Ability1"					"undead_web_disabled"	 //Reference: Aweb
-		"Ability2"					""	 //Reference: Aspa
-		"Ability3"					"undead_burrow_disabled"	 //Reference: Abur
-		"Ability4"					""	 //Reference: Aiun
+		"Ability1"					"undead_web_disabled"
+		"Ability2"					""
+		"Ability3"					"undead_burrow_disabled"
+		"Ability4"					""
 		"Ability10"					"undead_backpack_disabled"
 		"Ability11"					"undead_blight_regen"
 		
@@ -10186,7 +10199,7 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
-		"Ability1"					"undead_stone_form"	 //Reference: Astn
+		"Ability1"					"undead_stone_form"
 		"Ability11"					"undead_blight_regen"
 		
 		// Armor
@@ -10293,9 +10306,9 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
-		"Ability1"					"undead_cannibalize_disabled"	 //Reference: Aap1
-		"Ability2"					"undead_disease_cloud_disabled"	 //Reference: Aiun
-		"Ability3"					""	 //Reference: Acn2
+		"Ability1"					"undead_cannibalize_disabled"
+		"Ability2"					"undead_disease_cloud_disabled"
+		"Ability3"					""
 		"Ability10"					"undead_backpack_disabled"
 		"Ability11"					"undead_blight_regen"
 	
@@ -10393,6 +10406,7 @@
 		"AttacksEnabled"			"ground"
 		"LeavesCorpse"				"0"
 		"UnitLabel"					"mechanical"
+		"TransportSize"				"2"
 	
 		"Artillery"					"1"
 		"SplashAttack"				"1"
@@ -10412,9 +10426,9 @@
 		//----------------------------------------------------------------
 		"AbilityLayout"				"6"
 		"Ability1"					"attack_ground"
-		"Ability2"					"undead_get_corpse"	 //Reference: Sch2
-		"Ability3"					"undead_drop_corpse"	 //Reference: Amel
-		"Ability4"					"undead_exhume_corpses_disabled" //Reference: Apts
+		"Ability2"					"undead_get_corpse"
+		"Ability3"					"undead_drop_corpse"
+		"Ability4"					"undead_exhume_corpses_disabled"
 		"Ability5"					"undead_meat_wagon_disease_cloud_disabled"
 		"Ability6"					"minimum_range"
 		
@@ -10511,9 +10525,9 @@
 	
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					"undead_essence_of_blight"	 //Reference: Arpl
-		"Ability2"					"undead_spirit_touch"	 //Reference: Arpm
-		"Ability3"					"undead_destroyer_form_disabled"	 //Reference: Aave
+		"Ability1"					"undead_essence_of_blight"
+		"Ability2"					"undead_spirit_touch"
+		"Ability3"					"undead_destroyer_form_disabled"
 		"Ability10"					"undead_obsidian_statue_model"
 		
 		// Armor
@@ -10626,10 +10640,10 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"6"
-		"Ability1"					"undead_devour_magic"	 //Reference: Advm
-		"Ability2"					"undead_orb_of_annihilation"	 //Reference: Afak
-		"Ability3"					"undead_absorb_mana"	 //Reference: Aabs
-		"Ability4"					"generic_spell_immunity"	 //Reference: ACmi - Magic Immunity (Creep)
+		"Ability1"					"undead_devour_magic"
+		"Ability2"					"undead_orb_of_annihilation"
+		"Ability3"					"undead_absorb_mana"
+		"Ability4"					"generic_spell_immunity"
 		"Ability11"					"undead_blight_regen"
 		
 		// Armor
@@ -10738,10 +10752,10 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
-		"Ability1"					"undead_raise_dead"	 //Reference: Acri
-		"Ability2"					"undead_unholy_frenzy_disabled"	 //Reference: Arai
-		"Ability3"					"undead_cripple_disabled"	 //Reference: Auhf
-		"Ability4"					""	 //Reference: Aiun
+		"Ability1"					"undead_raise_dead"
+		"Ability2"					"undead_unholy_frenzy_disabled"
+		"Ability3"					"undead_cripple_disabled"
+		"Ability4"					""
 		"Ability10"					"undead_backpack_disabled"
 		"Ability11"					"undead_blight_regen"
 		
@@ -10855,10 +10869,10 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
-		"Ability1"					"undead_curse"	 //Reference: Aam2
-		"Ability2"					"undead_anti_magic_shell_disabled"	 //Reference: Acrs
-		"Ability3"					"undead_possession_disabled"	 //Reference: Aps2
-		"Ability4"					""	 //Reference: Aiun
+		"Ability1"					"undead_curse"
+		"Ability2"					"undead_anti_magic_shell_disabled"
+		"Ability3"					"undead_possession_disabled"
+		"Ability4"					""
 		"Ability10"					"undead_backpack_disabled"
 		"Ability11"					"undead_blight_regen"
 		
@@ -11182,7 +11196,7 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
-		"Ability1"					"undead_freezing_breath_disabled"	 //Reference: Afrz
+		"Ability1"					"undead_freezing_breath_disabled"
 		"Ability10"					"undead_freezing_splash"
 		"Ability11"					"undead_blight_regen"
 		
@@ -11365,7 +11379,7 @@
 		
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					""	 //Reference: ACvs
+		"Ability1"					"neutral_envenomed_weapon"
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -11517,7 +11531,7 @@
 		
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					""	 //Reference: ACac
+		"Ability1"					"neutral_command_aura"
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -11607,7 +11621,7 @@
 	
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					""	 //Reference: ACen
+		"Ability1"					"neutral_ensnare"
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -11763,9 +11777,9 @@
 		
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					""	 //Reference: Anh2
-		"Ability2"					""	 //Reference: ACif
-		"Ability3"					""	 //Reference: ACd2
+		"Ability1"					"neutral_heal"
+		"Ability2"					"neutral_abolish_magic"
+		"Ability3"					"neutral_inner_fire"
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -11811,7 +11825,7 @@
 		"StatusHealth"				"450"
 		"StatusHealthRegen"			"0.5"
 		"StatusMana"				"300"
-		"StatsManaRegen"			"0.75"
+		"StatusManaRegen"			"0.75"
 		
 		// Vision
 		//----------------------------------------------------------------
@@ -11841,6 +11855,7 @@
 		"Level"						"10"
 		"HealthBarOffset"			"140"
 		"UseNeutralCreepBehavior" 	"0"
+		"ConsideredHero"			"1"
 	
 		"FormationRank"				"2"
 		"AttacksEnabled"			"ground,air"
@@ -11848,9 +11863,9 @@
 		
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					""	 //Reference: Advc
-		"Ability2"					""	 //Reference: ACdv
-		"Ability3"					""	 //Reference: ACmi
+		"Ability1"					"neutral_devour"
+		"Ability2"					"neutral_spell_immunity"
+		"Ability3"					""
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -11920,6 +11935,7 @@
 		"Level"						"6"
 		"HealthBarOffset"			"140"
 		"UseNeutralCreepBehavior" 	"0"
+		"ConsideredHero"			"1"
 	
 		"FormationRank"				"0"
 		"AttacksEnabled"			"ground"
@@ -11927,8 +11943,8 @@
 		
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					""	 //Reference: ACmi
-		"Ability2"					""	 //Reference: ACtb
+		"Ability1"					"neutral_hurl_boulder"
+		"Ability2"					"neutral_spell_immunity"
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -11981,7 +11997,7 @@
 		"StatusHealth"				"675"
 		"StatusHealthRegen"			"0.5"
 		"StatusMana"				"400"
-		"StatsManaRegen"			"1"
+		"StatusManaRegen"			"1"
 		
 		// Vision
 		//----------------------------------------------------------------
@@ -12012,7 +12028,7 @@
 		
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					""	 //Reference: ACbb
+		"Ability1"					"neutral_bloodlust"
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -12056,7 +12072,7 @@
 		"StatusHealth"				"600"
 		"StatusHealthRegen"			"0.5"
 		"StatusMana"				"400"
-		"StatsManaRegen"			"1"
+		"StatusManaRegen"			"1"
 		
 		// Vision
 		//----------------------------------------------------------------
@@ -12315,7 +12331,7 @@
 		
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					""	 //Reference: ACsa
+		"Ability1"					"neutral_searing_arrows"
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -12356,7 +12372,7 @@
 		"StatusHealth"				"350"
 		"StatusHealthRegen"			"0.5"
 		"StatusMana"				"200"
-		"StatsManaRegen"			"0.5"
+		"StatusManaRegen"			"0.5"
 		
 		// Vision
 		//----------------------------------------------------------------
@@ -12392,8 +12408,8 @@
 		
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					""	 //Reference: ACbl
-		"Ability2"					""	 //Reference: ACdm
+		"Ability1"					"neutral_bloodlust"
+		"Ability2"					"neutral_abolish_magic"
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -12434,7 +12450,7 @@
 		"StatusHealth"				"600"
 		"StatusHealthRegen"			"1"
 		"StatusMana"				"400"
-		"StatsManaRegen"			"1"
+		"StatusManaRegen"			"1"
 		
 		// Vision
 		//----------------------------------------------------------------
@@ -12567,7 +12583,7 @@
 		
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					""	 //Reference: ACev
+		"Ability1"					"neutral_evasion"
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -12655,8 +12671,8 @@
 		
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					""	 //Reference: AChw
-		"Ability2"					""	 //Reference: ACs9
+		"Ability1"					"neutral_healing_ward"
+		"Ability2"					"neutral_feral_spirit_pigs"
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -12700,7 +12716,7 @@
 		"StatusHealth"				"600"
 		"StatusHealthRegen"			"0.5"
 		"StatusMana"				"400"
-		"StatsManaRegen"			"1"
+		"StatusManaRegen"			"1"
 		
 		// Vision
 		//----------------------------------------------------------------
@@ -12728,6 +12744,71 @@
 		}
 	}
 	
+	"neutral_spirit_pig"
+	{                                       
+	    // General
+	    //----------------------------------------------------------------
+	    "Model"                     "models/items/beastmaster/boar/beast_deming/beast_deming.vmdl"
+	    "BaseClass"                 "npc_dota_creature"
+	    "SoundSet"                  "Beastmaster_Boar"
+	    "Level"                     "2"
+	    "ModelScale"                "0.65"
+	
+	    "AttacksEnabled"            "ground"
+	    "LeavesCorpse"              "0"
+	
+	    // Armor
+	    //----------------------------------------------------------------
+	    "ArmorPhysical"             "0"     // Physical protection.
+	    "MagicalResistance"         "0"     // Magical protection.
+	
+	    // Attack
+	    //----------------------------------------------------------------
+	    "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
+	    "AttackDamageType"          "DAMAGE_TYPE_ArmorPhysical"
+	    "AttackDamageMin"           "11"        // Damage range min.
+	    "AttackDamageMax"           "12"        // Damage range max.    
+	    "AttackRate"                "1.25"      // Speed of attack.
+	    "AttackAnimationPoint"      "0.33"      // Normalized time in animation cycle to attack.
+	    "AttackAcquisitionRange"    "500"       // Range within a target can be acquired.
+	    "AttackRange"               "128"       // Range within a target can be attacked.      
+	
+	    // Bounds
+	    //----------------------------------------------------------------
+	    "RingRadius"                "40"
+	    "HealthBarOffset"           "160"
+	    "BoundsHullName"            "DOTA_HULL_SIZE_SMALL"          // Hull type used for navigation/locomotion.
+	    "FormationRank"             "0"
+	
+	    // Bounty
+	    //----------------------------------------------------------------
+	    "BountyXP"                  "20"        // Experience earn.
+	    "BountyGoldMin"             "21"        // Gold earned min.
+	    "BountyGoldMax"             "21"        // Gold earned max.
+	
+	    // Movement
+	    //----------------------------------------------------------------
+	    "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
+	    "MovementSpeed"             "350"       // Speed.
+	
+	    // Status
+	    //----------------------------------------------------------------
+	    "StatusHealth"              "200"       // Base health.
+	    "StatusHealthRegen"         "0.5"       // Health regeneration rate.
+	    "StatusMana"                "0"         // Base mana.
+	    "StatusManaRegen"           "0"         // Mana regeneration rate.       
+	    
+	    // Vision
+	    //----------------------------------------------------------------
+	    "VisionDaytimeRange"        "1200"      // Range of vision during day light.
+	    "VisionNighttimeRange"      "800"       // Range of vision at night time.
+	
+	    // Attack Damage types
+	    //----------------------------------------------------------------                          // Attack Damage types name.
+	    "AttackType"                "normal"
+	    "ArmorType"                 "heavy"
+	} 
+	
 	
 	//=================================================================================
 	// Creature: Razormane Chieftain
@@ -12743,14 +12824,15 @@
 		"Level"						"7"
 		"HealthBarOffset"			"140"
 		"UseNeutralCreepBehavior" 	"0"
+		"ConsideredHero"			"1"
 	
 		"FormationRank"				"0"
 		"AttacksEnabled"			"ground"
 		
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					""	 //Reference: ACah
-		"Ability2"					""	 //Reference: ACtb
+		"Ability1"					"neutral_hurl_boulder"
+		"Ability2"					"neutral_thorns_aura"
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -12789,7 +12871,7 @@
 		"StatusHealth"				"950"
 		"StatusHealthRegen"			"0.5"
 		"StatusMana"				"500"
-		"StatsManaRegen"			"1.25"
+		"StatusManaRegen"			"1.25"
 		
 		// Vision
 		//----------------------------------------------------------------
@@ -12917,7 +12999,7 @@
 	    
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"                  ""   //Reference: ANth
+	    "Ability1"                  "neutral_spiked_shell"
 	    
 	    // Armor
 	    //----------------------------------------------------------------
@@ -12992,7 +13074,7 @@
 	    
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"                  ""   //Reference: ANth
+	    "Ability1"                  "neutral_spiked_shell"
 	    
 	    // Armor
 	    //----------------------------------------------------------------
@@ -13061,13 +13143,14 @@
 		"Level"						"7"
 		"HealthBarOffset"			"140"
 		"UseNeutralCreepBehavior" 	"0"
+		"ConsideredHero"			"1"
 	
 	    "FormationRank"				"0"
 		"AttacksEnabled"			"ground"
 		
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					""	 //Reference: ANth
+		"Ability1"					"neutral_spiked_shell"
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -13134,13 +13217,14 @@
 	    "Level"                     "6"
 	    "HealthBarOffset"           "140"
 	    "UseNeutralCreepBehavior" 	"0"
+	    "ConsideredHero"			"1"
 	
 	    "FormationRank"				"2"
 		"AttacksEnabled"			"ground,air"
 	    
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"                  ""   //Reference: ACat
+	    "Ability1"                  "neutral_trueshot_aura"
 	    
 	    // Armor
 	    //----------------------------------------------------------------
@@ -13224,8 +13308,8 @@
 	    
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"                  ""   //Reference: ACav
-	    "Ability2"                  ""   //Reference: ACsh
+	    "Ability1"                  "neutral_shockwave"
+	    "Ability2"                  "neutral_devotion_aura"
 	    
 	    // Armor
 	    //----------------------------------------------------------------
@@ -13313,8 +13397,8 @@
 	    
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"                  ""   //Reference: ACvs
-	    "Ability2"                  ""   //Reference: Ashm
+	    "Ability1"                  "neutral_shadow_meld"
+	    "Ability2"                  "neutral_envenomed_weapon"
 	    
 	    // Armor
 	    //----------------------------------------------------------------
@@ -13398,7 +13482,7 @@
 	    
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"                  ""   //Reference: ACen
+	    "Ability1"                  "neutral_ensnare"
 	    
 	    // Armor
 	    //----------------------------------------------------------------
@@ -13494,7 +13578,7 @@
 		
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					""	 //Reference: ACpu
+		"Ability1"					"neutral_purge"
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -13837,9 +13921,9 @@
 		
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					""	 //Reference: ACmi
-		"Ability2"					""	 //Reference: ACtb
-		"Ability3"					""	 //Reference: ACtc
+		"Ability1"					"neutral_hurl_boulder"
+		"Ability2"					"neutral_slam"
+		"Ability3"					"neutral_spell_immunity"
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -13973,7 +14057,7 @@
 	
 	//=================================================================================
 	// Creature: Ice Troll Priest
-	// Description: "Priest of healing magic. |n|n|cffffcc00Attacks land and air units.|r"
+	// Description: "Priest of healing magic. Can cast Abolish Magic. |n|n|cffffcc00Attacks land and air units.|r"
 	//=================================================================================
 	"neutral_ice_troll_priest"
 	{
@@ -13991,7 +14075,8 @@
 		
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					""	 //Reference: Anh1
+		"Ability1"					"neutral_heal"
+		"Ability2"					"neutral_abolish_magic"
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -14148,9 +14233,9 @@
 		
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					""	 //Reference: Anh2
-		"Ability2"					""	 //Reference: ACf2
-		"Ability3"					""	 //Reference: ACd2
+		"Ability1"					"neutral_heal"
+		"Ability2"					"neutral_frost_armor"
+		"Ability3"					"neutral_abolish_magic"
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -14228,7 +14313,7 @@
 		
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					""	 //Reference: ACat
+		"Ability1"					"neutral_trueshot_aura"
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -14312,7 +14397,7 @@
 		
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					""	 //Reference: ACen
+		"Ability1"					"neutral_ensnare"
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -14399,8 +14484,8 @@
 		
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					""	 //Reference: ACsw
-		"Ability2"					""	 //Reference: ACdm
+		"Ability1"					"neutral_slow"
+		"Ability2"					"neutral_abolish_magic"
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -14430,7 +14515,6 @@
 		"BoundsHullName"			"DOTA_HULL_SIZE_HERO"
 		"RingRadius"				"31"
 		"CollisionSize"				"31"
-		"FormationRank"				"2"
 		
 		// Unit Costs
 		//----------------------------------------------------------------
@@ -14489,7 +14573,7 @@
 		
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					"models/creeps/neutral_creeps/n_creep_kobold/kobold_b/n_creep_kobold_b.vmdl"
+		"Ability1"					"neutral_bash"
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -14517,7 +14601,6 @@
 		"BoundsHullName"			"DOTA_HULL_SIZE_HUGE"
 		"RingRadius"				"31"
 		"CollisionSize"				"31"
-		"FormationRank"				"0"
 		
 		// Unit Costs
 		//----------------------------------------------------------------
@@ -14575,6 +14658,7 @@
 		"Level"						"1"
 		"HealthBarOffset"			"140"
 	
+		"FormationRank"				"0"
 		"AttacksEnabled"			"ground"
 		
 		// Abilities
@@ -14606,7 +14690,6 @@
 		"BoundsHullName"			"DOTA_HULL_SIZE_HERO"
 		"RingRadius"				"31"
 		"CollisionSize"				"31"
-		"FormationRank"				"0"
 		
 		// Unit Costs
 		//----------------------------------------------------------------
@@ -14657,12 +14740,13 @@
 		"Level"						"5"
 		"HealthBarOffset"			"140"
 	
+		"FormationRank"				"2"
 		"AttacksEnabled"			"ground,air"
 		
 		// Abilities
 		//----------------------------------------------------------------
-		"Ability1"					""	 //Reference: ACpu
-		"Ability2"					""	 //Reference: ACls
+		"Ability1"					"neutral_purge"
+		"Ability2"					"neutral_lightning_shield"
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -14692,7 +14776,6 @@
 		"BoundsHullName"			"DOTA_HULL_SIZE_HUGE"
 		"RingRadius"				"32"
 		"CollisionSize"				"32"
-		"FormationRank"				"2"
 		
 		// Unit Costs
 		//----------------------------------------------------------------
@@ -15033,8 +15116,8 @@
 		// Abilities
 		//----------------------------------------------------------------
 		"AbilityLayout"				"4"
-		"Ability1"					"gold_mine_passive"	 //Reference: Agld
-		"Ability2"					""	 //Reference: Avul
+		"Ability1"					"gold_mine_passive"
+		"Ability2"					""
 		
 		// Armor
 		//----------------------------------------------------------------
@@ -15113,16 +15196,17 @@
 	    //----------------------------------------------------------------
 	    "BaseClass"                 "npc_dota_creature"
 	    "Model"                     "models/heroes/techies/techies.vmdl"
-	    "ModelScale"                "0.5"
+	    "ModelScale"                "0.75"
 	    "Level"                     "4"
 	    "HealthBarOffset"           "140"
 	
 	    "FormationRank"             "0"
-	    "AttacksEnabled"            "none"
+	    "AttacksEnabled"            "ground"
+	    "LeavesCorpse"              "0"
 	    
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"                  ""   //Reference: Asds
+	    "Ability1"                  "sapper_kaboom"
 	    
 	    // Armor
 	    //----------------------------------------------------------------
@@ -15132,8 +15216,12 @@
 	    // Attack
 	    //----------------------------------------------------------------
 	    "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
+	    "AttackDamageMin"           "0"
+	    "AttackDamageMax"           "0"
+	    "AttackRange"               "100"
 	    "AttackDamageType"          "DAMAGE_TYPE_ArmorPhysical"
-	    "AttackRate"                "0"
+	    "AttackRate"                "1"
+	    "AttackAnimationPoint"      "0.01"
 	    "AttackAcquisitionRange"    "500"
 	    
 	    // Bounty
@@ -15144,7 +15232,7 @@
 	    // Bounds
 	    //----------------------------------------------------------------
 	    "BoundsHullName"            "DOTA_HULL_SIZE_HERO"
-	    "RingRadius"                "32"
+	    "RingRadius"                "60"
 	    "CollisionSize"             "32"
 	    "FormationRank"             "0"
 	    
@@ -15205,7 +15293,7 @@
 	    //----------------------------------------------------------------
 	    "BaseClass"                 "npc_dota_creature"
 	    "Model"                     "models/courier/tegu/tegu_flying.vmdl"
-	    "ModelScale"                "1"
+	    "ModelScale"                "2"
 	    "Level"                     "1"
 	    "HealthBarOffset"           "140"
 	
@@ -15215,10 +15303,10 @@
 	    
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"                  ""   //Reference: Sch3
-	    "Ability2"                  ""   //Reference: Achd
-	    "Ability3"                  ""   //Reference: Aloa
-	    "Ability4"                  ""   //Reference: Adro
+	    "Ability1"                  "zeppelin_load"
+	    "Ability2"                  "zeppelin_unload"
+	    "Ability3"                  ""
+	    "Ability4"                  ""
 	    
 	    // Armor
 	    //----------------------------------------------------------------
@@ -15228,6 +15316,8 @@
 	    // Attack
 	    //----------------------------------------------------------------
 	    "AttackCapabilities"        "DOTA_UNIT_CAP_NO_ATTACK"
+	    "AttackDamageMin"           "0"
+	    "AttackDamageMax"           "0"
 	    "AttackDamageType"          "DAMAGE_TYPE_ArmorPhysical"
 	    "AttackRate"                "0"
 	    "AttackAcquisitionRange"    "500"
@@ -15240,7 +15330,7 @@
 	    // Bounds
 	    //----------------------------------------------------------------
 	    "BoundsHullName"            "DOTA_HULL_SIZE_HUGE"
-	    "RingRadius"                "48"
+	    "RingRadius"                "70"
 	    "CollisionSize"             "48"
 	    "FormationRank"             "2"
 	    
@@ -15261,7 +15351,7 @@
 	    
 	    // Status
 	    //----------------------------------------------------------------
-	    "StatusHealth"              "575"
+	    "StatusHealth"              "500"
 	    "StatusHealthRegen"         "0"
 	    
 	    // Vision
@@ -15401,8 +15491,8 @@
 	    
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"                  ""   //Reference: Anh1
-	    "Ability2"                  ""   //Reference: ACdm
+	    "Ability1"                  "neutral_heal"
+	    "Ability2"                  "neutral_abolish_magic"
 	    
 	    // Armor
 	    //----------------------------------------------------------------
@@ -15502,8 +15592,8 @@
 	    
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"                  ""   //Reference: ACmi
-	    "Ability2"                  ""   //Reference: ACsw
+	    "Ability1"                  "neutral_slow"
+	    "Ability2"                  "neutral_spell_immunity"
 	    
 	    // Armor
 	    //----------------------------------------------------------------
@@ -15590,7 +15680,7 @@
 	    
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"                  ""   //Reference: Ashm
+	    "Ability1"                  "neutral_shadow_meld"
 	    
 	    // Armor
 	    //----------------------------------------------------------------
@@ -15674,8 +15764,8 @@
 	    
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"                  ""   //Reference: Ashm
-	    "Ability2"                  ""   //Reference: ACvs
+	    "Ability1"                  "neutral_shadow_meld"
+	    "Ability2"                  "neutral_envenomed_weapon"
 	    
 	    // Armor
 	    //----------------------------------------------------------------
@@ -15727,96 +15817,6 @@
 	    //----------------------------------------------------------------
 	    "StatusHealth"              "450"
 	    "StatusHealthRegen"         "0.5"
-	    
-	    // Vision
-	    //----------------------------------------------------------------
-	    "VisionDaytimeRange"        "1400"
-	    "VisionNighttimeRange"      "800"
-	    
-	    // Attack Damage types
-	    //----------------------------------------------------------------
-	    "AttackType"         "pierce"
-	    "ArmorType"                 "medium"
-	    
-	    // Creature Data
-	    //----------------------------------------------------------------
-	}
-	
-	//=================================================================================
-	// Creature: Kobold Geomancer
-	// Description: "Light ranged unit that casts Slow and Abolish Magic. |n|n|cffffcc00Attacks land and air units.|r"
-	//=================================================================================
-	"neutral_kobold_geomancer"
-	{
-	    // General
-	    //----------------------------------------------------------------
-	    "BaseClass"                 "npc_dota_creature"
-	    "Model"                     "models/creeps/neutral_creeps/n_creep_kobold/kobold_a/n_creep_kobold_a.vmdl"
-	    "ModelScale"                "1"
-	    "Level"                     "3"
-	    "HealthBarOffset"           "140"
-	
-	    "FormationRank"             "2"
-	    "AttacksEnabled"            "ground,air"
-	    
-	    // Abilities
-	    //----------------------------------------------------------------
-	    "Ability1"                  ""   //Reference: ACsw
-	    "Ability2"                  ""   //Reference: ACdm
-	    
-	    // Armor
-	    //----------------------------------------------------------------
-	    "ArmorPhysical"             "0"
-	    "MagicalResistance"         "0"
-	    
-	    // Attack
-	    //----------------------------------------------------------------
-	    "AttackCapabilities"        "DOTA_UNIT_CAP_RANGED_ATTACK"
-	    "AttackDamageMin"           "23.0"
-	    "AttackDamageMax"           "27.0"
-	    "AttackDamageType"          "DAMAGE_TYPE_ArmorPhysical"
-	    "AttackRate"                "1.8"
-	    "AttackAnimationPoint"      "0.38"
-	    "AttackAcquisitionRange"    "600"
-	    "AttackRange"               "600"
-	    "ProjectileModel"           "particles/base_attacks/ranged_badguy.vpcf"
-	    "ProjectileSpeed"           "900"
-	    
-	    // Bounty
-	    //----------------------------------------------------------------
-	    "BountyGoldMin"             "8.0"
-	    "BountyGoldMax"             "10.0"
-	    
-	    // Bounds
-	    //----------------------------------------------------------------
-	    "BoundsHullName"            "DOTA_HULL_SIZE_HUGE"
-	    "RingRadius"                "31"
-	    "CollisionSize"             "31"
-	    "FormationRank"             "2"
-	    
-	    // Unit Costs
-	    //----------------------------------------------------------------
-	    "GoldCost"                  "255"
-	    "LumberCost"                "30"
-	    "FoodCost"                  "2"
-	    "StockMax"                  "1"
-	    "StockTime"                 "160"
-	    "StockInitial"              "0"
-	    "StockStartDelay"           "440"
-	    
-	    // Movement
-	    //----------------------------------------------------------------
-	    "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
-	    "MovementSpeed"             "270"
-	    "MovementTurnRate"          "0.5"
-	    
-	    // Status
-	    //----------------------------------------------------------------
-	    "StatusHealth"              "300"
-	    "StatusHealthRegen"         "0.5"
-	    "StatusMana"                "300"
-	    "StatusManaRegen"           "0.75"
-	    "StatusStartingMana"        "300"
 	    
 	    // Vision
 	    //----------------------------------------------------------------
@@ -16019,7 +16019,7 @@
 	    
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"                  ""   //Reference: ACff
+	    "Ability1"                  "neutral_faerie_fire"
 	    
 	    // Armor
 	    //----------------------------------------------------------------
@@ -16108,7 +16108,7 @@
 	    
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"                  ""   //Reference: ACsa
+	    "Ability1"                  "neutral_searing_arrows"
 	    
 	    // Armor
 	    //----------------------------------------------------------------
@@ -16280,8 +16280,8 @@
 	    
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"                  ""   //Reference: ACsw
-	    "Ability2"                  ""   //Reference: ACdm
+	    "Ability1"                  "neutral_slow"
+	    "Ability2"                  "neutral_abolish_magic"
 	    
 	    // Armor
 	    //----------------------------------------------------------------
@@ -16453,8 +16453,8 @@
 	    
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"                  ""   //Reference: Aenw
-	    "Ability2"                  ""   //Reference: Aslp
+	    "Ability1"                  "neutral_entangling_roots"
+	    "Ability2"                  "neutral_summon_prawns"
 	    
 	    // Armor
 	    //----------------------------------------------------------------
@@ -16519,6 +16519,85 @@
 	    //----------------------------------------------------------------
 	    "AttackType"         "pierce"
 	    "ArmorType"                 "medium"
+	    
+	    // Creature Data
+	    //----------------------------------------------------------------
+	}
+	
+	//=================================================================================
+	// Creature: Makrura Snapper
+	// Description: "Heavy melee unit. |n|n|cffffcc00Attacks land units.|r"
+	//=================================================================================
+	"neutral_makrura_prawn"
+	{
+	    // General
+	    //----------------------------------------------------------------
+	    "BaseClass"                 "npc_dota_creature"
+	    "Model"                     "models/heroes/siren/siren.vmdl"
+	    "ModelScale"                "0.6"
+	    "Level"                     "5"
+	    "HealthBarOffset"           "140"
+	
+	    "FormationRank"             "0"
+	    "AttacksEnabled"            "ground"
+	    
+	    // Abilities
+	    //----------------------------------------------------------------
+	    
+	    // Armor
+	    //----------------------------------------------------------------
+	    "ArmorPhysical"             "6"
+	    "MagicalResistance"         "0"
+	    
+	    // Attack
+	    //----------------------------------------------------------------
+	    "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
+	    "AttackDamageMin"           "10.0"
+	    "AttackDamageMax"           "11.0"
+	    "AttackDamageType"          "DAMAGE_TYPE_ArmorPhysical"
+	    "AttackRate"                "1.35"
+	    "AttackAnimationPoint"      "0.38"
+	    "AttackAcquisitionRange"    "500"
+	    "AttackRange"               "100"
+	    
+	    // Bounty
+	    //----------------------------------------------------------------
+	    "BountyGoldMin"             "4.0"
+	    "BountyGoldMax"             "6.0"
+	    
+	    // Bounds
+	    //----------------------------------------------------------------
+	    "BoundsHullName"            "DOTA_HULL_SIZE_HUGE"
+	    "RingRadius"                "32"
+	    "CollisionSize"             "32"
+	    "FormationRank"             "0"
+	    
+	    // Unit Costs
+	    //----------------------------------------------------------------
+	    "GoldCost"                  "105"
+	    "LumberCost"                "0"
+	    "FoodCost"                  "1"
+	    
+	    // Movement
+	    //----------------------------------------------------------------
+	    "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
+	    "MovementSpeed"             "270"
+	    "MovementTurnRate"          "0.5"
+	    
+	    // Status
+	    //----------------------------------------------------------------
+	    "StatusHealth"              "170"
+	    "StatusHealthRegen"         "0.5"
+	    
+	    // Vision
+	    //----------------------------------------------------------------
+	    "VisionDaytimeRange"        "1400"
+	    "VisionNighttimeRange"      "800"
+	    
+	    // Attack Damage types
+	    //----------------------------------------------------------------
+	    "AttackType"                "normal"
+	    "ArmorType"                 "heavy"
 	    
 	    // Creature Data
 	    //----------------------------------------------------------------
@@ -16626,7 +16705,7 @@
 	    
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"                  ""   //Reference: Anh1
+	    "Ability1"                  ""
 	    
 	    // Armor
 	    //----------------------------------------------------------------
@@ -16715,7 +16794,7 @@
 	    
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"                  ""   //Reference: ACcw
+	    "Ability1"                  "neutral_cold_arrows"
 	    
 	    // Armor
 	    //----------------------------------------------------------------
@@ -16804,7 +16883,7 @@
 	    
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"                  ""   //Reference: ACim
+	    "Ability1"                  "neutral_immolation"
 	    
 	    // Armor
 	    //----------------------------------------------------------------
@@ -16891,8 +16970,8 @@
 	    
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"                  ""   //Reference: ACcs
-	    "Ability2"                  ""   //Reference: Ashm
+	    "Ability1"                  "neutral_shadow_meld"
+	    "Ability2"                  "neutral_curse"
 	    
 	    // Armor
 	    //----------------------------------------------------------------
@@ -16982,7 +17061,7 @@
 	    
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"                  ""   //Reference: ACr2
+	    "Ability1"                  ""
 	    
 	    // Armor
 	    //----------------------------------------------------------------
@@ -17071,8 +17150,7 @@
 	    
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"                  ""   //Reference: Alit
-	    "Ability2"                  ""   //Reference: ACt2
+	    "Ability1"                  "neutral_slam"
 	    
 	    // Armor
 	    //----------------------------------------------------------------
@@ -17161,7 +17239,7 @@
 	    
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"                  ""   //Reference: ACcn
+	    "Ability1"                  "neutral_cannibalize"
 	    
 	    // Armor
 	    //----------------------------------------------------------------
@@ -17246,7 +17324,7 @@
 	    
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"                  ""   //Reference: ACsw
+	    "Ability1"                  "neutral_slow"
 	    
 	    // Armor
 	    //----------------------------------------------------------------
@@ -17336,8 +17414,8 @@
 	    
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"                  ""   //Reference: Ambd
-	    "Ability2"                  ""   //Reference: ACrd
+	    "Ability1"                  "neutral_mana_burn"
+	    "Ability2"                  "neutral_raise_dead"
 	    
 	    // Armor
 	    //----------------------------------------------------------------
@@ -17424,7 +17502,7 @@
 	    
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"                  ""   //Reference: Abu5
+	    "Ability1"                  ""
 	    
 	    // Armor
 	    //----------------------------------------------------------------
@@ -17510,7 +17588,7 @@
 	    
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"                  ""   //Reference: ACev
+	    "Ability1"                  "neutral_evasion"
 	    
 	    // Armor
 	    //----------------------------------------------------------------
@@ -17594,7 +17672,7 @@
 	    
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"                  ""   //Reference: ACmi
+	    "Ability1"                  "neutral_spell_immunity"
 	    
 	    // Armor
 	    //----------------------------------------------------------------
@@ -17678,8 +17756,8 @@
 	    
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"                  ""   //Reference: ACf2
-	    "Ability2"                  ""   //Reference: ACdm
+	    "Ability1"                  "neutral_abolish_magic"
+	    "Ability2"                  "neutral_frost_armor"
 	    
 	    // Armor
 	    //----------------------------------------------------------------
@@ -17768,7 +17846,7 @@
 	    
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"                  ""   //Reference: Assp
+	    "Ability1"                  ""
 	    
 	    // Armor
 	    //----------------------------------------------------------------
@@ -17937,7 +18015,7 @@
 	    
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"                  ""   //Reference: ACbz
+	    "Ability1"                  "neutral_blizzard"
 	    
 	    // Armor
 	    //----------------------------------------------------------------
@@ -18024,9 +18102,8 @@
 	    
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"                  ""   //Reference: ACwb
-	    "Ability2"                  ""   //Reference: ACrd
-	    "Ability3"                  ""   //Reference: Aspa
+	    "Ability1"                  "neutral_web"
+	    "Ability2"                  "neutral_raise_dead"
 	    
 	    // Armor
 	    //----------------------------------------------------------------
@@ -18235,7 +18312,8 @@
 	    "HealthBarOffset"           "200"
 	    "UseNeutralCreepBehavior"   "0"
 	
-	    "UnitLabel"                 "tavern"
+	    "ShopType"                  "tavern"
+	    "SellsHeroes"               "1"
 	
 	    "MinimapIcon"               "minimap_shop"
 	    "MinimapIconSize"           "500"
@@ -18305,7 +18383,7 @@
 	    "HealthBarOffset"           "200"
 	    "UseNeutralCreepBehavior"   "0"
 	
-	    "UnitLabel"                 "goblin_merchant"
+	    "ShopType"                  "global"
 	
 	    "MinimapIcon"               "minimap_shop"
 	    "MinimapIconSize"           "500"
@@ -18375,7 +18453,8 @@
 	    "HealthBarOffset"           "200"
 	    "UseNeutralCreepBehavior"   "0"
 	
-	    "UnitLabel"                 "goblin_lab"
+	    "ShopType"                  "global"
+	    "SellsNPCs"                 "1"
 	
 	    "MinimapIcon"               "minimap_shop"
 	    "MinimapIconSize"           "500"
@@ -18445,7 +18524,78 @@
 	    "HealthBarOffset"           "200"
 	    "UseNeutralCreepBehavior"   "0"
 	
-	    "UnitLabel"                 "mercenary"
+	    "ShopType"                  "global"
+	    "SellsNPCs"                 "1"
+	
+	    "MinimapIcon"               "minimap_shop"
+	    "MinimapIconSize"           "500"
+	    "MinimapDisableTint"        "1"
+	
+	    "Ability1"                  "" //ability_shop
+	    "Ability2"                  "ability_tavern"
+	
+	    // Armor
+	    //----------------------------------------------------------------
+	    "ArmorPhysical"             "0"
+	    "MagicalResistance"         "0"
+	    
+	    // Attack
+	    //----------------------------------------------------------------
+	    "AttackCapabilities"        "DOTA_UNIT_CAP_NO_ATTACK"
+	    
+	    // Bounty
+	    //----------------------------------------------------------------
+	    "BountyGoldMin"             "4.0"
+	    "BountyGoldMax"             "6.0"
+	    
+	    // Gold and Lumber
+	    //----------------------------------------------------------------
+	    "GoldCost"                  "105"
+	    "LumberCost"                "105"
+	    
+	    // Movement
+	    //----------------------------------------------------------------
+	    "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_NONE"
+	    "MovementSpeed"             "100"
+	    "MovementTurnRate"          "0.5"
+	    
+	    // Status
+	    //----------------------------------------------------------------
+	    "StatusHealth"              "240"
+	    "StatusHealthRegen"         "0.5"
+	    
+	    // Vision
+	    //----------------------------------------------------------------
+	    "VisionDaytimeRange"        "1400"
+	    "VisionNighttimeRange"      "800"
+	
+	    // Building Size
+	    //----------------------------------------------------------------
+	    "ConstructionSize"          "8"
+	    "BlockPathingSize"          "6"
+	    
+	    // Team
+	    //----------------------------------------------------------------
+	    "TeamName"                  "DOTA_TEAM_NEUTRALS"
+	    "UnitRelationShipClass"     "DOTA_NPC_UNIT_RELATIONSHIP_TYPE_DEFAULT"
+	    
+	    // Creature Data
+	    //----------------------------------------------------------------
+	}
+	
+	"marketplace"
+	{
+	    // General
+	    //----------------------------------------------------------------
+	    "BaseClass"                 "npc_dota_building"
+	    "Model"                     "models/props_debris/secret_shop001.vmdl"
+	    "ModelScale"                "1.2"
+	    "Level"                     "10"
+	    "BoundsHullName"            "DOTA_HULL_SIZE_BARRACKS"
+	    "HealthBarOffset"           "200"
+	    "UseNeutralCreepBehavior"   "0"
+	
+	    "ShopType"                  "marketplace"
 	
 	    "MinimapIcon"               "minimap_shop"
 	    "MinimapIconSize"           "500"
@@ -18769,7 +18919,7 @@
 	    
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"                  ""   //Reference: Ambb
+	    "Ability1"                  ""
 	    
 	    // Armor
 	    //----------------------------------------------------------------
@@ -19940,10 +20090,10 @@
 	    
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"          "blood_mage_phoenix_reborn"  //Reference: Aphx
-	    "Ability2"          "neutral_spell_immunity"     //Reference: ACmi
-	    "Ability3"          ""   //Reference: ACrk
-	    "Ability4"          ""   //Reference: Apxf
+	    "Ability1"          "blood_mage_phoenix_reborn"
+	    "Ability2"          "neutral_spell_immunity"
+	    "Ability3"          ""
+	    "Ability4"          ""
 	    
 	    // Armor
 	    //----------------------------------------------------------------
@@ -19985,7 +20135,7 @@
 	    "StatusHealth"          "1250"
 	    "StatusHealthRegen"     "0"
 	    "StatusMana"            "0"
-	    "StatsManaRegen"        "0"
+	    "StatusManaRegen"        "0"
 	    
 	    // Vision
 	    //----------------------------------------------------------------
@@ -20023,9 +20173,9 @@
 	    
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"          "blood_mage_phoenix_egg"     //Reference: Aphx
-	    "Ability2"          "neutral_spell_immunity"     //Reference: ACrk
-	    "Ability3"          ""   //Reference: ACmi
+	    "Ability1"          "blood_mage_phoenix_egg"
+	    "Ability2"          "neutral_spell_immunity"
+	    "Ability3"          ""
 	    
 	    // Armor
 	    //----------------------------------------------------------------
@@ -20059,7 +20209,7 @@
 	    //----------------------------------------------------------------
 	    "StatusHealth"          "200"
 	    "StatusMana"            "0"
-	    "StatsManaRegen"        "0"
+	    "StatusManaRegen"        "0"
 	    
 	    // Vision
 	    //----------------------------------------------------------------
@@ -20131,7 +20281,7 @@
 	    "StatusHealth"          "140"
 	    "StatusHealthRegen"     "0" //2 burrow
 	    "StatusMana"            "0"
-	    "StatsManaRegen"        "0"
+	    "StatusManaRegen"        "0"
 	    
 	    // Vision
 	    //----------------------------------------------------------------
@@ -20165,7 +20315,7 @@
 	    
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"          "crypt_lord_beetle_burrow"   //Reference: Abu2
+	    "Ability1"          "crypt_lord_beetle_burrow"
 	    
 	    // Armor
 	    //----------------------------------------------------------------
@@ -20199,7 +20349,7 @@
 	    "StatusHealth"          "275"
 	    "StatusHealthRegen"     "0" //2 burrow
 	    "StatusMana"            "0"
-	    "StatsManaRegen"        "0"
+	    "StatusManaRegen"        "0"
 	    
 	    // Vision
 	    //----------------------------------------------------------------
@@ -20233,7 +20383,7 @@
 	    
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"          "crypt_lord_beetle_burrow"   //Reference: Abu3
+	    "Ability1"          "crypt_lord_beetle_burrow"
 	    
 	    // Armor
 	    //----------------------------------------------------------------
@@ -20267,7 +20417,7 @@
 	    "StatusHealth"          "410"
 	    "StatusHealthRegen"     "0" //2 burrow
 	    "StatusMana"            "0"
-	    "StatsManaRegen"        "0"
+	    "StatusManaRegen"        "0"
 	    
 	    // Vision
 	    //----------------------------------------------------------------
@@ -20302,7 +20452,7 @@
 	    
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"          ""   //Reference: Aloc
+	    "Ability1"          ""
 	    
 	    // Armor
 	    //----------------------------------------------------------------
@@ -20336,7 +20486,7 @@
 	    //----------------------------------------------------------------
 	    "StatusHealth"          "65"
 	    "StatusHealthRegen"     "0.25"
-	    "StatsManaRegen"        "-"
+	    "StatusManaRegen"        "-"
 	    
 	    // Vision
 	    //----------------------------------------------------------------
@@ -20933,7 +21083,7 @@
 	    "StatusHealth"          "425"
 	    "StatusHealthRegen"     "0.25"
 	    "StatusMana"            "0"
-	    "StatsManaRegen"        "0"
+	    "StatusManaRegen"        "0"
 	    
 	    // Vision
 	    //----------------------------------------------------------------
@@ -21004,7 +21154,7 @@
 	    "StatusHealth"          "550"
 	    "StatusHealthRegen"     "0.25"
 	    "StatusMana"            "0"
-	    "StatsManaRegen"        "0"
+	    "StatusManaRegen"        "0"
 	    
 	    // Vision
 	    //----------------------------------------------------------------
@@ -21074,7 +21224,7 @@
 	    "StatusHealth"          "700"
 	    "StatusHealthRegen"     "0.25"
 	    "StatusMana"            "0"
-	    "StatsManaRegen"        "0"
+	    "StatusManaRegen"        "0"
 	    
 	    // Vision
 	    //----------------------------------------------------------------
@@ -21128,7 +21278,7 @@
 	    
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"          ""   //Reference: Ault
+	    "Ability1"          "nightelf_ultravision_disabled"
 	    
 	    // Armor
 	    //----------------------------------------------------------------
@@ -21162,7 +21312,7 @@
 	    "StatusHealth"          "300"
 	    "StatusHealthRegen"     "0.5"
 	    "StatusMana"            "0"
-	    "StatsManaRegen"        "0"
+	    "StatusManaRegen"        "0"
 	    
 	    // Vision
 	    //----------------------------------------------------------------
@@ -22043,7 +22193,7 @@
 	    
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"          "" //tinker_clockwerk_goblin_kaboom, learned in lua  //Reference: Asd3
+	    "Ability1"          "" //tinker_clockwerk_goblin_kaboom, learned in lua
 	    
 	    // Armor
 	    //----------------------------------------------------------------
@@ -22077,7 +22227,7 @@
 	    "StatusHealth"          "80"
 	    "StatusHealthRegen"     "2"
 	    "StatusMana"            "0"
-	    "StatsManaRegen"        "0"
+	    "StatusManaRegen"        "0"
 	    
 	    // Vision
 	    //----------------------------------------------------------------
@@ -22125,7 +22275,7 @@
 	    
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"          "" //"tinker_pocket_factory_train_goblin" learn in lua   //Reference: ARal
+	    "Ability1"          "" //"tinker_pocket_factory_train_goblin" learn in lua
 	    
 	    // Armor
 	    //----------------------------------------------------------------
@@ -22160,7 +22310,7 @@
 	    //----------------------------------------------------------------
 	    "StatusHealth"          "300"
 	    "StatusMana"            "0"
-	    "StatsManaRegen"        "0"
+	    "StatusManaRegen"        "0"
 	    
 	    // Vision
 	    //----------------------------------------------------------------
@@ -22201,7 +22351,7 @@
 	    
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"          "" //"tinker_pocket_factory_train_goblin" learn in lua   //Reference: ARal
+	    "Ability1"          "" //"tinker_pocket_factory_train_goblin" learn in lua
 	    
 	    // Armor
 	    //----------------------------------------------------------------
@@ -22236,7 +22386,7 @@
 	    //----------------------------------------------------------------
 	    "StatusHealth"          "450"
 	    "StatusMana"            "0"
-	    "StatsManaRegen"        "0"
+	    "StatusManaRegen"        "0"
 	    
 	    // Vision
 	    //----------------------------------------------------------------
@@ -22277,7 +22427,7 @@
 	    
 	    // Abilities
 	    //----------------------------------------------------------------
-	    "Ability1"          "" //"tinker_pocket_factory_train_goblin" learn in lua   //Reference: ARal
+	    "Ability1"          "" //"tinker_pocket_factory_train_goblin" learn in lua
 	    
 	    // Armor
 	    //----------------------------------------------------------------
@@ -22312,7 +22462,7 @@
 	    //----------------------------------------------------------------
 	    "StatusHealth"          "600"
 	    "StatusMana"            "0"
-	    "StatsManaRegen"        "0"
+	    "StatusManaRegen"        "0"
 	    
 	    // Vision
 	    //----------------------------------------------------------------

@@ -31,7 +31,7 @@
 	"AttackDamageMax"			"12.0"
 	"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
 	"AttackRate"				"2.22"
-	"AttackAnimationPoint"		"0.35"
+	//"AttackAnimationPoint"		"0.35"
 	"AttackAcquisitionRange"	"500"
 	"AttackRange"				"100"
 	"ProjectileSpeed"			"900"
@@ -75,7 +75,7 @@
 	"StatusHealth"				"100"
 	"StatusHealthRegen"			"0.25"
 	"StatusMana"				"0"
-	"StatsManaRegen"			"0.01"
+	"StatusManaRegen"			"0.01"
 	
 	// Vision
 	//----------------------------------------------------------------

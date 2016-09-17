@@ -8,7 +8,8 @@ NeutralAI = {}
 NeutralAI.__index = NeutralAI
 
 function NeutralAI:Start( unit )
-    --print("Starting NeutralAI for "..unit:GetUnitName().." "..unit:GetEntityIndex())
+    unit.id = unit:GetUnitName().." "..unit:GetEntityIndex()
+    --print("[NeutralAI] Starting "..unit.id)
 
     local ai = {}
     setmetatable( ai, NeutralAI )
@@ -23,14 +24,15 @@ function NeutralAI:Start( unit )
 
     unit.state = AI_STATE_IDLE
     unit.spawnPos = unit:GetAbsOrigin()
+    unit.spawnFacing = unit:GetForwardVector()
+    Timers:CreateTimer(0.03, function() unit.spawnPos = unit:GetAbsOrigin() end)
     unit.acquireRange = unit:GetAcquisitionRange()
     unit.aggroRange = 200 --Range an enemy unit has to be for the group to go from IDLE to AGGRESIVE
     unit.leashRange = unit.acquireRange * 2 --Range from spawnPos to go from AGGRESIVE to RETURNING
     unit.campCenter = FindCreepCampCenter(unit)
     if not unit.campCenter then
         print("[NeutralAI] Error: Cant find minimap_ entity nearby "..unit:GetUnitName())
-        DebugDrawCircle(unit:GetAbsOrigin(),Vector(255,0,0),100,1000,true,30)
-        unit.allies = {}
+        unit.allies = {unit}
     else
         unit.allies = FindAllUnitsAroundPoint(unit, unit.campCenter, 1000)
     end
@@ -39,7 +41,46 @@ function NeutralAI:Start( unit )
     unit:SetIdleAcquire(false)
     unit:SetAcquisitionRange(0)
 
-    --Start thinking
+    function unit:Attack(target)
+        unit:MoveToTargetToAttack(target)
+        unit.state = AI_STATE_AGGRESSIVE
+        unit.aggroTarget = target
+    end
+
+    function unit:Return()
+        unit:MoveToPosition(unit.spawnPos)
+        unit.state = AI_STATE_RETURNING
+        unit.aggroTarget = nil
+        --print("[NeutralAI] "..unit.id.." stopped at "..math.floor(distanceFromSpawn).. " ("..unit.leashRange.." leash range)")
+    end
+
+    function unit:Sleep()
+        unit:Stop()
+        ApplyModifier(unit, "modifier_neutral_sleep")
+        unit.state = AI_STATE_SLEEPING
+    end
+
+    function unit:Idle()
+        unit.state = AI_STATE_IDLE
+        unit:RemoveModifierByName("modifier_neutral_sleep")
+        ApplyModifier(unit, "modifier_neutral_idle_aggro")
+    end
+
+    -- Check ability AI block
+    unit.ai_abilities = {}
+    for i=0,15 do
+        local ability = unit:GetAbilityByIndex(i)
+        if ability then
+            local ability_ai = ability:GetKeyValue("AI")
+            if ability_ai then
+                ability.ai = ability_ai
+                table.insert(unit.ai_abilities, ability)
+            end
+        end
+    end
+    if #unit.ai_abilities == 0 then unit.ai_abilities = nil end
+
+    -- Start thinking
     Timers:CreateTimer(function()
         return ai:GlobalThink()
     end)
@@ -50,12 +91,10 @@ end
 function NeutralAI:GlobalThink()
     local unit = self.unit
 
-    if not IsValidAlive(unit) then
-        return nil
-    end
+    if not IsValidAlive(unit) or unit:GetTeamNumber() ~= DOTA_TEAM_NEUTRALS then return end
 
     --Execute the think function that belongs to the current state
-    Dynamic_Wrap(NeutralAI, self.stateThinks[ unit.state ])( self )
+    local thinkInterval = Dynamic_Wrap(NeutralAI, self.stateThinks[ unit.state ])( self )
 
     return AI_THINK_INTERVAL
 end
@@ -63,28 +102,40 @@ end
 function NeutralAI:IdleThink()
     local unit = self.unit
 
-    -- Sleep
-    if not GameRules:IsDaytime() then
-        ApplyModifier(unit, "modifier_neutral_sleep")
-
-        unit.state = AI_STATE_SLEEPING
-        return true
+    -- Keep original facing
+    if unit:GetForwardVector() ~= unit.spawnFacing then
+        unit:MoveToPosition(unit.spawnPos + unit.spawnFacing)
+        return 0.1
     end
 
-    local target = FindAttackableEnemies( unit, unit.aggroRange )
+    -- Check if the unit has walked outside its leash range (in case of fleeing)
+    local distanceFromSpawn = (unit.spawnPos - unit:GetAbsOrigin()):Length2D()
+    if unit:GetHealthPercent() < 100 then
+        print(distanceFromSpawn)
+    end
+    if distanceFromSpawn > unit.leashRange then
+        unit:Return()
+        return
+    end
 
-    --Start attacking as a group
+    -- Sleep
+    if not GameRules:IsDaytime() and not unit:IsMoving() then
+        unit:Sleep()
+        return
+    end
+
+    local target = FindAttackableEnemy( unit, unit.aggroRange )
+
+    -- Start attacking as a group
     if target then
         for _,v in pairs(unit.allies) do
             if IsValidAlive(v) then
                 if v.state == AI_STATE_IDLE then
-                    v:MoveToTargetToAttack(target)
-                    v.aggroTarget = target
-                    v.state = AI_STATE_AGGRESSIVE
+                    v:Attack(target)
                 end
             end
         end    
-        return true
+        return
     end
 end
 
@@ -93,41 +144,40 @@ function NeutralAI:SleepThink()
 
     -- Wake up
     if GameRules:IsDaytime() then
-        unit:RemoveModifierByName("modifier_neutral_sleep")
-
-        unit.state = AI_STATE_IDLE
-        return true
+        unit:Idle()
+        return
     end
 end
 
 function NeutralAI:AggressiveThink()
     local unit = self.unit
 
-    --Check if the unit has walked outside its leash range
-    local distanceFromSpawn = ( unit.spawnPos - unit:GetAbsOrigin() ):Length2D()
-    if distanceFromSpawn >= unit.leashRange then
-        unit:MoveToPosition( unit.spawnPos )
-        unit.state = AI_STATE_RETURNING
-        unit.aggroTarget = nil
-        print("stop at ",distanceFromSpawn, unit.leashRange)
-        return true
+    -- Check if the unit has walked outside its leash range
+    local distanceFromSpawn = (unit.spawnPos - unit:GetAbsOrigin()):Length2D()
+    if distanceFromSpawn > unit.leashRange then
+        unit:Return()
+        return
+    end
+
+    if unit.ai_abilities then
+        local abilityCast = NeutralAI.ThinkAbilities(self)
+        if abilityCast then
+            --print("[NeutralAI] "..unit.id.." cast ".. abilityCast:GetAbilityName())
+            return abilityCast:GetCastPoint() + abilityCast:GetChannelTime() + 0.1 -- Continue attack orders only after the ability finishes casting
+        end
     end
     
     -- Use the acquisition range to find enemies while in aggro state
-    local target = FindAttackableEnemies( unit, unit.acquireRange )
+    local target = FindAttackableEnemy( unit, unit.acquireRange )
     
-    --Check if the unit's target is still alive
+    -- If the unit doesn't have an aggro target, assign a new one
     if not IsValidAlive(unit.aggroTarget) then
         -- If there is no other valid target, return
         if not target then
-            unit:MoveToPosition( unit.spawnPos )
-            unit.state = AI_STATE_RETURNING
-            unit.aggroTarget = nil    
+            unit:Return()
         else
-            unit:MoveToTargetToAttack(target)
-            unit.aggroTarget = target
+            unit:Attack(target)
         end
-        return true
     
     -- If the current aggro target is still valid
     else
@@ -137,35 +187,148 @@ function NeutralAI:AggressiveThink()
 
             -- If the range to the current target exceeds the attack range of the attacker, and there is a possible target closer to it, attack that one instead
             if range_to_current_target > unit:GetAttackRange() and range_to_current_target > range_to_closest_target then
-                unit:MoveToTargetToAttack(target)
-                unit.aggroTarget = target
+                unit:Attack(target)
+                return
             end
         else    
             -- Can't attack the current target and there aren't more targets close
-            if not UnitCanAttackTarget(unit, unit.aggroTarget) or unit.aggroTarget:HasModifier("modifier_invisible") or unit:GetRangeToUnit(unit.aggroTarget) > unit.leashRange then
-                unit:MoveToPosition( unit.spawnPos )
-                unit.state = AI_STATE_RETURNING
-                unit.aggroTarget = nil
+            if not UnitCanAttackTarget(unit, unit.aggroTarget) or unit.aggroTarget:IsInvisible() or unit:GetRangeToUnit(unit.aggroTarget) > unit.leashRange then
+                unit:Return()
+                return
             end
         end
     end
-    return true
+
+    if not unit:GetAggroTarget() and unit:IsIdle() then
+        if target then
+            unit:Attack(target)
+        end
+    end
 end
 
 function NeutralAI:ReturningThink()
     local unit = self.unit
 
     --Check if the AI unit has reached its spawn location yet
-    if ( unit.spawnPos - unit:GetAbsOrigin() ):Length2D() < 10 then
-        --Go into the idle state
-        unit.state = AI_STATE_IDLE
-        ApplyModifier(unit, "modifier_neutral_idle_aggro")
-        return true
+    if (unit.spawnPos - unit:GetAbsOrigin()):Length2D() < 10 then
+        unit:Idle()
+        return
+    else
+        unit:MoveToPosition(unit.spawnPos)
     end
 end
 
+NeutralAI.CastLogic = {}
+NeutralAI.CastLogic["OnCooldown"] = function(...) return NeutralAI.CastOnCooldown(...) end
+NeutralAI.CastLogic["TargetsAround"] = function(...) NeutralAI.CastOnTargetsAround(...) end
+NeutralAI.CastLogic["AllyHealthDeficit"] = function(...) return NeutralAI.CastOnAllyHealthDeficit(...) end
+NeutralAI.CastLogic["LinedTargets"] = function(...) return NeutralAI.CastOnLinedTargets(...) end
+
+function NeutralAI:ThinkAbilities()
+    local unit = self.unit
+
+    for _,ability in pairs(unit.ai_abilities) do
+        if ability:IsFullyCastable() and not ability:IsInAbilityPhase() then
+            local logic = ability.ai.CastLogic
+            if NeutralAI.CastLogic[logic] and NeutralAI.CastLogic[logic](self, ability) then
+                return ability -- Something was cast
+            end
+        end
+    end
+end
+
+function NeutralAI:CastOnCooldown(ability)
+    local unit = self.unit
+
+    -- No-Target abilities are used asap
+    if ability:HasBehavior(DOTA_ABILITY_BEHAVIOR_NO_TARGET) then
+        unit:CastAbilityNoTarget(ability,-1)
+        return true
+    else
+        -- Unit-Target abilities can check for air units
+        local bPrioritizeAirUnits = ability.ai.PriorizeAirUnits
+        local enemies = FindEnemiesInRadius(unit, ability:GetCastRange())
+        local modifierName = ability.ai.ModifierName
+        local target
+
+        if bPrioritizeAirUnits then
+            if modifierName then
+                target = FindFirstUnit(enemies, function(v) return not v:IsFlyingUnit() and not v:HasModifier(modifierName) and not v.targetedByNeutralAbility end)
+            else
+                target = FindFirstUnit(enemies, function(v) return not v:IsFlyingUnit() end)
+            end
+        else
+            if modifierName then
+                target = FindFirstUnit(enemies, function(v) return not v:HasModifier(modifierName) and not v.targetedByNeutralAbility end)
+            else
+                target = enemies[1]
+            end
+        end
+        if target then
+            if ability:HasBehavior(DOTA_ABILITY_BEHAVIOR_UNIT_TARGET) then
+                unit:CastAbilityOnTarget(target,ability,-1)
+                if modifierName then
+                    target.targetedByNeutralAbility = modifierName -- Prevent two units from targeting the same ability on the same target
+                    Timers:CreateTimer(0.1+ability:GetCastPoint(), function() target.targetedByNeutralAbility = nil end)
+                end
+                return true
+            end
+        end
+    end
+end
+ 
+function NeutralAI:CastOnTargetsAround(ability)
+    local unit = self.unit
+    if ability:HasBehavior(DOTA_ABILITY_BEHAVIOR_NO_TARGET) then
+        -- No Target abilities must have its find radius defined in "AbilityCastRange"
+        local enemies = FindUnitsInRadius(unit:GetTeamNumber(), unit:GetAbsOrigin(),  nil, ability:GetCastRange(), DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAG_NO_INVIS, FIND_ANY_ORDER, false)
+        local nMinTargets = ability.ai.MinTargets
+        if #enemies >= nMinTargets then
+            unit:CastAbilityNoTarget(ability,-1)
+            return true
+        end
+    end
+end
+
+function NeutralAI:CastOnAllyHealthDeficit(ability)
+    local unit = self.unit
+    local nHealthPercent = ability.ai.HealthPercent
+
+    for _,ally in pairs(unit.allies) do
+        if IsValidEntity(ally) and ally:IsAlive() and ally:GetHealthPercent() <= nHealthPercent then
+            -- Point Target abilities are cast behind the caster
+            if ability:HasBehavior(DOTA_ABILITY_BEHAVIOR_POINT) then
+                local pos = unit:GetAbsOrigin() - unit:GetForwardVector() * 150
+                unit:CastAbilityOnPosition(pos,ability,-1)
+                return true
+            end
+        end
+    end
+end
+
+function NeutralAI:CastOnLinedTargets(ability)
+    local unit = self.unit
+    local nLineWidth = ability.ai.LineWidth
+    local nMinTargets = ability.ai.MinTargets
+
+    -- Point Target abilities check a line towards each unit
+    if ability:HasBehavior(DOTA_ABILITY_BEHAVIOR_POINT) then
+        local enemies = FindUnitsInRadius(unit:GetTeamNumber(), unit:GetAbsOrigin(),  nil, ability:GetCastRange(), DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAG_NO_INVIS, FIND_FARTHEST, false)
+        for _,enemy in pairs(enemies) do
+            local lineEnemies = FindUnitsInLine(unit:GetTeamNumber(), unit:GetAbsOrigin(), enemy:GetAbsOrigin(), nil, nLineWidth, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_FOW_VISIBLE + DOTA_UNIT_TARGET_FLAG_NO_INVIS)
+            if #enemies >= nMinTargets then
+                unit:CastAbilityOnPosition(enemy:GetAbsOrigin(),ability,-1)
+                return true
+            end
+        end
+    end
+end
+
+
+-------------------------------------------------------------------
+
 -- Return a valid attackable unit or nil if there are none
-function FindAttackableEnemies( unit, radius )
+function FindAttackableEnemy( unit, radius )
     local enemies = FindEnemiesInRadius( unit, radius )
     for _,target in pairs(enemies) do
         if UnitCanAttackTarget(unit, target) and not target:HasModifier("modifier_invisible") then

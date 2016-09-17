@@ -34,7 +34,7 @@
 	"AttackDamageMax"			"8.0"
 	"AttackDamageType"			"DAMAGE_TYPE_ArmorPhysical"
 	"AttackRate"				"2.13"
-	"AttackAnimationPoint"		"0.55"
+	//"AttackAnimationPoint"		"0.55"
 	"AttackAcquisitionRange"	"600"
 	"AttackRange"				"600"
 	"ProjectileModel"			"particles/units/heroes/hero_rubick/rubick_base_attack.vpcf"
@@ -79,7 +79,7 @@
 	"StatusHealth"				"100"
 	"StatusHealthRegen"			"0.25"
 	"StatusMana"				"0"
-	"StatsManaRegen"			"0.01"
+	"StatusManaRegen"			"0.01"
 	
 	// Vision
 	//----------------------------------------------------------------

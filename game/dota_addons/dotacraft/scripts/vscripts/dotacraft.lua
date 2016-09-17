@@ -88,14 +88,14 @@ function dotacraft:InitGameMode()
     GameMode:SetItemAddedToInventoryFilter( Dynamic_Wrap(dotacraft, "FilterItemAdded"), self )
 
     -- Panorama listeners
-    CustomGameEventManager:RegisterListener( "selection_update", Dynamic_Wrap(dotacraft, 'OnPlayerSelectedEntities'))
-    CustomGameEventManager:RegisterListener( "moonwell_order", Dynamic_Wrap(dotacraft, "MoonWellOrder"))
-    CustomGameEventManager:RegisterListener( "burrow_order", Dynamic_Wrap(dotacraft, "BurrowOrder")) 
-    CustomGameEventManager:RegisterListener( "hippogryph_ride_order", Dynamic_Wrap(dotacraft, "HippogryphRiderOrder")) 
-    CustomGameEventManager:RegisterListener( "sacrifice_order", Dynamic_Wrap(dotacraft, "SacrificeOrder"))
-    CustomGameEventManager:RegisterListener( "entangle_order", Dynamic_Wrap(dotacraft, "EntangleOrder"))
-    CustomGameEventManager:RegisterListener( "shop_active_order", Dynamic_Wrap(dotacraft, "ShopActiveOrder")) 
-    CustomGameEventManager:RegisterListener( "building_rally_order", Dynamic_Wrap(dotacraft, "OnBuildingRallyOrder"))
+    CustomGameEventManager:RegisterListener("selection_update", Dynamic_Wrap(dotacraft, 'OnPlayerSelectedEntities'))
+    CustomGameEventManager:RegisterListener("moonwell_order", Dynamic_Wrap(dotacraft, "MoonWellOrder"))
+    CustomGameEventManager:RegisterListener("burrow_order", Dynamic_Wrap(dotacraft, "BurrowOrder")) 
+    CustomGameEventManager:RegisterListener("hippogryph_ride_order", Dynamic_Wrap(dotacraft, "HippogryphRiderOrder")) 
+    CustomGameEventManager:RegisterListener("sacrifice_order", Dynamic_Wrap(dotacraft, "SacrificeOrder"))
+    CustomGameEventManager:RegisterListener("entangle_order", Dynamic_Wrap(dotacraft, "EntangleOrder"))
+    CustomGameEventManager:RegisterListener("shop_active_order", Dynamic_Wrap(dotacraft, "ShopActiveOrder")) 
+    CustomGameEventManager:RegisterListener("building_rally_order", Dynamic_Wrap(dotacraft, "OnBuildingRallyOrder"))
     
     -- Lua Modifiers
     LinkLuaModifier("modifier_hex_frog", "libraries/modifiers/modifier_hex", LUA_MODIFIER_MOTION_NONE)
@@ -156,6 +156,8 @@ function dotacraft:InitGameMode()
 
     -- Panorama Developer setting
     CustomNetTables:SetTableValue("dotacraft_settings","developer",{value=IsInToolsMode()})
+
+    Containers:UsePanoramaInventory(true)
 
     print('[DOTACRAFT] Done loading dotacraft gamemode!')
 end
@@ -284,7 +286,7 @@ function dotacraft:InitializePlayer( hero )
     race_setup_table.mid_point = race_setup_table.closest_mine_pos + (position-race_setup_table.closest_mine_pos)/2
 
     -- Find neutrals near the starting zone and remove them
-    local neutrals = FindUnitsInRadius(hero:GetTeamNumber(), position, nil, 1000, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC, DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FIND_ANY_ORDER, true)
+    local neutrals = FindUnitsInRadius(hero:GetTeamNumber(), position, nil, 1000, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_BASIC+DOTA_UNIT_TARGET_HERO, DOTA_UNIT_TARGET_FLAG_INVULNERABLE, FIND_ANY_ORDER, true)
     for k,v in pairs(neutrals) do
         if v:GetTeamNumber() == DOTA_TEAM_NEUTRALS and not v:GetUnitName():match("minimap_") then
             v:RemoveSelf()
@@ -585,7 +587,7 @@ end
 function dotacraft:OnGameInProgress()
     print("[DOTACRAFT] The game has officially begun")
 
-    -- Setup shops (Tavern, Mercenary, Goblin Merchant and Lab)
+    -- Setup shops (Tavern, Mercenary, Marketplace, Goblin Merchant and Lab)
     local shops = Entities:FindAllByName("*shop*")
     for k,v in pairs(shops) do
         if v.AddAbility then
@@ -922,14 +924,21 @@ function dotacraft:OnEntityKilled( event )
     end
 
     -- Remove dead units from selection group
-    PlayerResource:RemoveFromSelection(killed_playerID, killed)
+    if PlayerResource:IsUnitSelected(killed_playerID, killed) then
+        print(TableCount(PlayerResource:GetSelectedEntities(killed_playerID)))
+        if TableCount(PlayerResource:GetSelectedEntities(killed_playerID)) == 1 then
+            PlayerResource:NewSelection(killed_playerID, PlayerResource:GetDefaultSelectionEntity(killed_playerID))
+        else
+            PlayerResource:RemoveFromSelection(killed_playerID, killed)
+        end
+    end
 
     -- Hero Killed
     if killed:IsRealHero() and killed_playerID ~= -1 then
         print("A Hero was killed")
         
         -- add hero to tavern, this function also works out cost etc
-        unit_shops:AddHeroToTavern(killed)
+        Shops:AddHeroToTavern(killed)
         
         if Players:HasAltar(killed_playerID) then
 
@@ -994,7 +1003,7 @@ function dotacraft:OnEntityKilled( event )
 
         if killed:GetUnitName() == "haunted_gold_mine" then
             if IsValidEntity(killed.sigil) then
-                killed.sigil:RemoveSelf()
+                UTIL_Remove(killed.sigil)
             end
         end
 

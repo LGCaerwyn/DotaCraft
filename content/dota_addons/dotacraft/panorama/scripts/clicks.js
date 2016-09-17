@@ -26,8 +26,6 @@ function GetMouseTarget()
 // Handle Right Button events
 function OnRightButtonPressed()
 {
-    $.Msg("OnRightButtonPressed")
-
     var iPlayerID = Players.GetLocalPlayer()
     var selectedEntities = Players.GetSelectedEntities( iPlayerID )
     var mainSelected = Players.GetLocalPlayerPortraitUnit() 
@@ -191,7 +189,7 @@ function OnRightButtonPressed()
                     return false
                 }
                 else
-                    CreateErrorMessage({message:"error_already_sacrificing"})
+                    GameUI.CreateErrorMessage({message:"error_already_sacrificing"})
             }
             // on an allied unit
             else if (IsAlliedUnit(targetIndex))
@@ -224,7 +222,7 @@ function OnLeftButtonPressed() {
     var mainSelected = Players.GetLocalPlayerPortraitUnit() 
     var mainSelectedName = Entities.GetUnitName( mainSelected )
     var targetIndex = GetMouseTarget()
-    
+
     Hide_All_Shops()
 
     if (targetIndex)
@@ -237,7 +235,7 @@ function OnLeftButtonPressed() {
             // Hero or unit with inventory
             if (UnitCanPurchase(mainSelected))
             {
-                GameEvents.SendCustomGameEventToServer("shop_active_order", { shop: targetIndex, unit: mainSelected, targeted: true})
+                GameEvents.SendCustomGameEventToServer("shop_active_order", {shop: targetIndex, unit: mainSelected, targeted: true})
                 return true
             }
         }
@@ -302,12 +300,12 @@ function IsShop(entIndex) {
 }
 
 function IsTavern(entIndex) {
-    return (Entities.GetUnitLabel(entIndex ) == "tavern")
+    return (Entities.GetUnitName(entIndex) == "tavern")
 }
 
 function IsGlobalShop(entIndex) {
-	var entityName = Entities.GetUnitLabel(entIndex);
-    return (entityName == "goblin_merchant" || entityName == "goblin_lab" || entityName == "mercenary")
+	var entityName = Entities.GetUnitName(entIndex);
+    return (entityName == "goblin_merchant" || entityName == "goblin_lab" || entityName == "mercenary" || entityName == "marketplace")
 }
 
 function IsAlliedUnit(targetIndex) {
@@ -381,7 +379,7 @@ function OnReleaseRotateLeft() {
 function RotateTimerLeft() {
     if (rotatingLeft) {
         angle-=1
-        GameUI.SetCameraYaw( angle);
+        GameUI.SetCameraYaw(angle);
         $.Schedule(1/60, RotateTimerLeft)
     }
 }
@@ -399,13 +397,13 @@ function OnReleaseRotateRight() {
 function RotateTimerRight() {
     if (rotatingRight) {
         angle+=1
-        GameUI.SetCameraYaw( angle);
+        GameUI.SetCameraYaw(angle);
         $.Schedule(1/60, RotateTimerRight)
     }
 }
 
 // Main mouse event callback
-GameUI.SetMouseCallback( function(eventName, arg ) {
+GameUI.SetMouseCallback(function(eventName, arg) {
     var CONSUME_EVENT = true
     var CONTINUE_PROCESSING_EVENT = false
     var LEFT_CLICK = (arg === 0)

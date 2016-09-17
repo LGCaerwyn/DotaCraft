@@ -8,16 +8,17 @@
     //----------------------------------------------------------------
     "BaseClass"                 "npc_dota_creature"
     "Model"                     "models/heroes/techies/techies.vmdl"
-    "ModelScale"                "0.5"
+    "ModelScale"                "0.75"
     "Level"                     "4"
     "HealthBarOffset"           "140"
 
     "FormationRank"             "0"
-    "AttacksEnabled"            "none"
+    "AttacksEnabled"            "ground"
+    "LeavesCorpse"              "0"
     
     // Abilities
     //----------------------------------------------------------------
-    "Ability1"                  ""   //Reference: Asds
+    "Ability1"                  "sapper_kaboom"
     
     // Armor
     //----------------------------------------------------------------
@@ -27,8 +28,12 @@
     // Attack
     //----------------------------------------------------------------
     "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
+    "AttackDamageMin"           "0"
+    "AttackDamageMax"           "0"
+    "AttackRange"               "100"
     "AttackDamageType"          "DAMAGE_TYPE_ArmorPhysical"
-    "AttackRate"                "0"
+    "AttackRate"                "1"
+    "AttackAnimationPoint"      "0.01"
     "AttackAcquisitionRange"    "500"
     
     // Bounty
@@ -39,7 +44,7 @@
     // Bounds
     //----------------------------------------------------------------
     "BoundsHullName"            "DOTA_HULL_SIZE_HERO"
-    "RingRadius"                "32"
+    "RingRadius"                "60"
     "CollisionSize"             "32"
     "FormationRank"             "0"
     
@@ -100,7 +105,7 @@
     //----------------------------------------------------------------
     "BaseClass"                 "npc_dota_creature"
     "Model"                     "models/courier/tegu/tegu_flying.vmdl"
-    "ModelScale"                "1"
+    "ModelScale"                "2"
     "Level"                     "1"
     "HealthBarOffset"           "140"
 
@@ -110,10 +115,10 @@
     
     // Abilities
     //----------------------------------------------------------------
-    "Ability1"                  ""   //Reference: Sch3
-    "Ability2"                  ""   //Reference: Achd
-    "Ability3"                  ""   //Reference: Aloa
-    "Ability4"                  ""   //Reference: Adro
+    "Ability1"                  "zeppelin_load"
+    "Ability2"                  "zeppelin_unload"
+    "Ability3"                  ""
+    "Ability4"                  ""
     
     // Armor
     //----------------------------------------------------------------
@@ -123,6 +128,8 @@
     // Attack
     //----------------------------------------------------------------
     "AttackCapabilities"        "DOTA_UNIT_CAP_NO_ATTACK"
+    "AttackDamageMin"           "0"
+    "AttackDamageMax"           "0"
     "AttackDamageType"          "DAMAGE_TYPE_ArmorPhysical"
     "AttackRate"                "0"
     "AttackAcquisitionRange"    "500"
@@ -135,7 +142,7 @@
     // Bounds
     //----------------------------------------------------------------
     "BoundsHullName"            "DOTA_HULL_SIZE_HUGE"
-    "RingRadius"                "48"
+    "RingRadius"                "70"
     "CollisionSize"             "48"
     "FormationRank"             "2"
     
@@ -156,7 +163,7 @@
     
     // Status
     //----------------------------------------------------------------
-    "StatusHealth"              "575"
+    "StatusHealth"              "500"
     "StatusHealthRegen"         "0"
     
     // Vision
@@ -296,8 +303,8 @@
     
     // Abilities
     //----------------------------------------------------------------
-    "Ability1"                  ""   //Reference: Anh1
-    "Ability2"                  ""   //Reference: ACdm
+    "Ability1"                  "neutral_heal"
+    "Ability2"                  "neutral_abolish_magic"
     
     // Armor
     //----------------------------------------------------------------
@@ -397,8 +404,8 @@
     
     // Abilities
     //----------------------------------------------------------------
-    "Ability1"                  ""   //Reference: ACmi
-    "Ability2"                  ""   //Reference: ACsw
+    "Ability1"                  "neutral_slow"
+    "Ability2"                  "neutral_spell_immunity"
     
     // Armor
     //----------------------------------------------------------------
@@ -485,7 +492,7 @@
     
     // Abilities
     //----------------------------------------------------------------
-    "Ability1"                  ""   //Reference: Ashm
+    "Ability1"                  "neutral_shadow_meld"
     
     // Armor
     //----------------------------------------------------------------
@@ -569,8 +576,8 @@
     
     // Abilities
     //----------------------------------------------------------------
-    "Ability1"                  ""   //Reference: Ashm
-    "Ability2"                  ""   //Reference: ACvs
+    "Ability1"                  "neutral_shadow_meld"
+    "Ability2"                  "neutral_envenomed_weapon"
     
     // Armor
     //----------------------------------------------------------------
@@ -622,96 +629,6 @@
     //----------------------------------------------------------------
     "StatusHealth"              "450"
     "StatusHealthRegen"         "0.5"
-    
-    // Vision
-    //----------------------------------------------------------------
-    "VisionDaytimeRange"        "1400"
-    "VisionNighttimeRange"      "800"
-    
-    // Attack Damage types
-    //----------------------------------------------------------------
-    "AttackType"         "pierce"
-    "ArmorType"                 "medium"
-    
-    // Creature Data
-    //----------------------------------------------------------------
-}
-
-//=================================================================================
-// Creature: Kobold Geomancer
-// Description: "Light ranged unit that casts Slow and Abolish Magic. |n|n|cffffcc00Attacks land and air units.|r"
-//=================================================================================
-"neutral_kobold_geomancer"
-{
-    // General
-    //----------------------------------------------------------------
-    "BaseClass"                 "npc_dota_creature"
-    "Model"                     "models/creeps/neutral_creeps/n_creep_kobold/kobold_a/n_creep_kobold_a.vmdl"
-    "ModelScale"                "1"
-    "Level"                     "3"
-    "HealthBarOffset"           "140"
-
-    "FormationRank"             "2"
-    "AttacksEnabled"            "ground,air"
-    
-    // Abilities
-    //----------------------------------------------------------------
-    "Ability1"                  ""   //Reference: ACsw
-    "Ability2"                  ""   //Reference: ACdm
-    
-    // Armor
-    //----------------------------------------------------------------
-    "ArmorPhysical"             "0"
-    "MagicalResistance"         "0"
-    
-    // Attack
-    //----------------------------------------------------------------
-    "AttackCapabilities"        "DOTA_UNIT_CAP_RANGED_ATTACK"
-    "AttackDamageMin"           "23.0"
-    "AttackDamageMax"           "27.0"
-    "AttackDamageType"          "DAMAGE_TYPE_ArmorPhysical"
-    "AttackRate"                "1.8"
-    "AttackAnimationPoint"      "0.38"
-    "AttackAcquisitionRange"    "600"
-    "AttackRange"               "600"
-    "ProjectileModel"           "particles/base_attacks/ranged_badguy.vpcf"
-    "ProjectileSpeed"           "900"
-    
-    // Bounty
-    //----------------------------------------------------------------
-    "BountyGoldMin"             "8.0"
-    "BountyGoldMax"             "10.0"
-    
-    // Bounds
-    //----------------------------------------------------------------
-    "BoundsHullName"            "DOTA_HULL_SIZE_HUGE"
-    "RingRadius"                "31"
-    "CollisionSize"             "31"
-    "FormationRank"             "2"
-    
-    // Unit Costs
-    //----------------------------------------------------------------
-    "GoldCost"                  "255"
-    "LumberCost"                "30"
-    "FoodCost"                  "2"
-    "StockMax"                  "1"
-    "StockTime"                 "160"
-    "StockInitial"              "0"
-    "StockStartDelay"           "440"
-    
-    // Movement
-    //----------------------------------------------------------------
-    "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
-    "MovementSpeed"             "270"
-    "MovementTurnRate"          "0.5"
-    
-    // Status
-    //----------------------------------------------------------------
-    "StatusHealth"              "300"
-    "StatusHealthRegen"         "0.5"
-    "StatusMana"                "300"
-    "StatusManaRegen"           "0.75"
-    "StatusStartingMana"        "300"
     
     // Vision
     //----------------------------------------------------------------
@@ -914,7 +831,7 @@
     
     // Abilities
     //----------------------------------------------------------------
-    "Ability1"                  ""   //Reference: ACff
+    "Ability1"                  "neutral_faerie_fire"
     
     // Armor
     //----------------------------------------------------------------
@@ -1003,7 +920,7 @@
     
     // Abilities
     //----------------------------------------------------------------
-    "Ability1"                  ""   //Reference: ACsa
+    "Ability1"                  "neutral_searing_arrows"
     
     // Armor
     //----------------------------------------------------------------
@@ -1175,8 +1092,8 @@
     
     // Abilities
     //----------------------------------------------------------------
-    "Ability1"                  ""   //Reference: ACsw
-    "Ability2"                  ""   //Reference: ACdm
+    "Ability1"                  "neutral_slow"
+    "Ability2"                  "neutral_abolish_magic"
     
     // Armor
     //----------------------------------------------------------------
@@ -1348,8 +1265,8 @@
     
     // Abilities
     //----------------------------------------------------------------
-    "Ability1"                  ""   //Reference: Aenw
-    "Ability2"                  ""   //Reference: Aslp
+    "Ability1"                  "neutral_entangling_roots"
+    "Ability2"                  "neutral_summon_prawns"
     
     // Armor
     //----------------------------------------------------------------
@@ -1414,6 +1331,85 @@
     //----------------------------------------------------------------
     "AttackType"         "pierce"
     "ArmorType"                 "medium"
+    
+    // Creature Data
+    //----------------------------------------------------------------
+}
+
+//=================================================================================
+// Creature: Makrura Snapper
+// Description: "Heavy melee unit. |n|n|cffffcc00Attacks land units.|r"
+//=================================================================================
+"neutral_makrura_prawn"
+{
+    // General
+    //----------------------------------------------------------------
+    "BaseClass"                 "npc_dota_creature"
+    "Model"                     "models/heroes/siren/siren.vmdl"
+    "ModelScale"                "0.6"
+    "Level"                     "5"
+    "HealthBarOffset"           "140"
+
+    "FormationRank"             "0"
+    "AttacksEnabled"            "ground"
+    
+    // Abilities
+    //----------------------------------------------------------------
+    
+    // Armor
+    //----------------------------------------------------------------
+    "ArmorPhysical"             "6"
+    "MagicalResistance"         "0"
+    
+    // Attack
+    //----------------------------------------------------------------
+    "AttackCapabilities"        "DOTA_UNIT_CAP_MELEE_ATTACK"
+    "AttackDamageMin"           "10.0"
+    "AttackDamageMax"           "11.0"
+    "AttackDamageType"          "DAMAGE_TYPE_ArmorPhysical"
+    "AttackRate"                "1.35"
+    "AttackAnimationPoint"      "0.38"
+    "AttackAcquisitionRange"    "500"
+    "AttackRange"               "100"
+    
+    // Bounty
+    //----------------------------------------------------------------
+    "BountyGoldMin"             "4.0"
+    "BountyGoldMax"             "6.0"
+    
+    // Bounds
+    //----------------------------------------------------------------
+    "BoundsHullName"            "DOTA_HULL_SIZE_HUGE"
+    "RingRadius"                "32"
+    "CollisionSize"             "32"
+    "FormationRank"             "0"
+    
+    // Unit Costs
+    //----------------------------------------------------------------
+    "GoldCost"                  "105"
+    "LumberCost"                "0"
+    "FoodCost"                  "1"
+    
+    // Movement
+    //----------------------------------------------------------------
+    "MovementCapabilities"      "DOTA_UNIT_CAP_MOVE_GROUND"
+    "MovementSpeed"             "270"
+    "MovementTurnRate"          "0.5"
+    
+    // Status
+    //----------------------------------------------------------------
+    "StatusHealth"              "170"
+    "StatusHealthRegen"         "0.5"
+    
+    // Vision
+    //----------------------------------------------------------------
+    "VisionDaytimeRange"        "1400"
+    "VisionNighttimeRange"      "800"
+    
+    // Attack Damage types
+    //----------------------------------------------------------------
+    "AttackType"                "normal"
+    "ArmorType"                 "heavy"
     
     // Creature Data
     //----------------------------------------------------------------
@@ -1521,7 +1517,7 @@
     
     // Abilities
     //----------------------------------------------------------------
-    "Ability1"                  ""   //Reference: Anh1
+    "Ability1"                  ""
     
     // Armor
     //----------------------------------------------------------------
@@ -1610,7 +1606,7 @@
     
     // Abilities
     //----------------------------------------------------------------
-    "Ability1"                  ""   //Reference: ACcw
+    "Ability1"                  "neutral_cold_arrows"
     
     // Armor
     //----------------------------------------------------------------
@@ -1699,7 +1695,7 @@
     
     // Abilities
     //----------------------------------------------------------------
-    "Ability1"                  ""   //Reference: ACim
+    "Ability1"                  "neutral_immolation"
     
     // Armor
     //----------------------------------------------------------------
@@ -1786,8 +1782,8 @@
     
     // Abilities
     //----------------------------------------------------------------
-    "Ability1"                  ""   //Reference: ACcs
-    "Ability2"                  ""   //Reference: Ashm
+    "Ability1"                  "neutral_shadow_meld"
+    "Ability2"                  "neutral_curse"
     
     // Armor
     //----------------------------------------------------------------
@@ -1877,7 +1873,7 @@
     
     // Abilities
     //----------------------------------------------------------------
-    "Ability1"                  ""   //Reference: ACr2
+    "Ability1"                  ""
     
     // Armor
     //----------------------------------------------------------------
@@ -1966,8 +1962,7 @@
     
     // Abilities
     //----------------------------------------------------------------
-    "Ability1"                  ""   //Reference: Alit
-    "Ability2"                  ""   //Reference: ACt2
+    "Ability1"                  "neutral_slam"
     
     // Armor
     //----------------------------------------------------------------
@@ -2056,7 +2051,7 @@
     
     // Abilities
     //----------------------------------------------------------------
-    "Ability1"                  ""   //Reference: ACcn
+    "Ability1"                  "neutral_cannibalize"
     
     // Armor
     //----------------------------------------------------------------
@@ -2141,7 +2136,7 @@
     
     // Abilities
     //----------------------------------------------------------------
-    "Ability1"                  ""   //Reference: ACsw
+    "Ability1"                  "neutral_slow"
     
     // Armor
     //----------------------------------------------------------------
@@ -2231,8 +2226,8 @@
     
     // Abilities
     //----------------------------------------------------------------
-    "Ability1"                  ""   //Reference: Ambd
-    "Ability2"                  ""   //Reference: ACrd
+    "Ability1"                  "neutral_mana_burn"
+    "Ability2"                  "neutral_raise_dead"
     
     // Armor
     //----------------------------------------------------------------
@@ -2319,7 +2314,7 @@
     
     // Abilities
     //----------------------------------------------------------------
-    "Ability1"                  ""   //Reference: Abu5
+    "Ability1"                  ""
     
     // Armor
     //----------------------------------------------------------------
@@ -2405,7 +2400,7 @@
     
     // Abilities
     //----------------------------------------------------------------
-    "Ability1"                  ""   //Reference: ACev
+    "Ability1"                  "neutral_evasion"
     
     // Armor
     //----------------------------------------------------------------
@@ -2489,7 +2484,7 @@
     
     // Abilities
     //----------------------------------------------------------------
-    "Ability1"                  ""   //Reference: ACmi
+    "Ability1"                  "neutral_spell_immunity"
     
     // Armor
     //----------------------------------------------------------------
@@ -2573,8 +2568,8 @@
     
     // Abilities
     //----------------------------------------------------------------
-    "Ability1"                  ""   //Reference: ACf2
-    "Ability2"                  ""   //Reference: ACdm
+    "Ability1"                  "neutral_abolish_magic"
+    "Ability2"                  "neutral_frost_armor"
     
     // Armor
     //----------------------------------------------------------------
@@ -2663,7 +2658,7 @@
     
     // Abilities
     //----------------------------------------------------------------
-    "Ability1"                  ""   //Reference: Assp
+    "Ability1"                  ""
     
     // Armor
     //----------------------------------------------------------------
@@ -2832,7 +2827,7 @@
     
     // Abilities
     //----------------------------------------------------------------
-    "Ability1"                  ""   //Reference: ACbz
+    "Ability1"                  "neutral_blizzard"
     
     // Armor
     //----------------------------------------------------------------
@@ -2919,9 +2914,8 @@
     
     // Abilities
     //----------------------------------------------------------------
-    "Ability1"                  ""   //Reference: ACwb
-    "Ability2"                  ""   //Reference: ACrd
-    "Ability3"                  ""   //Reference: Aspa
+    "Ability1"                  "neutral_web"
+    "Ability2"                  "neutral_raise_dead"
     
     // Armor
     //----------------------------------------------------------------

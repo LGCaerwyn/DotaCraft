@@ -62,6 +62,15 @@ end
 
 --------------------------------------------------------------------------------
 
+neutral_immolation = class({})
+
+neutral_immolation.OnToggle = demon_hunter_immolation.OnToggle
+neutral_immolation.OnToggleOn = demon_hunter_immolation.OnToggleOn
+neutral_immolation.OnToggleOff = demon_hunter_immolation.OnToggleOff
+neutral_immolation.OnIntervalThink = demon_hunter_immolation.OnIntervalThink
+
+--------------------------------------------------------------------------------
+
 modifier_immolation_aura = class({})
 
 function modifier_immolation_aura:OnCreated()
@@ -77,7 +86,6 @@ end
 function modifier_immolation_aura:OnIntervalThink()
     local caster = self:GetCaster()
     local ability = self:GetAbility()
-    local abilityDamageType = ability:GetAbilityDamageType()
     local damage_per_second = ability:GetSpecialValueFor("damage_per_second")
     local radius = ability:GetSpecialValueFor("radius")
     local targets = FindUnitsInRadius(caster:GetTeamNumber(), caster:GetAbsOrigin(), nil, radius, DOTA_UNIT_TARGET_TEAM_ENEMY, DOTA_UNIT_TARGET_HERO + DOTA_UNIT_TARGET_BASIC, 0, 0, false)
@@ -85,7 +93,7 @@ function modifier_immolation_aura:OnIntervalThink()
     for _,unit in pairs(targets) do
         local immolation_modifier = unit:FindModifierByName("modifier_immolation_aura_debuff") --Make sure only one instance is applied
         if immolation_modifier and immolation_modifier:GetAbility() == ability then
-            ApplyDamage({ victim = unit, attacker = caster, damage = damage_per_second, damage_type = abilityDamageType })
+            ApplyDamage({ victim = unit, attacker = caster, damage = damage_per_second, damage_type = DAMAGE_TYPE_MAGICAL })
         end
     end
 end
@@ -115,7 +123,7 @@ function modifier_immolation_aura:GetAuraSearchTeam()
 end
 
 function modifier_immolation_aura:GetAuraEntityReject(target)
-    return IsCustomBuilding(target) or target:HasFlyMovementCapability() or target:IsMechanical()
+    return self:GetParent():IsInvisible() or IsCustomBuilding(target) or target:HasFlyMovementCapability() or target:IsMechanical()
 end
 
 function modifier_immolation_aura:GetAuraSearchType()
